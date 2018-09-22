@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Fantasy Transaction Notifier</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+      .container { margin-top: 10px; }
+      #emailInput { width: 250px; }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="jumbotron">
+        <h1 class="display-4">Fantasy Transaction Notifier</h1>
+        <p class="lead">
+          Enter your email to receive transaction notifications for all of your
+          Yahoo NFL fantasy leagues.
+        </p>
+        <hr class="my-4">
+        <form method="post" action="/signup">
+          <div class="form-group">
+            <label for="emailInput">Email Address:</label>
+            <input type="email" id="emailInput" name="email" placeholder="Email" />
+          </div>
+          <button type="submit" class="btn btn-primary">Get Notified!</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
