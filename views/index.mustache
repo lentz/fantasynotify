@@ -18,10 +18,20 @@
           Yahoo NFL fantasy leagues.
         </p>
         <hr class="my-4">
+        {{#successMessage}}
+        <div class="alert alert-success" role="alert">
+          {{successMessage}}
+        </div>
+        {{/successMessage}}
+        {{#errorMessage}}
+        <div class="alert alert-warning" role="alert">
+          {{errorMessage}}
+        </div>
+        {{/errorMessage}}
         <form method="post" action="/signup">
           <div class="form-group">
             <label for="emailInput">Email Address:</label>
-            <input type="email" id="emailInput" name="email" placeholder="Email" />
+            <input type="email" id="emailInput" name="email" placeholder="Email" required />
           </div>
           <button type="submit" class="btn btn-primary">Get Notified!</button>
         </form>

@@ -24,7 +24,7 @@ async function renewToken(user) {
   ).exec();
 }
 
-async function getLeagues(user) {
+async function updateLeagues(user) {
   const usersRes = await axios.get(
     'https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_codes=nfl;is_available=1/leagues?format=json',
     { headers: { Authorization: `Bearer ${user.accessToken}` } },
@@ -33,10 +33,16 @@ async function getLeagues(user) {
   const yahooLeagues = usersRes.data.fantasy_content.users[0]
     .user[1].games[0].game[1].leagues;
 
-  return Object.entries(yahooLeagues)
+  const leagues = Object.entries(yahooLeagues)
     .filter(entry => entry[1].league)
     .map(entry => entry[1].league[0])
     .map(league => ({ key: league.league_key, name: league.name }));
+
+  leagues.forEach(league => {
+    if(!(user.leagues || []).find(uL => uL.key === league.key)) {
+      user.leagues.push(league);
+    }
+  });
 }
 
 function mapPlayers(players) {
@@ -69,6 +75,10 @@ async function getTransactions(league, user) {
     }));
 }
 
+async function sendNotifications(transactions, league) {
+  console.log('send notifications since', league.lastNotifiedTransaction);
+}
+
 async function run() {
   try {
     const users = await User.find().exec();
@@ -76,11 +86,16 @@ async function run() {
       if (user.expires < new Date()) {
         user = await renewToken(user);
       }
-      const leagues = await getLeagues(user);
-      for (const league of leagues) {
+      await updateLeagues(user);
+      for (const league of user.leagues) {
         const transactions = await getTransactions(league, user);
-        console.log(JSON.stringify(transactions));
+        const latestTransaction = transactions && transactions[0].key;
+        if (league.lastNotifiedTransaction && league.lastNotifiedTransaction !== latestTransaction) {
+          await sendNotifications(transactions, league);
+        }
+        league.lastNotifiedTransaction = latestTransaction;
       }
+      await User.updateOne({ email: user.email }, { leagues: user.leagues }).exec();
     }
     process.exit();
   } catch (err) {

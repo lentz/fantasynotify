@@ -5,7 +5,12 @@ const userSchema = new mongoose.Schema({
   accessToken: { type: String, required: true },
   refreshToken: { type: String, required: true },
   expires: { type: Date, required: true },
-  lastNotifiedTransaction: String,
+  leagues: [{
+    _id: false,
+    key: { type: String, required: true },
+    name: { type: String, required: true },
+    lastNotifiedTransaction: String,
+  }],
 }, { timestamps: true });
 
 module.exports = mongoose.model('User', userSchema);
