@@ -1,9 +1,41 @@
 #!/usr/bin/env node
 
 const axios = require('axios');
+const { readFileSync } = require('fs');
+const handlebars = require('handlebars');
+const sgMail = require('@sendgrid/mail');
 const User = require('./User');
 require('./db');
 const yahooAuth = require('./yahooAuth');
+
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+
+const emailTemplate = handlebars.compile(
+  readFileSync('./views/emailLayout.handlebars').toString(),
+);
+
+const leagueTemplate = handlebars.compile(
+  readFileSync('./views/league.handlebars').toString(),
+);
+
+handlebars.registerHelper('playerTransaction', function(player) {
+  let source = '';
+  let action;
+  let team;
+  if (player.type === 'add') {
+    action = 'added';
+    team = player.destination_team_name;
+    if (player.source_type === 'waivers') {
+      source = 'from waivers';
+    } else if (player.source_type === 'freeagents') {
+      source = 'from free agents';
+    }
+  } else {
+    action = 'dropped';
+    team = player.source_team_name;
+  }
+  return `${team} ${action} ${player.name} ${source}`;
+});
 
 async function renewToken(user) {
   const token = yahooAuth.createToken(user.accessToken, user.refreshToken, 'bearer');
@@ -75,12 +107,19 @@ async function getTransactions(league, user) {
     }));
 }
 
-async function sendNotifications(transactions, league) {
-  console.log('send notifications since', league.lastNotifiedTransaction);
+function renderTransactions(transactions, league) {
+  const lastNotifiedTransactionIndex = transactions.findIndex(transaction => {
+    return transaction.key === league.lastNotifiedTransaction;
+  });
+  return leagueTemplate({
+    transactions: transactions.slice(0, lastNotifiedTransactionIndex),
+    league,
+  });
 }
 
 async function run() {
   try {
+    let emailContent = '';
     const users = await User.find().exec();
     for (let user of users) {
       if (user.expires < new Date()) {
@@ -91,9 +130,22 @@ async function run() {
         const transactions = await getTransactions(league, user);
         const latestTransaction = transactions && transactions[0].key;
         if (league.lastNotifiedTransaction && league.lastNotifiedTransaction !== latestTransaction) {
-          await sendNotifications(transactions, league);
+          emailContent += renderTransactions(transactions, league);
         }
         league.lastNotifiedTransaction = latestTransaction;
+      }
+      if (emailContent.length) {
+        console.log('Sending email to', user.email);
+        await sgMail.send({
+          to: user.email,
+          from: 'Fantasy Notify <notifications@fantasynotify.herokuapp.net>',
+          subject: 'New transactions in your NFL fantasy league',
+          html: emailTemplate({
+            body: emailContent,
+            domain: process.env.DOMAIN,
+            email: user.email,
+          }),
+        });
       }
       await User.updateOne({ email: user.email }, { leagues: user.leagues }).exec();
     }

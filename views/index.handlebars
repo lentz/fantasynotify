@@ -18,16 +18,16 @@
           Yahoo NFL fantasy leagues.
         </p>
         <hr class="my-4">
-        {{#successMessage}}
+        {{#if successMessage}}
         <div class="alert alert-success" role="alert">
           {{successMessage}}
         </div>
-        {{/successMessage}}
-        {{#errorMessage}}
+        {{/if}}
+        {{#if errorMessage}}
         <div class="alert alert-warning" role="alert">
           {{errorMessage}}
         </div>
-        {{/errorMessage}}
+        {{/if}}
         <form method="post" action="/signup">
           <div class="form-group">
             <label for="emailInput">Email Address:</label>

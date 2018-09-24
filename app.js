@@ -3,7 +3,7 @@ const bodyParser = require('body-parser')
 const express = require('express');
 require('express-async-errors');
 const morgan = require('morgan');
-const mustacheExpress = require('mustache-express');
+const handlebarsExpress = require('express-handlebars');
 require('./db');
 const User = require('./User');
 const yahooAuth = require('./yahooAuth');
@@ -12,8 +12,8 @@ const app = express();
 
 app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.engine('mustache', mustacheExpress());
-app.set('view engine', 'mustache');
+app.engine('handlebars', handlebarsExpress());
+app.set('view engine', 'handlebars');
 
 app.get('/', (req, res) => res.render('index'));
 

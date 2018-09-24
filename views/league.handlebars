@@ -1,0 +1,10 @@
+<h3 style="margin-bottom: 20px;">{{ league.name }}</h3>
+{{#each transactions}}
+  <div>
+    <p>
+    {{#each this.players}}
+      {{playerTransaction this}}<br />
+    {{/each}}
+    </p>
+  </div>
+{{/each}}
