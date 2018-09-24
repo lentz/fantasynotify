@@ -50,6 +50,11 @@ app.get('/auth/callback', async (req, res) => {
   }
 });
 
+app.get('/unsubscribe/:id', async (req, res) => {
+  const user = await User.findByIdAndDelete(req.params.id);
+  res.render('index', { successMessage: `${user.email} has been unsubscribed` });
+});
+
 app.listen(process.env.PORT)
   .on('listening', () => console.log(`Listening on port ${process.env.PORT}`))
   .on('error', console.error);

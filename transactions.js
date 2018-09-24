@@ -143,7 +143,7 @@ async function run() {
           html: emailTemplate({
             body: emailContent,
             domain: process.env.DOMAIN,
-            email: user.email,
+            user,
           }),
         });
       }
