@@ -33,26 +33,33 @@ app.post('/signup', async (req, res) => {
 });
 
 app.get('/auth/callback', async (req, res) => {
-  try {
-    if (req.query.error) { throw new Error(req.query.error); }
-    const authUser = await yahooAuth.code.getToken(req.originalUrl);
-    await User.create({
-      email: req.query.state,
-      accessToken: authUser.accessToken,
-      expires: authUser.expires,
-      refreshToken: authUser.refreshToken,
-    });
-    res.render('index', { successMessage:
-      'All done! You\'ll start receiving transaction notifications from now on.',
-    });
-  } catch (err) {
-    res.render('index', { errorMessage: err.message });
-  }
+  if (req.query.error) { throw new Error(req.query.error); }
+  const authUser = await yahooAuth.code.getToken(req.originalUrl);
+  await User.create({
+    email: req.query.state,
+    accessToken: authUser.accessToken,
+    expires: authUser.expires,
+    refreshToken: authUser.refreshToken,
+  });
+  res.render('index', { successMessage:
+    'All done! You\'ll start receiving transaction notifications from now on.',
+  });
 });
 
 app.get('/unsubscribe/:id', async (req, res) => {
   const user = await User.findByIdAndDelete(req.params.id);
-  res.render('index', { successMessage: `${user.email} has been unsubscribed` });
+  const context = {};
+  if (!user) {
+    context.errorMessage = 'No email found matching this account';
+  } else {
+    context.successMessage = `${user.email} has been unsubscribed`;
+  }
+  res.render('index', context);
+});
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.render('index', { errorMessage: err.message });
 });
 
 app.listen(process.env.PORT)
