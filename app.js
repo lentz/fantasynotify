@@ -25,7 +25,6 @@ app.post('/signup', async (req, res) => {
     return res.render('index', { errorMessage: 'Email is required!' });
   }
   const user = await User.findOne({ email }).exec();
-  console.log(user);
   if (user) {
     res.render('index', { errorMessage:
       `${email} is already signed up to receive notifications!`,
