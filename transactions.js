@@ -141,7 +141,7 @@ async function run() {
     }
     process.exit();
   } catch (err) {
-    console.error(require('util').inspect(err, { depth: null }));
+    console.error(err.stack);
     process.exit(1);
   }
 }
