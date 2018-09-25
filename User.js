@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongooseEncryption = require('mongoose-encryption');
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true },
@@ -12,5 +13,12 @@ const userSchema = new mongoose.Schema({
     lastNotifiedTransaction: String,
   }],
 }, { timestamps: true });
+
+userSchema.plugin(mongooseEncryption, {
+  encryptionKey: process.env.MONGO_ENCRYPTION_KEY,
+  signingKey: process.env.MONGO_SIGNING_KEY,
+  encryptedFields: ['accessToken', 'refreshToken'],
+  additionalAuthenticatedFields: ['email'],
+});
 
 module.exports = mongoose.model('User', userSchema);

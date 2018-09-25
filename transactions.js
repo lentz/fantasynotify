@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 
+require('dotenv').config();
 const axios = require('axios');
 const { readFileSync } = require('fs');
 const handlebars = require('handlebars');
@@ -40,20 +41,9 @@ handlebars.registerHelper('playerTransaction', function(player) {
 async function renewToken(user) {
   const token = yahooAuth.createToken(user.accessToken, user.refreshToken, 'bearer');
   const newToken = await token.refresh();
-
-  return User.findOneAndUpdate(
-    {
-      email: user.email,
-    },
-    {
-      accessToken: newToken.accessToken,
-      refreshToken: newToken.refreshToken,
-      expires: newToken.expires,
-    },
-    {
-      new: true,
-    }
-  ).exec();
+  user.accessToken = newToken.accessToken;
+  user.expires = newToken.expires;
+  return user;
 }
 
 async function updateLeagues(user) {
@@ -147,7 +137,7 @@ async function run() {
           }),
         });
       }
-      await User.updateOne({ email: user.email }, { leagues: user.leagues }).exec();
+      await user.save();
     }
     process.exit();
   } catch (err) {
