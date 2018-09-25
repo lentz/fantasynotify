@@ -2,6 +2,7 @@ require('dotenv').config();
 const bodyParser = require('body-parser')
 const express = require('express');
 require('express-async-errors');
+const helmet = require('helmet')
 const morgan = require('morgan');
 const handlebarsExpress = require('express-handlebars');
 require('./db');
@@ -10,6 +11,7 @@ const yahooAuth = require('./yahooAuth');
 
 const app = express();
 
+app.use(helmet());
 app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.engine('handlebars', handlebarsExpress());
