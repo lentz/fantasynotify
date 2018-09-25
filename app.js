@@ -26,7 +26,7 @@ app.post('/signup', async (req, res) => {
   }
   const user = await User.findOne({ email }).exec();
   if (user) {
-    res.render('index', { errorMessage:
+    return res.render('index', { errorMessage:
       `${email} is already signed up to receive notifications!`,
     });
   }
