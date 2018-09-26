@@ -1,8 +1,8 @@
 require('dotenv').config();
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 const express = require('express');
 require('express-async-errors');
-const helmet = require('helmet')
+const helmet = require('helmet');
 const morgan = require('morgan');
 const handlebarsExpress = require('express-handlebars');
 require('./db');
@@ -26,11 +26,12 @@ app.post('/signup', async (req, res) => {
   }
   const user = await User.findOne({ email }).exec();
   if (user) {
-    return res.render('index', { errorMessage:
+    return res.render('index', {
+      errorMessage:
       `${email} is already signed up to receive notifications!`,
     });
   }
-  res.redirect(yahooAuth.code.getUri({ state: email }));
+  return res.redirect(yahooAuth.code.getUri({ state: email }));
 });
 
 app.get('/auth/callback', async (req, res) => {
@@ -42,7 +43,8 @@ app.get('/auth/callback', async (req, res) => {
     expires: authUser.expires,
     refreshToken: authUser.refreshToken,
   });
-  res.render('index', { successMessage:
+  res.render('index', {
+    successMessage:
     'All done! You\'ll start receiving transaction notifications from now on.',
   });
 });
@@ -58,7 +60,7 @@ app.get('/unsubscribe/:id', async (req, res) => {
   res.render('index', context);
 });
 
-app.use((err, req, res, next) => {
+app.use((err, req, res, _next) => {
   console.error(err.stack);
   res.render('index', { errorMessage: err.message });
 });

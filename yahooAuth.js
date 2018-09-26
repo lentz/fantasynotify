@@ -1,5 +1,5 @@
 require('dotenv').config();
-const ClientOAuth2 = require('client-oauth2')
+const ClientOAuth2 = require('client-oauth2');
 
 module.exports = new ClientOAuth2({
   clientId: process.env.YAHOO_CLIENT_ID,

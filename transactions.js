@@ -19,7 +19,7 @@ const leagueTemplate = handlebars.compile(
   readFileSync('./views/league.handlebars').toString(),
 );
 
-handlebars.registerHelper('playerTransaction', function(player) {
+handlebars.registerHelper('playerTransaction', (player) => {
   let source = '';
   let action;
   let team;
@@ -38,6 +38,7 @@ handlebars.registerHelper('playerTransaction', function(player) {
   return `${team} ${action} ${player.name} ${source}`;
 });
 
+/* eslint-disable no-param-reassign */
 async function renewToken(user) {
   const token = yahooAuth.createToken(user.accessToken, user.refreshToken, 'bearer');
   const newToken = await token.refresh();
@@ -45,6 +46,7 @@ async function renewToken(user) {
   user.expires = newToken.expires;
   return user;
 }
+/* eslint-enable no-param-reassign */
 
 async function updateLeagues(user) {
   const usersRes = await axios.get(
@@ -60,8 +62,8 @@ async function updateLeagues(user) {
     .map(entry => entry[1].league[0])
     .map(league => ({ key: league.league_key, name: league.name }));
 
-  leagues.forEach(league => {
-    if(!(user.leagues || []).find(uL => uL.key === league.key)) {
+  leagues.forEach((league) => {
+    if (!(user.leagues || []).find(uL => uL.key === league.key)) {
       user.leagues.push(league);
     }
   });
@@ -71,13 +73,13 @@ function mapPlayers(players) {
   return Object.entries(players)
     .map(entry => entry[1].player)
     .filter(entry => entry)
-    .map(playerTrans => {
+    .map((playerTrans) => {
       let transactionData = playerTrans[1].transaction_data;
-      if (Array.isArray(transactionData)) { transactionData = transactionData[0]; }
+      if (Array.isArray(transactionData)) { [transactionData] = transactionData; }
       return {
         ...transactionData,
         name: playerTrans[0][2].name.full,
-      }
+      };
     });
 }
 
@@ -98,28 +100,30 @@ async function getTransactions(league, user) {
 }
 
 function renderTransactions(transactions, league) {
-  const lastNotifiedTransactionIndex = transactions.findIndex(transaction => {
-    return transaction.key === league.lastNotifiedTransaction;
-  });
+  const lastNotifiedTransactionIndex = transactions
+    .findIndex(transaction => transaction.key === league.lastNotifiedTransaction);
+
   return leagueTemplate({
     transactions: transactions.slice(0, lastNotifiedTransactionIndex),
     league,
   });
 }
 
+/* eslint-disable no-await-in-loop */
 async function run() {
   try {
-    let emailContent = '';
     const users = await User.find().exec();
-    for (let user of users) {
+    for (const user of users) { // eslint-disable-line no-restricted-syntax
+      let emailContent = '';
       if (user.expires < new Date()) {
-        user = await renewToken(user);
+        await renewToken(user);
       }
       await updateLeagues(user);
-      for (const league of user.leagues) {
+      for (const league of user.leagues) { // eslint-disable-line no-restricted-syntax
         const transactions = await getTransactions(league, user);
         const latestTransaction = transactions && transactions[0].key;
-        if (league.lastNotifiedTransaction && league.lastNotifiedTransaction !== latestTransaction) {
+        if (league.lastNotifiedTransaction
+            && league.lastNotifiedTransaction !== latestTransaction) {
           emailContent += renderTransactions(transactions, league);
         }
         league.lastNotifiedTransaction = latestTransaction;
@@ -145,5 +149,6 @@ async function run() {
     process.exit(1);
   }
 }
+/* eslint-enable no-await-in-loop */
 
 run();
