@@ -129,11 +129,10 @@ async function run() {
         league.lastNotifiedTransaction = latestTransaction;
       }
       if (emailContent.length) {
-        console.log('Sending email to', user.email);
         await sgMail.send({
           to: user.email,
-          from: 'Fantasy Notify <notifications@fantasynotify.herokuapp.net>',
-          subject: 'New transactions in your NFL fantasy league',
+          from: 'Fantasy Notify <notifications@fantasynotify.herokuapp.com>',
+          subject: 'New transactions in your Yahoo fantasy football league',
           html: emailTemplate({
             body: emailContent,
             domain: process.env.DOMAIN,
