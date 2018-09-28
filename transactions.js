@@ -24,7 +24,7 @@ handlebars.registerHelper('playerTransaction', (player) => {
   let action;
   let team;
   if (player.type === 'add') {
-    action = 'added';
+    action = '<span style="color: #1e824c">added</span>';
     team = player.destination_team_name;
     if (player.source_type === 'waivers') {
       source = 'from waivers';
@@ -32,10 +32,10 @@ handlebars.registerHelper('playerTransaction', (player) => {
       source = 'from free agents';
     }
   } else {
-    action = 'dropped';
+    action = '<span style="color: #aa0000">dropped</span>';
     team = player.source_team_name;
   }
-  return `${team} ${action} ${player.name} ${source}`;
+  return `${team} ${action} <span style="font-weight: bold">${player.name}</span> ${source}`;
 });
 
 /* eslint-disable no-param-reassign */
