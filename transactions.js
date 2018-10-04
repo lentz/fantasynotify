@@ -19,7 +19,7 @@ const leagueTemplate = handlebars.compile(
   readFileSync('./views/league.handlebars').toString(),
 );
 
-handlebars.registerHelper('playerTransaction', (player) => {
+handlebars.registerHelper('playerTransaction', (player, bid) => {
   let source = '';
   let action;
   let team;
@@ -28,6 +28,7 @@ handlebars.registerHelper('playerTransaction', (player) => {
     team = player.destination_team_name;
     if (player.source_type === 'waivers') {
       source = 'from waivers';
+      if (bid) { source += ` for $${bid}`; }
     } else if (player.source_type === 'freeagents') {
       source = 'from free agents';
     }
@@ -95,6 +96,7 @@ async function getTransactions(league, user) {
     .filter(transaction => transaction)
     .filter(transaction => transaction[0].status === 'successful')
     .map(transaction => ({
+      bid: transaction[0].faab_bid,
       key: transaction[0].transaction_key,
       players: mapPlayers(transaction[1].players),
     }));
