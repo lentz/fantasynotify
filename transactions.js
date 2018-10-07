@@ -2,42 +2,10 @@
 
 require('dotenv').config();
 const axios = require('axios');
-const { readFileSync } = require('fs');
-const handlebars = require('handlebars');
-const sgMail = require('@sendgrid/mail');
+const Notification = require('./Notification');
 const User = require('./User');
 require('./db');
 const yahooAuth = require('./yahooAuth');
-
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-
-const emailTemplate = handlebars.compile(
-  readFileSync('./views/emailLayout.handlebars').toString(),
-);
-
-const leagueTemplate = handlebars.compile(
-  readFileSync('./views/league.handlebars').toString(),
-);
-
-handlebars.registerHelper('playerTransaction', (player, bid) => {
-  let source = '';
-  let action;
-  let team;
-  if (player.type === 'add') {
-    action = '<span style="color: #1e824c">added</span>';
-    team = player.destination_team_name;
-    if (player.source_type === 'waivers') {
-      source = 'from waivers';
-      if (bid) { source += ` for $${bid}`; }
-    } else if (player.source_type === 'freeagents') {
-      source = 'from free agents';
-    }
-  } else {
-    action = '<span style="color: #aa0000">dropped</span>';
-    team = player.source_team_name;
-  }
-  return `${team} ${action} <span style="font-weight: bold">${player.name}</span> ${source}`;
-});
 
 /* eslint-disable no-param-reassign */
 async function renewToken(user) {
@@ -102,14 +70,12 @@ async function getTransactions(league, user) {
     }));
 }
 
-function renderTransactions(transactions, league) {
+function newTransactions(league, transactions) {
+  if (!league.lastNotifiedTransaction) { return []; }
   const lastNotifiedTransactionIndex = transactions
     .findIndex(transaction => transaction.key === league.lastNotifiedTransaction);
 
-  return leagueTemplate({
-    transactions: transactions.slice(0, lastNotifiedTransactionIndex),
-    league,
-  });
+  return transactions.slice(0, lastNotifiedTransactionIndex);
 }
 
 /* eslint-disable no-await-in-loop */
@@ -117,32 +83,15 @@ async function run() {
   try {
     const users = await User.find().exec();
     for (const user of users) { // eslint-disable-line no-restricted-syntax
-      let emailContent = '';
-      if (user.expires < new Date()) {
-        await renewToken(user);
-      }
+      const notification = new Notification(user);
+      if (user.expires < new Date()) { await renewToken(user); }
       await updateLeagues(user);
       for (const league of user.leagues) { // eslint-disable-line no-restricted-syntax
         const transactions = await getTransactions(league, user);
-        const latestTransaction = transactions && transactions[0].key;
-        if (league.lastNotifiedTransaction
-            && league.lastNotifiedTransaction !== latestTransaction) {
-          emailContent += renderTransactions(transactions, league);
-        }
-        league.lastNotifiedTransaction = latestTransaction;
+        notification.addTransactions(league, newTransactions(league, transactions));
+        league.lastNotifiedTransaction = transactions && transactions[0].key;
       }
-      if (emailContent.length) {
-        await sgMail.send({
-          to: user.email,
-          from: 'Fantasy Notify <notifications@fantasynotify.herokuapp.com>',
-          subject: 'New transactions in your Yahoo fantasy football league',
-          html: emailTemplate({
-            body: emailContent,
-            domain: process.env.DOMAIN,
-            user,
-          }),
-        });
-      }
+      await notification.send();
       await user.save();
     }
     process.exit();

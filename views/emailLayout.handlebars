@@ -5,10 +5,24 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
-    {{{body}}}
+    {{#each leagueTransactions}}
+      <h3>{{ @key }}</h3>
+      <hr />
+      {{#each this}}
+        <div>
+          <p>
+          {{#each this.players}}
+            {{{playerTransaction this ../bid}}}<br />
+          {{/each}}
+          </p>
+        </div>
+      {{/each}}
+    {{/each}}
+
     <div style="text-align: center;">
       <span style="font-size: .75em; color: #666666; margin-top: 40px;">
-        This email was sent by <a href="{{domain}}">Fantasy Transaction Notifier</a>.
+        This email was sent by <a href="{{domain}}">Fantasy Transaction Notifier</a>
+        to {{user.email}}.
         <a href="{{domain}}/unsubscribe/{{user.id}}">Unsubscribe</a>
       </span>
     </div>
