@@ -1,0 +1,110 @@
+{
+  "data": {
+    "fantasy_content": {
+      "xml:lang": "en-US",
+      "yahoo:uri": "/fantasy/v2/users;use_login=1/games;game_codes=nfl;is_available=1/leagues",
+      "users": {
+        "0": {
+          "user": [
+            {
+              "guid": "WICFULGOMXAK7RQ5J7K4QPNCNU"
+            },
+            {
+              "games": {
+                "0": {
+                  "game": [
+                    {
+                      "game_key": "380",
+                      "game_id": "380",
+                      "name": "Football",
+                      "code": "nfl",
+                      "type": "full",
+                      "url": "https://football.fantasysports.yahoo.com/f1",
+                      "season": "2018",
+                      "is_registration_over": 0,
+                      "is_game_over": 0,
+                      "is_offseason": 0
+                    },
+                    {
+                      "leagues": {
+                        "0": {
+                          "league": [
+                            {
+                              "league_key": "380.l.942166",
+                              "league_id": "942166",
+                              "name": "Keeper League",
+                              "url": "https://football.fantasysports.yahoo.com/f1/942166",
+                              "logo_url": false,
+                              "draft_status": "postdraft",
+                              "num_teams": 10,
+                              "edit_key": 5,
+                              "weekly_deadline": "",
+                              "league_update_timestamp": "1538718654",
+                              "scoring_type": "head",
+                              "league_type": "private",
+                              "renew": "371_503847",
+                              "renewed": "",
+                              "iris_group_chat_id": "GUHZIDQGT5BK7IQ76DZUNSPN4M",
+                              "short_invitation_url": "https://football.fantasysports.yahoo.com/f1/942166/invitation?key=475262039c655ae8&ikey=f35f9ce17205839f",
+                              "allow_add_to_dl_extra_pos": 0,
+                              "is_pro_league": "0",
+                              "is_cash_league": "0",
+                              "current_week": 5,
+                              "start_week": "1",
+                              "start_date": "2018-09-06",
+                              "end_week": "16",
+                              "end_date": "2018-12-24",
+                              "game_code": "nfl",
+                              "season": "2018"
+                            }
+                          ]
+                        },
+                        "1": {
+                          "league": [
+                            {
+                              "league_key": "380.l.511310",
+                              "league_id": "511310",
+                              "name": "Belmont St Fantasy",
+                              "url": "https://football.fantasysports.yahoo.com/f1/511310",
+                              "logo_url": "https://ct.yimg.com/cy/1760/43715661024_1d0e8d_192sq.jpg",
+                              "draft_status": "postdraft",
+                              "num_teams": 10,
+                              "edit_key": 5,
+                              "weekly_deadline": "",
+                              "league_update_timestamp": "1538719402",
+                              "scoring_type": "head",
+                              "league_type": "private",
+                              "renew": "371_708797",
+                              "renewed": "",
+                              "iris_group_chat_id": "IAKWDGBOLHTBDMSHN2L3XBDZIY",
+                              "allow_add_to_dl_extra_pos": 0,
+                              "is_pro_league": "0",
+                              "is_cash_league": "0",
+                              "current_week": 5,
+                              "start_week": "1",
+                              "start_date": "2018-09-06",
+                              "end_week": "16",
+                              "end_date": "2018-12-24",
+                              "game_code": "nfl",
+                              "season": "2018"
+                            }
+                          ]
+                        },
+                        "count": 2
+                      }
+                    }
+                  ]
+                },
+                "count": 1
+              }
+            }
+          ]
+        },
+        "count": 1
+      },
+      "time": "43.829917907715ms",
+      "copyright": "Data provided by Yahoo! and STATS, LLC",
+      "refresh_rate": "120"
+    }
+  }
+}

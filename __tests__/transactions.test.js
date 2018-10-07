@@ -6,12 +6,12 @@ describe('transactions', () => {
   afterEach(() => jest.resetAllMocks());
 
   const mockLeague = { name: 'league', lastNotifiedTransaction: '2' };
-  const mockYahooResp = readFileSync('./__tests__/mockYahooResp.json');
+  const mockYahooTransactions = readFileSync('./__tests__/mockYahooTransactions.json');
 
   describe('#getAll', () => {
     test('tranforms yahoo response into usable transactions', async () => {
       const mockHttpLib = {
-        get: () => Promise.resolve(JSON.parse(mockYahooResp)),
+        get: () => Promise.resolve(JSON.parse(mockYahooTransactions)),
       };
 
       const transactions = await getAll(mockLeague, {}, mockHttpLib);
