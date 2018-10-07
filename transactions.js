@@ -20,7 +20,7 @@ async function getAll(league, user, httpLib = axios) {
     { headers: { Authorization: `Bearer ${user.accessToken}` } },
   );
   const yahooTransactions = transactionsRes.data.fantasy_content.league[1].transactions;
-  if (process.env.LOG_TRANSACTIONS) { console.log(JSON.stringify(yahooTransactions, null, 2)); }
+
   return Object.entries(yahooTransactions)
     .map(entry => entry[1].transaction)
     .filter(transaction => transaction)
