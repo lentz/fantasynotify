@@ -30,10 +30,10 @@ handlebars.registerHelper('playerTransaction', (player, bid) => {
 });
 
 module.exports = class Notification {
-  constructor(user, mailer) {
-    this.user = user;
+  constructor(user, mailer = sgMail) {
     this.leagueTransactions = {};
-    this.mailer = mailer || sgMail;
+    this.mailer = mailer;
+    this.user = user;
   }
 
   addTransactions(league, transactions) {
