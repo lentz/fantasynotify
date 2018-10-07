@@ -49,7 +49,7 @@
     "collectCoverage": true
   },
   "nodemonConfig": {
-    "ext": "js,mustache"
+    "ext": "js,handlebars"
   },
   "pre-commit": [
     "lint",
