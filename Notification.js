@@ -1,4 +1,3 @@
-require('dotenv').config();
 const { readFileSync } = require('fs');
 const handlebars = require('handlebars');
 const sgMail = require('@sendgrid/mail');

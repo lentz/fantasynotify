@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const mongooseEncryption = require('mongoose-encryption');
+const yahooAuth = require('./yahooAuth');
 
 const userSchema = new mongoose.Schema({
   email: { type: String, required: true },
@@ -20,5 +21,12 @@ userSchema.plugin(mongooseEncryption, {
   encryptedFields: ['accessToken', 'refreshToken'],
   additionalAuthenticatedFields: ['email'],
 });
+
+userSchema.methods.renewToken = async function renewToken() {
+  const token = yahooAuth.createToken(this.accessToken, this.refreshToken, 'bearer');
+  const newToken = await token.refresh();
+  this.accessToken = newToken.accessToken;
+  this.expires = newToken.expires;
+};
 
 module.exports = mongoose.model('User', userSchema);

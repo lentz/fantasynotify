@@ -4,6 +4,7 @@ describe('Notification', () => {
   beforeEach(() => expect.hasAssertions());
   afterEach(() => jest.resetAllMocks());
 
+  process.env.DOMAIN = 'http://test.com';
   const mockUser = { id: '123', email: 'test@test.com' };
   const mockLeague = { name: 'Test League' };
   const mockMailer = { send: jest.fn() };
@@ -119,9 +120,9 @@ describe('Notification', () => {
             </div>
         <div style=\"text-align: center;\">
           <span style=\"font-size: .75em; color: #666666; margin-top: 40px;\">
-            This email was sent by <a href=\"http://macbookpro.local\">Fantasy Transaction Notifier</a>
+            This email was sent by <a href=\"http://test.com\">Fantasy Transaction Notifier</a>
             to test@test.com.
-            <a href=\"http://macbookpro.local/unsubscribe/123\">Unsubscribe</a>
+            <a href=\"http://test.com/unsubscribe/123\">Unsubscribe</a>
           </span>
         </div>
       </body>
