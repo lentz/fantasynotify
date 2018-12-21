@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const mongooseEncryption = require('mongoose-encryption');
 const yahooAuth = require('./yahooAuth');

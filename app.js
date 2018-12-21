@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const handlebarsExpress = require('express-handlebars');
 require('./db');
+const leagues = require('./leagues');
 const User = require('./User');
 const yahooAuth = require('./yahooAuth');
 
@@ -37,16 +38,25 @@ app.post('/signup', async (req, res) => {
 app.get('/auth/callback', async (req, res) => {
   if (req.query.error) { throw new Error(req.query.error); }
   const authUser = await yahooAuth.code.getToken(req.originalUrl);
-  await User.create({
+  const user = new User({
     email: req.query.state,
     accessToken: authUser.accessToken,
     expires: authUser.expires,
     refreshToken: authUser.refreshToken,
   });
-  res.render('index', {
-    successMessage:
-    'All done! You\'ll start receiving transaction notifications from now on.',
-  });
+  await leagues.updateForUser(user);
+  let context = {
+    successMessage: `All done! You'll start receiving transaction
+      notifications for ${user.leagues.map(league => league.name).join(', ')}.`,
+  };
+  if (!user.leagues.length) {
+    context = {
+      errorMessage: 'No fantasy football leagues found for your account!',
+    };
+  } else {
+    await user.save();
+  }
+  res.render('index', context);
 });
 
 app.get('/unsubscribe/:id', async (req, res) => {
@@ -61,8 +71,14 @@ app.get('/unsubscribe/:id', async (req, res) => {
 });
 
 app.use((err, req, res, _next) => {
-  console.error(err.stack);
-  res.render('index', { errorMessage: err.message });
+  const context = { errorMessage: err.message };
+  if (err.message === 'access_denied') {
+    context.errorMessage = `You must click "Allow" to authorize Fantasy Notify
+      to monitor your league's transations.`;
+  } else {
+    console.error(err.stack);
+  }
+  res.render('index', context);
 });
 
 app.listen(process.env.PORT)
