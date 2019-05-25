@@ -21,7 +21,9 @@ async function run() {
           league,
           transactions.filterNew(league, allTransactions),
         );
-        league.lastNotifiedTransaction = allTransactions && allTransactions[0].key;
+        league.lastNotifiedTransaction = allTransactions
+          && allTransactions.length
+          && allTransactions[0].key;
       }
       await notification.send();
       await user.save();
