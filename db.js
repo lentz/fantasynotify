@@ -8,3 +8,5 @@ mongoose.connection.on('error', (err) => {
   console.error('Unable to connect to Mongo:', err);
   process.exit(1);
 });
+
+module.exports = mongoose.connection;

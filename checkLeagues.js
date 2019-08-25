@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 require('dotenv').config();
-require('./db');
+const db = require('./db');
 const Notification = require('./Notification');
 const leagues = require('./leagues');
 const transactions = require('./transactions');
@@ -9,9 +9,9 @@ const User = require('./User');
 
 /* eslint-disable no-await-in-loop */
 (async function run() {
-  try {
-    const users = await User.find().exec();
-    for (const user of users) { // eslint-disable-line no-restricted-syntax
+  const users = await User.find().exec();
+  for (const user of users) { // eslint-disable-line no-restricted-syntax
+    try {
       console.log(`Checking leagues for ${user.email}`);
       const notification = new Notification(user);
       if (user.expires < new Date()) { await user.renewToken(); }
@@ -28,11 +28,10 @@ const User = require('./User');
       }
       await notification.send();
       await user.save();
+    } catch (err) {
+      console.error(err.stack);
     }
-    process.exit();
-  } catch (err) {
-    console.error(err.stack);
-    process.exit(1);
   }
+  db.close();
 }());
 /* eslint-enable no-await-in-loop */
