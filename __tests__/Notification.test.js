@@ -86,58 +86,20 @@ describe('Notification', () => {
         ],
       },
     ];
-    const expectedBody = `<!DOCTYPE HTML>
-    <html>
-      <head>
-        <meta name=\"viewport\" content=\"width=device-width\">
-        <meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">
-      </head>
-      <body>
-          <h3>Test League</h3>
-          <hr />
-            <div>
-              <p>
-                Test Team 1 <span style=\"color: #1e824c\">added</span> <span style=\"font-weight: bold\">Carson Wentz</span> from waivers<br />
-                Test Team 1 <span style=\"color: #aa0000\">dropped</span> <span style=\"font-weight: bold\">Alex Smith</span> <br />
-              </p>
-            </div>
-            <div>
-              <p>
-                Test Team 2 <span style=\"color: #1e824c\">added</span> <span style=\"font-weight: bold\">Zach Ertz</span> from waivers for $7<br />
-                Test Team 2 <span style=\"color: #aa0000\">dropped</span> <span style=\"font-weight: bold\">Jordan Reed</span> <br />
-              </p>
-            </div>
-            <div>
-              <p>
-                Test Team 3 <span style=\"color: #1e824c\">added</span> <span style=\"font-weight: bold\">Jay Ajayi</span> from free agents<br />
-                Test Team 3 <span style=\"color: #aa0000\">dropped</span> <span style=\"font-weight: bold\">James Connor</span> <br />
-              </p>
-            </div>
-            <div>
-              <p>
-                Test Team 4 <span style=\"color: #aa0000\">dropped</span> <span style=\"font-weight: bold\">Antonio Brown</span> <br />
-              </p>
-            </div>
-        <div style=\"text-align: center;\">
-          <span style=\"font-size: .75em; color: #666666; margin-top: 40px;\">
-            This email was sent by <a href=\"http://test.com\">Fantasy Transaction Notifier</a>
-            to test@test.com.
-            <a href=\"http://test.com/unsubscribe/123\">Unsubscribe</a>
-          </span>
-        </div>
-      </body>
-    </html>
-    `.replace(/^\s{4}/gm, '');
+
     notification.addTransactions(mockLeague, mockTransactions);
 
     notification.send();
 
-    expect(mockMailer.send).toBeCalledWith({
-      from: 'Fantasy Notify <notifications@fantasynotify.herokuapp.com>',
-      html: expectedBody,
-      to: 'test@test.com',
-      subject: 'New transactions in your Yahoo fantasy football league',
-    });
+    const mailerArg = mockMailer.send.mock.calls[0][0];
+    expect(mailerArg.from).toEqual(
+      'Fantasy Notify <notifications@fantasynotify.herokuapp.com>',
+    );
+    expect(mailerArg.to).toEqual('test@test.com');
+    expect(mailerArg.subject).toEqual(
+      'New transactions in Test League',
+    );
+    expect(mailerArg.html).toMatchSnapshot();
   });
 
   test('creates message with transactions from multiple leagues', () => {
@@ -178,27 +140,13 @@ describe('Notification', () => {
       },
     ];
     notification.addTransactions({ name: 'League 2' }, mockLeague2Transactions);
-    const expectedBody = `<h3>Test League</h3>
-      <hr />
-        <div>
-          <p>
-            Test Team 1 <span style=\"color: #1e824c\">added</span> <span style=\"font-weight: bold\">Carson Wentz</span> from waivers<br />
-            Test Team 1 <span style=\"color: #aa0000\">dropped</span> <span style=\"font-weight: bold\">Alex Smith</span> <br />
-          </p>
-        </div>
-      <h3>League 2</h3>
-      <hr />
-        <div>
-          <p>
-            Test Team 2 <span style=\"color: #1e824c\">added</span> <span style=\"font-weight: bold\">Zach Ertz</span> from waivers<br />
-            Test Team 2 <span style=\"color: #aa0000\">dropped</span> <span style=\"font-weight: bold\">Jordan Reed</span> <br />
-          </p>
-        </div>`;
 
     notification.send();
 
-    expect(mockMailer.send).toBeCalledWith(expect.objectContaining({
-      html: expect.stringContaining(expectedBody),
-    }));
+    const mailerArg = mockMailer.send.mock.calls[0][0];
+    expect(mailerArg.subject).toEqual(
+      'New transactions in Test League, League 2',
+    );
+    expect(mailerArg.html).toMatchSnapshot();
   });
 });

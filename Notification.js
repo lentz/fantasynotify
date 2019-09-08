@@ -45,7 +45,7 @@ module.exports = class Notification {
     const message = {
       to: this.user.email,
       from: 'Fantasy Notify <notifications@fantasynotify.herokuapp.com>',
-      subject: 'New transactions in your Yahoo fantasy football league',
+      subject: `New transactions in ${Object.keys(this.leagueTransactions).join(', ')}`,
       html: emailTemplate({
         leagueTransactions: this.leagueTransactions,
         domain: process.env.DOMAIN,
