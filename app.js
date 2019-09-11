@@ -15,7 +15,8 @@ const app = express();
 app.use(helmet());
 app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
-app.engine('handlebars', handlebarsExpress());
+const handlebars = handlebarsExpress.create({ defaultLayout: false });
+app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 
 app.get('/', (req, res) => res.render('index'));
