@@ -48,7 +48,7 @@ app.get('/auth/callback', async (req, res) => {
   await leagues.updateForUser(user);
   let context = {
     successMessage: `All done! You'll start receiving transaction
-      notifications for ${user.leagues.map(league => league.name).join(', ')}.`,
+      notifications for ${user.leagues.map((league) => league.name).join(', ')}.`,
   };
   if (!user.leagues.length) {
     context = {

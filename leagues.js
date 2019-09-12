@@ -11,12 +11,12 @@ async function updateForUser(user, httpLib = axios) {
   const yahooLeagues = games[0].game[1].leagues;
 
   const leagues = Object.entries(yahooLeagues)
-    .filter(entry => entry[1].league)
-    .map(entry => entry[1].league[0])
-    .map(league => ({ key: league.league_key, name: league.name }));
+    .filter((entry) => entry[1].league)
+    .map((entry) => entry[1].league[0])
+    .map((league) => ({ key: league.league_key, name: league.name }));
 
   leagues.forEach((league) => {
-    if (!(user.leagues || []).find(uL => uL.key === league.key)) {
+    if (!(user.leagues || []).find((uL) => uL.key === league.key)) {
       user.leagues.push(league);
     }
   });
