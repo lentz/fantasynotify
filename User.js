@@ -24,14 +24,10 @@ userSchema.plugin(mongooseEncryption, {
 });
 
 userSchema.methods.renewToken = async function renewToken() {
-  try {
-    const token = yahooAuth.createToken(this.accessToken, this.refreshToken, 'bearer');
-    const newToken = await token.refresh();
-    this.accessToken = newToken.accessToken;
-    this.expires = newToken.expires;
-  } catch (err) {
-    console.error(`Failed to refresh token for ${this.email}: ${err.stack}`);
-  }
+  const token = yahooAuth.createToken(this.accessToken, this.refreshToken, 'bearer');
+  const newToken = await token.refresh();
+  this.accessToken = newToken.accessToken;
+  this.expires = newToken.expires;
 };
 
 module.exports = mongoose.model('User', userSchema);
