@@ -30,7 +30,7 @@ const User = require('./User');
       await user.save();
     } catch (err) {
       console.error(err.stack);
-      if (err.body.error === 'INVALID_REFRESH_TOKEN') {
+      if (err.body && err.body.error === 'INVALID_REFRESH_TOKEN') {
         console.log(`Deleting user '${user.email}' with invalid refresh token`);
         await user.remove();
       }
