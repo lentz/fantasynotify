@@ -16,12 +16,14 @@ const userSchema = new mongoose.Schema({
   }],
 }, { timestamps: true });
 
-userSchema.plugin(mongooseEncryption, {
-  encryptionKey: process.env.MONGO_ENCRYPTION_KEY,
-  signingKey: process.env.MONGO_SIGNING_KEY,
-  encryptedFields: ['accessToken', 'refreshToken'],
-  additionalAuthenticatedFields: ['email'],
-});
+if (process.env.MONGO_ENCRYPTION_KEY) {
+  userSchema.plugin(mongooseEncryption, {
+    encryptionKey: process.env.MONGO_ENCRYPTION_KEY,
+    signingKey: process.env.MONGO_SIGNING_KEY,
+    encryptedFields: ['accessToken', 'refreshToken'],
+    additionalAuthenticatedFields: ['email'],
+  });
+}
 
 userSchema.methods.renewToken = async function renewToken() {
   const token = yahooAuth.createToken(this.accessToken, this.refreshToken, 'bearer');
