@@ -1,9 +1,6 @@
 const Notification = require('../Notification');
 
 describe('Notification', () => {
-  beforeEach(() => expect.hasAssertions());
-  afterEach(() => jest.resetAllMocks());
-
   process.env.DOMAIN = 'http://test.com';
   const mockUser = { id: '123', email: 'test@test.com' };
   const mockLeague = { name: 'Test League' };
@@ -14,7 +11,7 @@ describe('Notification', () => {
 
     notification.send();
 
-    expect(mockMailer.send).not.toBeCalled();
+    expect(mockMailer.send).not.toHaveBeenCalled();
   });
 
   test('does not send a notification if empty transactions are provided', () => {
@@ -24,7 +21,7 @@ describe('Notification', () => {
 
     notification.send();
 
-    expect(mockMailer.send).not.toBeCalled();
+    expect(mockMailer.send).not.toHaveBeenCalled();
   });
 
   test('renders the transactions when calling send', () => {

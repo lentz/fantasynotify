@@ -2,9 +2,6 @@ const { readFileSync } = require('fs');
 const { filterNew, getAll } = require('../transactions');
 
 describe('transactions', () => {
-  beforeEach(() => expect.hasAssertions());
-  afterEach(() => jest.resetAllMocks());
-
   const mockLeague = { name: 'league', lastNotifiedTransaction: '2' };
   const mockYahooTransactions = readFileSync('./__tests__/mockYahooTransactions.json');
 
@@ -20,7 +17,7 @@ describe('transactions', () => {
         {
           bid: 7,
           key: '380.l.241704.tr.146',
-          players:  [
+          players: [
             {
               destination_team_key: '380.l.241704.t.7',
               destination_team_name: 'Zeke\'s Freaks',
@@ -42,7 +39,7 @@ describe('transactions', () => {
         {
           bid: undefined,
           key: '380.l.241704.tr.145',
-          players:  [
+          players: [
             {
               destination_team_key: '380.l.241704.t.6',
               destination_team_name: '2017 Third Place',
@@ -64,7 +61,7 @@ describe('transactions', () => {
         {
           bid: undefined,
           key: '380.l.241704.tr.144',
-          players:  [
+          players: [
             {
               destination_team_key: '380.l.241704.t.1',
               destination_team_name: 'Chris Hogan BROTHER',
@@ -86,7 +83,7 @@ describe('transactions', () => {
         {
           bid: undefined,
           key: '380.l.241704.tr.143',
-          players:  [
+          players: [
             {
               destination_team_key: '380.l.241704.t.11',
               destination_team_name: '2018 Champion',

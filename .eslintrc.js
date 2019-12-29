@@ -1,12 +1,18 @@
 module.exports = {
-  extends: 'airbnb-base',
+  extends: [
+    'airbnb-base',
+    'plugin:jest/recommended',
+    'plugin:jest/style',
+  ],
+  plugins: ['jest'],
   rules: {
+    'jest/expect-expect': 'error',
     'no-console': 'off',
     'no-unused-vars': [
       'error',
       {
         argsIgnorePattern: '^_*',
-      }
-    ]
-  }
+      },
+    ],
+  },
 };
