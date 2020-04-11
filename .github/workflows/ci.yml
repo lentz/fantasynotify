@@ -17,3 +17,5 @@ jobs:
     - run: npm ci
     - run: npm run lint
     - run: npm test
+    env:
+      SENDGRID_API_KEY: SG.TEST_KEY
