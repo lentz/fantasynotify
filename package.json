@@ -43,7 +43,7 @@
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.17.1",
-    "jest": "^26.0.1",
+    "jest": "^26.1.0",
     "pre-commit": "^1.2.2"
   },
   "jest": {
