@@ -5,7 +5,7 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 const emailTemplate = handlebars.compile(
-  readFileSync('./views/emailLayout.handlebars').toString(),
+  readFileSync('./views/emailLayout.hbs').toString(),
 );
 
 handlebars.registerHelper('playerTransaction', (player, bid) => {

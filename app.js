@@ -29,9 +29,9 @@ app.use(helmet({
 }));
 app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
-const handlebars = handlebarsExpress.create({ defaultLayout: false });
-app.engine('handlebars', handlebars.engine);
-app.set('view engine', 'handlebars');
+const handlebars = handlebarsExpress.create({ defaultLayout: false, extname: '.hbs' });
+app.engine('.hbs', handlebars.engine);
+app.set('view engine', '.hbs');
 
 app.get('/', controller.index);
 app.post('/signup', controller.signup);
