@@ -10,7 +10,23 @@ const controller = require('./controller');
 
 const app = express();
 
-app.use(helmet());
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      baseUri: ["'self'"],
+      blockAllMixedContent: [],
+      fontSrc: ["'self'", 'https:', 'data:'],
+      frameAncestors: ["'self'"],
+      imgSrc: ["'self'", 'data:', 'www.paypalobjects.com'],
+      objectSrc: ["'none'"],
+      scriptSrc: ["'self'"],
+      scriptSrcAttr: ["'none'"],
+      styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
+      upgradeInsecureRequests: [],
+    },
+  },
+}));
 app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
 const handlebars = handlebarsExpress.create({ defaultLayout: false });
