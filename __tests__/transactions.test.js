@@ -3,7 +3,9 @@ const { filterNew, getAll } = require('../transactions');
 
 describe('transactions', () => {
   const mockLeague = { name: 'league', lastNotifiedTransaction: '2' };
-  const mockYahooTransactions = readFileSync('./__tests__/mockYahooTransactions.json');
+  const mockYahooTransactions = readFileSync(
+    './__tests__/mockYahooTransactions.json',
+  );
 
   describe('#getAll', () => {
     test('tranforms yahoo response into usable transactions', async () => {
@@ -20,7 +22,7 @@ describe('transactions', () => {
           players: [
             {
               destination_team_key: '380.l.241704.t.7',
-              destination_team_name: 'Zeke\'s Freaks',
+              destination_team_name: "Zeke's Freaks",
               destination_type: 'team',
               name: 'Wendell Smallwood',
               source_type: 'waivers',
@@ -30,7 +32,7 @@ describe('transactions', () => {
               destination_type: 'waivers',
               name: 'Ted Ginn Jr.',
               source_team_key: '380.l.241704.t.7',
-              source_team_name: 'Zeke\'s Freaks',
+              source_team_name: "Zeke's Freaks",
               source_type: 'team',
               type: 'drop',
             },
@@ -66,7 +68,7 @@ describe('transactions', () => {
               destination_team_key: '380.l.241704.t.1',
               destination_team_name: 'Chris Hogan BROTHER',
               destination_type: 'team',
-              name: 'D\'Onta Foreman',
+              name: "D'Onta Foreman",
               source_type: 'freeagents',
               type: 'add',
             },
@@ -108,11 +110,7 @@ describe('transactions', () => {
 
   describe('#filterNew', () => {
     test('returns only new transactions', () => {
-      const transactions = [
-        { key: '3' },
-        { key: '2' },
-        { key: '1' },
-      ];
+      const transactions = [{ key: '3' }, { key: '2' }, { key: '1' }];
 
       const newTransactions = filterNew(mockLeague, transactions);
 
@@ -120,10 +118,7 @@ describe('transactions', () => {
     });
 
     test('returns empty array if none are new', () => {
-      const transactions = [
-        { key: '2' },
-        { key: '1' },
-      ];
+      const transactions = [{ key: '2' }, { key: '1' }];
 
       const newTransactions = filterNew(mockLeague, transactions);
 

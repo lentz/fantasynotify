@@ -17,7 +17,9 @@ handlebars.registerHelper('playerTransaction', (player, bid) => {
     team = player.destination_team_name;
     if (player.source_type === 'waivers') {
       source = 'from waivers';
-      if (bid) { source += ` for $${bid}`; }
+      if (bid) {
+        source += ` for $${bid}`;
+      }
     } else if (player.source_type === 'freeagents') {
       source = 'from free agents';
     }
@@ -36,16 +38,22 @@ module.exports = class Notification {
   }
 
   addTransactions(league, transactions) {
-    if (!transactions || !transactions.length) { return; }
+    if (!transactions || !transactions.length) {
+      return;
+    }
     this.leagueTransactions[league.name] = transactions;
   }
 
   send() {
-    if (!Object.entries(this.leagueTransactions).length) { return null; }
+    if (!Object.entries(this.leagueTransactions).length) {
+      return null;
+    }
     const message = {
       to: this.user.email,
       from: 'Fantasy Notify <notifications@fantasynotify.herokuapp.com>',
-      subject: `New transactions in ${Object.keys(this.leagueTransactions).join(', ')}`,
+      subject: `New transactions in ${Object.keys(this.leagueTransactions).join(
+        ', ',
+      )}`,
       html: emailTemplate({
         leagueTransactions: this.leagueTransactions,
         domain: process.env.DOMAIN,

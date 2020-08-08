@@ -6,7 +6,9 @@ function mapPlayers(players) {
     .filter((entry) => entry)
     .map((playerTrans) => {
       let transactionData = playerTrans[1].transaction_data;
-      if (Array.isArray(transactionData)) { [transactionData] = transactionData; }
+      if (Array.isArray(transactionData)) {
+        [transactionData] = transactionData;
+      }
       return {
         ...transactionData,
         name: playerTrans[0][2].name.full,
@@ -19,7 +21,8 @@ async function getAll(league, user, httpLib = axios) {
     `https://fantasysports.yahooapis.com/fantasy/v2/league/${league.key}/transactions;types=add,drop?format=json`,
     { headers: { Authorization: `Bearer ${user.accessToken}` } },
   );
-  const yahooTransactions = transactionsRes.data.fantasy_content.league[1].transactions;
+  const yahooTransactions =
+    transactionsRes.data.fantasy_content.league[1].transactions;
 
   return Object.entries(yahooTransactions)
     .map((entry) => entry[1].transaction)
@@ -33,9 +36,12 @@ async function getAll(league, user, httpLib = axios) {
 }
 
 function filterNew(league, transactions) {
-  if (!league.lastNotifiedTransaction) { return []; }
-  const lastNotifiedTransactionIndex = transactions
-    .findIndex((transaction) => transaction.key === league.lastNotifiedTransaction);
+  if (!league.lastNotifiedTransaction) {
+    return [];
+  }
+  const lastNotifiedTransactionIndex = transactions.findIndex(
+    (transaction) => transaction.key === league.lastNotifiedTransaction,
+  );
 
   return transactions.slice(0, lastNotifiedTransactionIndex);
 }

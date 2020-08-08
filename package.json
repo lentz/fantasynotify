@@ -41,10 +41,12 @@
   "devDependencies": {
     "eslint": "^7.6.0",
     "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-jest": "^23.20.0",
     "jest": "^26.2.2",
-    "pre-commit": "^1.2.2"
+    "pre-commit": "^1.2.2",
+    "prettier": "^2.0.5"
   },
   "jest": {
     "clearMocks": true,
@@ -53,7 +55,7 @@
     "testEnvironment": "node"
   },
   "nodemonConfig": {
-    "ext": "js,handlebars",
+    "ext": "js,hbs",
     "nodeArgs": "--inspect"
   },
   "pre-commit": [

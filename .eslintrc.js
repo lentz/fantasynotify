@@ -3,6 +3,7 @@ module.exports = {
     'airbnb-base',
     'plugin:jest/recommended',
     'plugin:jest/style',
+    'prettier',
   ],
   plugins: ['jest'],
   rules: {

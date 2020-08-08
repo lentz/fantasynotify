@@ -14,15 +14,16 @@ async function signup(req, res) {
   const user = await User.findOne({ email }).exec();
   if (user) {
     return res.render('index', {
-      errorMessage:
-      `${email} is already signed up to receive notifications!`,
+      errorMessage: `${email} is already signed up to receive notifications!`,
     });
   }
   return res.redirect(yahooAuth.code.getUri({ state: email }));
 }
 
 async function authCallback(req, res) {
-  if (req.query.error) { throw new Error(req.query.error); }
+  if (req.query.error) {
+    throw new Error(req.query.error);
+  }
   const authUser = await yahooAuth.code.getToken(req.originalUrl);
   const user = new User({
     email: req.query.state,
@@ -33,7 +34,9 @@ async function authCallback(req, res) {
   await leagues.updateForUser(user);
   let context = {
     successMessage: `All done! You'll start receiving transaction
-      notifications for ${user.leagues.map((league) => league.name).join(', ')}.`,
+      notifications for ${user.leagues
+        .map((league) => league.name)
+        .join(', ')}.`,
   };
   if (!user.leagues.length) {
     context = {

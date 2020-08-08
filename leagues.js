@@ -7,7 +7,9 @@ async function updateForUser(user, httpLib = axios) {
   );
 
   const { games } = usersRes.data.fantasy_content.users[0].user[1];
-  if (!Object.keys(games).length) { return; }
+  if (!Object.keys(games).length) {
+    return;
+  }
   const yahooLeagues = games[0].game[1].leagues;
 
   const leagues = Object.entries(yahooLeagues)

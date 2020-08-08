@@ -94,9 +94,7 @@ describe('Notification', () => {
       'Fantasy Notify <notifications@fantasynotify.herokuapp.com>',
     );
     expect(mailerArg.to).toEqual('test@test.com');
-    expect(mailerArg.subject).toEqual(
-      'New transactions in Test League',
-    );
+    expect(mailerArg.subject).toEqual('New transactions in Test League');
     expect(mailerArg.html).toMatchSnapshot();
   });
 

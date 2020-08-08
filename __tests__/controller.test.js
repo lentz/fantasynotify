@@ -21,12 +21,11 @@ describe('controller', () => {
 
   describe('#signup', () => {
     test('renders an error is email is not provided', async () => {
-      await controller.signup({ body: { } }, mockRes);
+      await controller.signup({ body: {} }, mockRes);
 
-      expect(mockRes.render).toHaveBeenCalledWith(
-        'index',
-        { errorMessage: 'Email is required!' },
-      );
+      expect(mockRes.render).toHaveBeenCalledWith('index', {
+        errorMessage: 'Email is required!',
+      });
     });
 
     test('shows a warning if the user has already signed up', async () => {
@@ -36,10 +35,10 @@ describe('controller', () => {
 
       await controller.signup({ body: { email: 'foo@bar.com' } }, mockRes);
 
-      expect(mockRes.render).toHaveBeenCalledWith(
-        'index',
-        { errorMessage: 'foo@bar.com is already signed up to receive notifications!' },
-      );
+      expect(mockRes.render).toHaveBeenCalledWith('index', {
+        errorMessage:
+          'foo@bar.com is already signed up to receive notifications!',
+      });
     });
 
     test('redirects to the yahoo auth page', async () => {
@@ -54,8 +53,10 @@ describe('controller', () => {
   });
 
   describe('#authCallback', () => {
-    test('throws an error if set in the request', () => expect(controller.authCallback({ query: { error: 'auth failed' } }, mockRes))
-      .rejects.toEqual(new Error('auth failed')));
+    test('throws an error if set in the request', () =>
+      expect(
+        controller.authCallback({ query: { error: 'auth failed' } }, mockRes),
+      ).rejects.toEqual(new Error('auth failed')));
 
     test('calls updateLeagues and renders a success message', async () => {
       jest.spyOn(leagues, 'updateForUser').mockImplementation((user) => {
@@ -74,13 +75,11 @@ describe('controller', () => {
         mockRes,
       );
 
-      expect(mockRes.render).toHaveBeenCalledWith(
-        'index',
-        {
-          successMessage: 'All done! You\'ll start receiving transaction\n'
-          + '      notifications for league 1, league 2.',
-        },
-      );
+      expect(mockRes.render).toHaveBeenCalledWith('index', {
+        successMessage:
+          "All done! You'll start receiving transaction\n" +
+          '      notifications for league 1, league 2.',
+      });
     });
 
     test('renders a warning if no leagues were found', async () => {
@@ -100,10 +99,9 @@ describe('controller', () => {
         mockRes,
       );
 
-      expect(mockRes.render).toHaveBeenCalledWith(
-        'index',
-        { errorMessage: 'No fantasy football leagues found for your account!' },
-      );
+      expect(mockRes.render).toHaveBeenCalledWith('index', {
+        errorMessage: 'No fantasy football leagues found for your account!',
+      });
     });
   });
 
@@ -113,21 +111,21 @@ describe('controller', () => {
 
       await controller.unsubscribe({ params: { id: '123' } }, mockRes);
 
-      expect(mockRes.render).toHaveBeenCalledWith(
-        'index',
-        { errorMessage: 'No email found matching this account' },
-      );
+      expect(mockRes.render).toHaveBeenCalledWith('index', {
+        errorMessage: 'No email found matching this account',
+      });
     });
 
     test('calls the function to delete the user if the ID matches', async () => {
-      jest.spyOn(User, 'findByIdAndDelete').mockResolvedValue({ email: 'foo@bar.com' });
+      jest
+        .spyOn(User, 'findByIdAndDelete')
+        .mockResolvedValue({ email: 'foo@bar.com' });
 
       await controller.unsubscribe({ params: { id: '123' } }, mockRes);
 
-      expect(mockRes.render).toHaveBeenCalledWith(
-        'index',
-        { successMessage: 'foo@bar.com has been unsubscribed' },
-      );
+      expect(mockRes.render).toHaveBeenCalledWith('index', {
+        successMessage: 'foo@bar.com has been unsubscribed',
+      });
     });
   });
 
@@ -135,13 +133,11 @@ describe('controller', () => {
     test('instructs user to allow on Yahoo if access denied', () => {
       controller.handleError(new Error('access_denied'), {}, mockRes);
 
-      expect(mockRes.render).toHaveBeenCalledWith(
-        'index',
-        {
-          errorMessage: 'You must click "Allow" to authorize Fantasy Notify\n'
-          + '      to monitor your league\'s transactions.',
-        },
-      );
+      expect(mockRes.render).toHaveBeenCalledWith('index', {
+        errorMessage:
+          'You must click "Allow" to authorize Fantasy Notify\n' +
+          "      to monitor your league's transactions.",
+      });
     });
 
     test('prints other errors to the console and sets errorMessage', () => {
@@ -149,11 +145,12 @@ describe('controller', () => {
 
       controller.handleError(new Error('Other error'), {}, mockRes);
 
-      expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('Other error'));
-      expect(mockRes.render).toHaveBeenCalledWith(
-        'index',
-        { errorMessage: 'Other error' },
+      expect(consoleSpy).toHaveBeenCalledWith(
+        expect.stringContaining('Other error'),
       );
+      expect(mockRes.render).toHaveBeenCalledWith('index', {
+        errorMessage: 'Other error',
+      });
     });
   });
 });

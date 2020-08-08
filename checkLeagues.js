@@ -10,21 +10,24 @@ const User = require('./User');
 /* eslint-disable no-await-in-loop */
 (async function run() {
   const users = await User.find().exec();
-  for (const user of users) { // eslint-disable-line no-restricted-syntax
+  // eslint-disable-next-line no-restricted-syntax
+  for (const user of users) {
     try {
       console.log(`Checking leagues for ${user.email}`);
       const notification = new Notification(user);
-      if (user.expires < new Date()) { await user.renewToken(); }
+      if (user.expires < new Date()) {
+        await user.renewToken();
+      }
       await leagues.updateForUser(user);
-      for (const league of user.leagues) { // eslint-disable-line no-restricted-syntax
+      // eslint-disable-next-line no-restricted-syntax
+      for (const league of user.leagues) {
         const allTransactions = await transactions.getAll(league, user);
         notification.addTransactions(
           league,
           transactions.filterNew(league, allTransactions),
         );
-        league.lastNotifiedTransaction = allTransactions
-          && allTransactions.length
-          && allTransactions[0].key;
+        league.lastNotifiedTransaction =
+          allTransactions && allTransactions.length && allTransactions[0].key;
       }
       await notification.send();
       await user.save();
@@ -37,5 +40,5 @@ const User = require('./User');
     }
   }
   db.close();
-}());
+})();
 /* eslint-enable no-await-in-loop */
