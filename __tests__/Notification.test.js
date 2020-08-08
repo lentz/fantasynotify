@@ -1,3 +1,4 @@
+process.env.SENDGRID_API_KEY = 'SG.TEST_KEY';
 const Notification = require('../Notification');
 
 describe('Notification', () => {
