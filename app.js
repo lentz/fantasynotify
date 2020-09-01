@@ -44,6 +44,22 @@ app.get('/auth/callback', controller.authCallback);
 app.get('/unsubscribe/:id', controller.unsubscribe);
 app.use(controller.handleError);
 
+/* Dev HTTPS */
+/*
+const fs = require('fs');
+const https = require('https');
+const server = https.createServer(
+    {
+      key: fs.readFileSync('../key.pem'),
+      cert: fs.readFileSync('../cert.pem'),
+    },
+    app,
+  )
+  .listen(process.env.PORT)
+  .on('listening', () => console.log(`Listening on port ${process.env.PORT}`))
+  .on('error', console.error);
+*/
+
 app
   .listen(process.env.PORT)
   .on('listening', () => console.log(`Listening on port ${process.env.PORT}`))
