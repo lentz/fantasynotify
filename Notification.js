@@ -57,7 +57,8 @@ module.exports = class Notification {
       html: emailTemplate({
         leagueTransactions: this.leagueTransactions,
         domain: process.env.DOMAIN,
-        user: this.user,
+        userEmail: this.user.email,
+        userId: this.user.id,
       }),
     };
     return this.mailer.send(message);
