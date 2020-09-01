@@ -82,5 +82,40 @@ describe('leagues', () => {
         },
       ]);
     });
+
+    test('removes old leagues that are no longer returned from Yahoo', async () => {
+      const mockHttpLib = {
+        get: () => Promise.resolve(JSON.parse(mockYahooUser)),
+      };
+      const mockUser = {
+        leagues: [
+          {
+            key: '300.l.123456',
+            name: 'Old League',
+          },
+          {
+            key: '380.l.942166',
+            name: 'Keeper League',
+          },
+          {
+            key: '380.l.511310',
+            name: 'Belmont St Fantasy',
+          },
+        ],
+      };
+
+      await updateForUser(mockUser, mockHttpLib);
+
+      expect(mockUser.leagues).toEqual([
+        {
+          key: '380.l.942166',
+          name: 'Keeper League',
+        },
+        {
+          key: '380.l.511310',
+          name: 'Belmont St Fantasy',
+        },
+      ]);
+    });
   });
 });

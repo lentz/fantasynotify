@@ -18,9 +18,13 @@ async function updateForUser(user, httpLib = axios) {
     .map((league) => ({ key: league.league_key, name: league.name }));
 
   leagues.forEach((league) => {
-    if (!(user.leagues || []).find((uL) => uL.key === league.key)) {
+    if (!(user.leagues || []).some((uL) => uL.key === league.key)) {
       user.leagues.push(league);
     }
+  });
+
+  user.leagues = (user.leagues || []).filter((existingLeague) => {
+    return leagues.some((league) => league.key === existingLeague.key);
   });
 }
 

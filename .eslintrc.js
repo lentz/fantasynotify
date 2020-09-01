@@ -9,6 +9,7 @@ module.exports = {
   rules: {
     'jest/expect-expect': 'error',
     'no-console': 'off',
+    'no-param-reassign': 'off',
     'no-unused-vars': [
       'error',
       {
