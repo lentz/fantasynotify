@@ -125,9 +125,12 @@ describe('transactions', () => {
       expect(newTransactions).toEqual([]);
     });
 
-    test('returns empty array if the league does not have a last modified transaction', () => {
+    test('returns empty array if transactions is not provided', () => {
       expect(filterNew({ name: 'new' })).toEqual([]);
-      expect(filterNew({ name: 'new' }, [{ key: '1' }])).toEqual([]);
+    });
+
+    test('returns all transactions if the league does not have a last modified transaction', () => {
+      expect(filterNew({ name: 'new' }, [{ key: '1' }])).toEqual([{ key: '1' }]);
     });
   });
 });

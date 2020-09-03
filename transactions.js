@@ -35,9 +35,9 @@ async function getAll(league, user, httpLib = axios) {
     }));
 }
 
-function filterNew(league, transactions) {
+function filterNew(league, transactions = []) {
   if (!league.lastNotifiedTransaction) {
-    return [];
+    return transactions;
   }
   const lastNotifiedTransactionIndex = transactions.findIndex(
     (transaction) => transaction.key === league.lastNotifiedTransaction,

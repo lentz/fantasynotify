@@ -26,8 +26,9 @@ const User = require('./User');
           league,
           transactions.filterNew(league, allTransactions),
         );
-        league.lastNotifiedTransaction =
-          allTransactions && allTransactions.length && allTransactions[0].key;
+        if (allTransactions && allTransactions.length) {
+          league.lastNotifiedTransaction = allTransactions[0].key;
+        }
       }
       await notification.send();
       await user.save();

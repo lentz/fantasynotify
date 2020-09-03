@@ -48,6 +48,7 @@ module.exports = class Notification {
     if (!Object.entries(this.leagueTransactions).length) {
       return null;
     }
+    console.log(`Sending notification to ${this.user.email}`);
     const message = {
       to: this.user.email,
       from: 'Fantasy Notify <notifications@fantasynotify.herokuapp.com>',
