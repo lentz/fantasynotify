@@ -32,6 +32,7 @@ const User = require('./User');
       }
       await notification.send();
       await user.save();
+      await new Promise((resolve) => setTimeout(resolve, 3000));
     } catch (err) {
       if (err.response) {
         console.error(`HTTP ${err.response.status}: ${err.response.data}`);
