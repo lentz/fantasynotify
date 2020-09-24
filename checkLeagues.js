@@ -33,6 +33,9 @@ const User = require('./User');
       await notification.send();
       await user.save();
     } catch (err) {
+      if (err.response) {
+        console.error(`HTTP ${err.response.status}: ${err.response.data}`);
+      }
       console.error(err.stack);
       if (err.body && err.body.error === 'INVALID_REFRESH_TOKEN') {
         console.log(`Deleting user '${user.email}' with invalid refresh token`);
