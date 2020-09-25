@@ -31,6 +31,7 @@ const User = require('./User');
         }
       }
       await notification.send();
+      user.markModified('leagues');
       await user.save();
       await new Promise((resolve) => setTimeout(resolve, 3000));
     } catch (err) {
