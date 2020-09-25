@@ -9,7 +9,7 @@ const User = require('./User');
 
 /* eslint-disable no-await-in-loop */
 (async function run() {
-  const users = await User.find().exec();
+  const users = await User.find().sort({ updatedAt: 1 }).exec();
   // eslint-disable-next-line no-restricted-syntax
   for (const user of users) {
     try {
@@ -33,7 +33,7 @@ const User = require('./User');
       await notification.send();
       user.markModified('leagues');
       await user.save();
-      await new Promise((resolve) => setTimeout(resolve, 3000));
+      await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (err) {
       if (err.response) {
         console.error(`HTTP ${err.response.status}: ${err.response.data}`);
