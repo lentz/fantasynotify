@@ -36,7 +36,13 @@ const User = require('./User');
       await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (err) {
       if (err.response) {
-        console.error(`HTTP ${err.response.status}: ${err.response.data}`);
+        console.error(
+          `HTTP ${err.response.status}: ${JSON.stringify(
+            err.response.data,
+            null,
+            2,
+          )}`,
+        );
       }
       console.error(err.stack);
       if (err.body && err.body.error === 'INVALID_REFRESH_TOKEN') {
