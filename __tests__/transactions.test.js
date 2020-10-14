@@ -130,7 +130,9 @@ describe('transactions', () => {
     });
 
     test('returns all transactions if the league does not have a last modified transaction', () => {
-      expect(filterNew({ name: 'new' }, [{ key: '1' }])).toEqual([{ key: '1' }]);
+      expect(filterNew({ name: 'new' }, [{ key: '1' }])).toEqual([
+        { key: '1' },
+      ]);
     });
   });
 });

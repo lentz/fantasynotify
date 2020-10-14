@@ -71,7 +71,7 @@ describe('controller', () => {
       });
 
       await controller.authCallback(
-        { query: {}, originalUrl: 'https://orig.com' },
+        { query: { code: 'test' }, originalUrl: 'https://orig.com' },
         mockRes,
       );
 
@@ -95,7 +95,7 @@ describe('controller', () => {
       });
 
       await controller.authCallback(
-        { query: {}, originalUrl: 'https://orig.com' },
+        { query: { code: 'test' }, originalUrl: 'https://orig.com' },
         mockRes,
       );
 

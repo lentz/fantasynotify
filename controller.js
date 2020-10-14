@@ -24,6 +24,11 @@ async function authCallback(req, res) {
   if (req.query.error) {
     throw new Error(req.query.error);
   }
+  if (!Object.keys(req.query).length) {
+    return res.render('index', {
+      errorMessage: 'Invalid callback, please try again.',
+    });
+  }
   const authUser = await yahooAuth.code.getToken(req.originalUrl);
   const user = new User({
     email: req.query.state,
@@ -45,7 +50,7 @@ async function authCallback(req, res) {
   } else {
     await user.save();
   }
-  res.render('index', context);
+  return res.render('index', context);
 }
 
 async function unsubscribe(req, res) {
