@@ -15,9 +15,7 @@ const User = require('./User');
     try {
       console.log(`Checking leagues for ${user.email}`);
       const notification = new Notification(user);
-      if (user.expires < new Date()) {
-        await user.renewToken();
-      }
+      await user.renewToken();
       await leagues.updateForUser(user);
       // eslint-disable-next-line no-restricted-syntax
       for (const league of user.leagues) {
