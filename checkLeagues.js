@@ -42,10 +42,11 @@ const User = require('./User');
           )}`,
         );
       }
-      console.error(err.stack);
       if (err.body && err.body.error === 'INVALID_REFRESH_TOKEN') {
-        console.log(`Deleting user '${user.email}' with invalid refresh token`);
+        console.log(`Deleting user '${user.email}' with revoked refresh token`);
         await user.remove();
+      } else {
+        console.error(err.stack);
       }
     }
   }
