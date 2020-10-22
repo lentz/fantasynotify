@@ -6,9 +6,9 @@ describe('leagues', () => {
 
   describe('#updateForUser', () => {
     test('adds new leagues to the user', async () => {
-      const mockHttpLib = {
-        get: () => Promise.resolve(JSON.parse(mockYahooUser)),
-      };
+      const mockHttpLib = () => ({
+        json: () => Promise.resolve(JSON.parse(mockYahooUser)),
+      });
       const mockUser = { leagues: [] };
 
       await updateForUser(mockUser, mockHttpLib);
@@ -26,9 +26,9 @@ describe('leagues', () => {
     });
 
     test('only adds leagues that are not already present', async () => {
-      const mockHttpLib = {
-        get: () => Promise.resolve(JSON.parse(mockYahooUser)),
-      };
+      const mockHttpLib = () => ({
+        json: () => Promise.resolve(JSON.parse(mockYahooUser)),
+      });
       const mockUser = {
         leagues: [
           {
@@ -53,9 +53,9 @@ describe('leagues', () => {
     });
 
     test('does not modify leagues if they all already exist', async () => {
-      const mockHttpLib = {
-        get: () => Promise.resolve(JSON.parse(mockYahooUser)),
-      };
+      const mockHttpLib = () => ({
+        json: () => Promise.resolve(JSON.parse(mockYahooUser)),
+      });
       const mockUser = {
         leagues: [
           {
@@ -84,9 +84,9 @@ describe('leagues', () => {
     });
 
     test('removes old leagues that are no longer returned from Yahoo', async () => {
-      const mockHttpLib = {
-        get: () => Promise.resolve(JSON.parse(mockYahooUser)),
-      };
+      const mockHttpLib = () => ({
+        json: () => Promise.resolve(JSON.parse(mockYahooUser)),
+      });
       const mockUser = {
         leagues: [
           {

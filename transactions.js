@@ -1,4 +1,4 @@
-const axios = require('axios');
+const got = require('got');
 
 function mapPlayers(players) {
   return Object.entries(players)
@@ -16,13 +16,12 @@ function mapPlayers(players) {
     });
 }
 
-async function getAll(league, user, httpLib = axios) {
-  const transactionsRes = await httpLib.get(
+async function getAll(league, user, httpLib = got) {
+  const transactions = await httpLib(
     `https://fantasysports.yahooapis.com/fantasy/v2/league/${league.key}/transactions;types=add,drop?format=json`,
     { headers: { Authorization: `Bearer ${user.accessToken}` } },
-  );
-  const yahooTransactions =
-    transactionsRes.data.fantasy_content.league[1].transactions;
+  ).json();
+  const yahooTransactions = transactions.fantasy_content.league[1].transactions;
 
   return Object.entries(yahooTransactions)
     .map((entry) => entry[1].transaction)

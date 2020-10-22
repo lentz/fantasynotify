@@ -1,426 +1,424 @@
 {
-  "data": {
-    "fantasy_content": {
-      "xml:lang": "en-US",
-      "yahoo:uri": "/fantasy/v2/league/380.l.241704/transactions;types=add,drop",
-      "league": [
-        {
-          "league_key": "380.l.241704",
-          "league_id": "241704",
-          "name": "NHT Fantasy Football",
-          "url": "https://football.fantasysports.yahoo.com/f1/241704",
-          "logo_url": "https://ct.yimg.com/cy/1754/43868580882_2aec41_192sq.jpg?ct=fantasy",
-          "draft_status": "postdraft",
-          "num_teams": 12,
-          "edit_key": 5,
-          "weekly_deadline": "",
-          "league_update_timestamp": "1538720354",
-          "scoring_type": "head",
-          "league_type": "private",
-          "renew": "371_496691",
-          "renewed": "",
-          "iris_group_chat_id": "HUEGRGD22VANNBJWZIBOEOIQCY",
-          "allow_add_to_dl_extra_pos": 0,
-          "is_pro_league": "0",
-          "is_cash_league": "0",
-          "current_week": 5,
-          "start_week": "1",
-          "start_date": "2018-09-06",
-          "end_week": "16",
-          "end_date": "2018-12-24",
-          "game_code": "nfl",
-          "season": "2018"
-        },
-        {
-          "transactions": {
-            "0": {
-              "transaction": [
-                {
-                  "faab_bid": 7,
-                  "transaction_key": "380.l.241704.tr.146",
-                  "transaction_id": "146",
-                  "type": "add/drop",
-                  "status": "successful",
-                  "timestamp": "1538939369"
-                },
-                {
-                  "players": {
-                    "0": {
-                      "player": [
-                        [
-                          {
-                            "player_key": "380.p.29387"
-                          },
-                          {
-                            "player_id": "29387"
-                          },
-                          {
-                            "name": {
-                              "full": "Wendell Smallwood",
-                              "first": "Wendell",
-                              "last": "Smallwood",
-                              "ascii_first": "Wendell",
-                              "ascii_last": "Smallwood"
-                            }
-                          },
-                          {
-                            "editorial_team_abbr": "Phi"
-                          },
-                          {
-                            "display_position": "RB"
-                          },
-                          {
-                            "position_type": "O"
-                          }
-                        ],
+  "fantasy_content": {
+    "xml:lang": "en-US",
+    "yahoo:uri": "/fantasy/v2/league/380.l.241704/transactions;types=add,drop",
+    "league": [
+      {
+        "league_key": "380.l.241704",
+        "league_id": "241704",
+        "name": "NHT Fantasy Football",
+        "url": "https://football.fantasysports.yahoo.com/f1/241704",
+        "logo_url": "https://ct.yimg.com/cy/1754/43868580882_2aec41_192sq.jpg?ct=fantasy",
+        "draft_status": "postdraft",
+        "num_teams": 12,
+        "edit_key": 5,
+        "weekly_deadline": "",
+        "league_update_timestamp": "1538720354",
+        "scoring_type": "head",
+        "league_type": "private",
+        "renew": "371_496691",
+        "renewed": "",
+        "iris_group_chat_id": "HUEGRGD22VANNBJWZIBOEOIQCY",
+        "allow_add_to_dl_extra_pos": 0,
+        "is_pro_league": "0",
+        "is_cash_league": "0",
+        "current_week": 5,
+        "start_week": "1",
+        "start_date": "2018-09-06",
+        "end_week": "16",
+        "end_date": "2018-12-24",
+        "game_code": "nfl",
+        "season": "2018"
+      },
+      {
+        "transactions": {
+          "0": {
+            "transaction": [
+              {
+                "faab_bid": 7,
+                "transaction_key": "380.l.241704.tr.146",
+                "transaction_id": "146",
+                "type": "add/drop",
+                "status": "successful",
+                "timestamp": "1538939369"
+              },
+              {
+                "players": {
+                  "0": {
+                    "player": [
+                      [
                         {
-                          "transaction_data": [
-                            {
-                              "type": "add",
-                              "source_type": "waivers",
-                              "destination_type": "team",
-                              "destination_team_key": "380.l.241704.t.7",
-                              "destination_team_name": "Zeke's Freaks"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    "1": {
-                      "player": [
-                        [
-                          {
-                            "player_key": "380.p.8263"
-                          },
-                          {
-                            "player_id": "8263"
-                          },
-                          {
-                            "name": {
-                              "full": "Ted Ginn Jr.",
-                              "first": "Ted",
-                              "last": "Ginn Jr.",
-                              "ascii_first": "Ted",
-                              "ascii_last": "Ginn Jr."
-                            }
-                          },
-                          {
-                            "editorial_team_abbr": "NO"
-                          },
-                          {
-                            "display_position": "WR"
-                          },
-                          {
-                            "position_type": "O"
-                          }
-                        ],
+                          "player_key": "380.p.29387"
+                        },
                         {
-                          "transaction_data": {
-                            "type": "drop",
-                            "source_type": "team",
-                            "source_team_key": "380.l.241704.t.7",
-                            "source_team_name": "Zeke's Freaks",
-                            "destination_type": "waivers"
+                          "player_id": "29387"
+                        },
+                        {
+                          "name": {
+                            "full": "Wendell Smallwood",
+                            "first": "Wendell",
+                            "last": "Smallwood",
+                            "ascii_first": "Wendell",
+                            "ascii_last": "Smallwood"
                           }
+                        },
+                        {
+                          "editorial_team_abbr": "Phi"
+                        },
+                        {
+                          "display_position": "RB"
+                        },
+                        {
+                          "position_type": "O"
                         }
-                      ]
-                    },
-                    "count": 2
-                  }
+                      ],
+                      {
+                        "transaction_data": [
+                          {
+                            "type": "add",
+                            "source_type": "waivers",
+                            "destination_type": "team",
+                            "destination_team_key": "380.l.241704.t.7",
+                            "destination_team_name": "Zeke's Freaks"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "1": {
+                    "player": [
+                      [
+                        {
+                          "player_key": "380.p.8263"
+                        },
+                        {
+                          "player_id": "8263"
+                        },
+                        {
+                          "name": {
+                            "full": "Ted Ginn Jr.",
+                            "first": "Ted",
+                            "last": "Ginn Jr.",
+                            "ascii_first": "Ted",
+                            "ascii_last": "Ginn Jr."
+                          }
+                        },
+                        {
+                          "editorial_team_abbr": "NO"
+                        },
+                        {
+                          "display_position": "WR"
+                        },
+                        {
+                          "position_type": "O"
+                        }
+                      ],
+                      {
+                        "transaction_data": {
+                          "type": "drop",
+                          "source_type": "team",
+                          "source_team_key": "380.l.241704.t.7",
+                          "source_team_name": "Zeke's Freaks",
+                          "destination_type": "waivers"
+                        }
+                      }
+                    ]
+                  },
+                  "count": 2
                 }
-              ]
-            },
-            "1": {
-              "transaction": [
-                {
-                  "transaction_key": "380.l.241704.tr.145",
-                  "transaction_id": "145",
-                  "type": "add/drop",
-                  "status": "successful",
-                  "timestamp": "1538918038"
-                },
-                {
-                  "players": {
-                    "0": {
-                      "player": [
-                        [
-                          {
-                            "player_key": "380.p.9526"
-                          },
-                          {
-                            "player_id": "9526"
-                          },
-                          {
-                            "name": {
-                              "full": "Graham Gano",
-                              "first": "Graham",
-                              "last": "Gano",
-                              "ascii_first": "Graham",
-                              "ascii_last": "Gano"
-                            }
-                          },
-                          {
-                            "editorial_team_abbr": "Car"
-                          },
-                          {
-                            "display_position": "K"
-                          },
-                          {
-                            "position_type": "K"
-                          }
-                        ],
+              }
+            ]
+          },
+          "1": {
+            "transaction": [
+              {
+                "transaction_key": "380.l.241704.tr.145",
+                "transaction_id": "145",
+                "type": "add/drop",
+                "status": "successful",
+                "timestamp": "1538918038"
+              },
+              {
+                "players": {
+                  "0": {
+                    "player": [
+                      [
                         {
-                          "transaction_data": [
-                            {
-                              "type": "add",
-                              "source_type": "freeagents",
-                              "destination_type": "team",
-                              "destination_team_key": "380.l.241704.t.6",
-                              "destination_team_name": "2017 Third Place"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    "1": {
-                      "player": [
-                        [
-                          {
-                            "player_key": "380.p.31144"
-                          },
-                          {
-                            "player_id": "31144"
-                          },
-                          {
-                            "name": {
-                              "full": "Marquez Valdes-Scantling",
-                              "first": "Marquez",
-                              "last": "Valdes-Scantling",
-                              "ascii_first": "Marquez",
-                              "ascii_last": "Valdes-Scantling"
-                            }
-                          },
-                          {
-                            "editorial_team_abbr": "GB"
-                          },
-                          {
-                            "display_position": "WR"
-                          },
-                          {
-                            "position_type": "O"
-                          }
-                        ],
+                          "player_key": "380.p.9526"
+                        },
                         {
-                          "transaction_data": {
-                            "type": "drop",
-                            "source_type": "team",
-                            "source_team_key": "380.l.241704.t.6",
-                            "source_team_name": "2017 Third Place",
-                            "destination_type": "waivers"
+                          "player_id": "9526"
+                        },
+                        {
+                          "name": {
+                            "full": "Graham Gano",
+                            "first": "Graham",
+                            "last": "Gano",
+                            "ascii_first": "Graham",
+                            "ascii_last": "Gano"
                           }
+                        },
+                        {
+                          "editorial_team_abbr": "Car"
+                        },
+                        {
+                          "display_position": "K"
+                        },
+                        {
+                          "position_type": "K"
                         }
-                      ]
-                    },
-                    "count": 2
-                  }
+                      ],
+                      {
+                        "transaction_data": [
+                          {
+                            "type": "add",
+                            "source_type": "freeagents",
+                            "destination_type": "team",
+                            "destination_team_key": "380.l.241704.t.6",
+                            "destination_team_name": "2017 Third Place"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "1": {
+                    "player": [
+                      [
+                        {
+                          "player_key": "380.p.31144"
+                        },
+                        {
+                          "player_id": "31144"
+                        },
+                        {
+                          "name": {
+                            "full": "Marquez Valdes-Scantling",
+                            "first": "Marquez",
+                            "last": "Valdes-Scantling",
+                            "ascii_first": "Marquez",
+                            "ascii_last": "Valdes-Scantling"
+                          }
+                        },
+                        {
+                          "editorial_team_abbr": "GB"
+                        },
+                        {
+                          "display_position": "WR"
+                        },
+                        {
+                          "position_type": "O"
+                        }
+                      ],
+                      {
+                        "transaction_data": {
+                          "type": "drop",
+                          "source_type": "team",
+                          "source_team_key": "380.l.241704.t.6",
+                          "source_team_name": "2017 Third Place",
+                          "destination_type": "waivers"
+                        }
+                      }
+                    ]
+                  },
+                  "count": 2
                 }
-              ]
-            },
-            "2": {
-              "transaction": [
-                {
-                  "transaction_key": "380.l.241704.tr.144",
-                  "transaction_id": "144",
-                  "type": "add/drop",
-                  "status": "successful",
-                  "timestamp": "1538824448"
-                },
-                {
-                  "players": {
-                    "0": {
-                      "player": [
-                        [
-                          {
-                            "player_key": "380.p.30202"
-                          },
-                          {
-                            "player_id": "30202"
-                          },
-                          {
-                            "name": {
-                              "full": "D'Onta Foreman",
-                              "first": "D'Onta",
-                              "last": "Foreman",
-                              "ascii_first": "D'Onta",
-                              "ascii_last": "Foreman"
-                            }
-                          },
-                          {
-                            "editorial_team_abbr": "Hou"
-                          },
-                          {
-                            "display_position": "RB"
-                          },
-                          {
-                            "position_type": "O"
-                          }
-                        ],
+              }
+            ]
+          },
+          "2": {
+            "transaction": [
+              {
+                "transaction_key": "380.l.241704.tr.144",
+                "transaction_id": "144",
+                "type": "add/drop",
+                "status": "successful",
+                "timestamp": "1538824448"
+              },
+              {
+                "players": {
+                  "0": {
+                    "player": [
+                      [
                         {
-                          "transaction_data": [
-                            {
-                              "type": "add",
-                              "source_type": "freeagents",
-                              "destination_type": "team",
-                              "destination_team_key": "380.l.241704.t.1",
-                              "destination_team_name": "Chris Hogan BROTHER"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    "1": {
-                      "player": [
-                        [
-                          {
-                            "player_key": "380.p.26644"
-                          },
-                          {
-                            "player_id": "26644"
-                          },
-                          {
-                            "name": {
-                              "full": "Tyler Eifert",
-                              "first": "Tyler",
-                              "last": "Eifert",
-                              "ascii_first": "Tyler",
-                              "ascii_last": "Eifert"
-                            }
-                          },
-                          {
-                            "editorial_team_abbr": "Cin"
-                          },
-                          {
-                            "display_position": "TE"
-                          },
-                          {
-                            "position_type": "O"
-                          }
-                        ],
+                          "player_key": "380.p.30202"
+                        },
                         {
-                          "transaction_data": {
-                            "type": "drop",
-                            "source_type": "team",
-                            "source_team_key": "380.l.241704.t.1",
-                            "source_team_name": "Chris Hogan BROTHER",
-                            "destination_type": "waivers"
+                          "player_id": "30202"
+                        },
+                        {
+                          "name": {
+                            "full": "D'Onta Foreman",
+                            "first": "D'Onta",
+                            "last": "Foreman",
+                            "ascii_first": "D'Onta",
+                            "ascii_last": "Foreman"
                           }
+                        },
+                        {
+                          "editorial_team_abbr": "Hou"
+                        },
+                        {
+                          "display_position": "RB"
+                        },
+                        {
+                          "position_type": "O"
                         }
-                      ]
-                    },
-                    "count": 2
-                  }
+                      ],
+                      {
+                        "transaction_data": [
+                          {
+                            "type": "add",
+                            "source_type": "freeagents",
+                            "destination_type": "team",
+                            "destination_team_key": "380.l.241704.t.1",
+                            "destination_team_name": "Chris Hogan BROTHER"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "1": {
+                    "player": [
+                      [
+                        {
+                          "player_key": "380.p.26644"
+                        },
+                        {
+                          "player_id": "26644"
+                        },
+                        {
+                          "name": {
+                            "full": "Tyler Eifert",
+                            "first": "Tyler",
+                            "last": "Eifert",
+                            "ascii_first": "Tyler",
+                            "ascii_last": "Eifert"
+                          }
+                        },
+                        {
+                          "editorial_team_abbr": "Cin"
+                        },
+                        {
+                          "display_position": "TE"
+                        },
+                        {
+                          "position_type": "O"
+                        }
+                      ],
+                      {
+                        "transaction_data": {
+                          "type": "drop",
+                          "source_type": "team",
+                          "source_team_key": "380.l.241704.t.1",
+                          "source_team_name": "Chris Hogan BROTHER",
+                          "destination_type": "waivers"
+                        }
+                      }
+                    ]
+                  },
+                  "count": 2
                 }
-              ]
-            },
-            "3": {
-              "transaction": [
-                {
-                  "transaction_key": "380.l.241704.tr.143",
-                  "transaction_id": "143",
-                  "type": "add/drop",
-                  "status": "successful",
-                  "timestamp": "1538768595"
-                },
-                {
-                  "players": {
-                    "0": {
-                      "player": [
-                        [
-                          {
-                            "player_key": "380.p.30494"
-                          },
-                          {
-                            "player_id": "30494"
-                          },
-                          {
-                            "name": {
-                              "full": "Ricky Seals-Jones",
-                              "first": "Ricky",
-                              "last": "Seals-Jones",
-                              "ascii_first": "Ricky",
-                              "ascii_last": "Seals-Jones"
-                            }
-                          },
-                          {
-                            "editorial_team_abbr": "Ari"
-                          },
-                          {
-                            "display_position": "TE"
-                          },
-                          {
-                            "position_type": "O"
-                          }
-                        ],
+              }
+            ]
+          },
+          "3": {
+            "transaction": [
+              {
+                "transaction_key": "380.l.241704.tr.143",
+                "transaction_id": "143",
+                "type": "add/drop",
+                "status": "successful",
+                "timestamp": "1538768595"
+              },
+              {
+                "players": {
+                  "0": {
+                    "player": [
+                      [
                         {
-                          "transaction_data": [
-                            {
-                              "type": "add",
-                              "source_type": "freeagents",
-                              "destination_type": "team",
-                              "destination_team_key": "380.l.241704.t.11",
-                              "destination_team_name": "2018 Champion"
-                            }
-                          ]
-                        }
-                      ]
-                    },
-                    "1": {
-                      "player": [
-                        [
-                          {
-                            "player_key": "380.p.31090"
-                          },
-                          {
-                            "player_id": "31090"
-                          },
-                          {
-                            "name": {
-                              "full": "Will Dissly",
-                              "first": "Will",
-                              "last": "Dissly",
-                              "ascii_first": "Will",
-                              "ascii_last": "Dissly"
-                            }
-                          },
-                          {
-                            "editorial_team_abbr": "Sea"
-                          },
-                          {
-                            "display_position": "TE"
-                          },
-                          {
-                            "position_type": "O"
-                          }
-                        ],
+                          "player_key": "380.p.30494"
+                        },
                         {
-                          "transaction_data": {
-                            "type": "drop",
-                            "source_type": "team",
-                            "source_team_key": "380.l.241704.t.11",
-                            "source_team_name": "2018 Champion",
-                            "destination_type": "waivers"
+                          "player_id": "30494"
+                        },
+                        {
+                          "name": {
+                            "full": "Ricky Seals-Jones",
+                            "first": "Ricky",
+                            "last": "Seals-Jones",
+                            "ascii_first": "Ricky",
+                            "ascii_last": "Seals-Jones"
                           }
+                        },
+                        {
+                          "editorial_team_abbr": "Ari"
+                        },
+                        {
+                          "display_position": "TE"
+                        },
+                        {
+                          "position_type": "O"
                         }
-                      ]
-                    },
-                    "count": 2
-                  }
+                      ],
+                      {
+                        "transaction_data": [
+                          {
+                            "type": "add",
+                            "source_type": "freeagents",
+                            "destination_type": "team",
+                            "destination_team_key": "380.l.241704.t.11",
+                            "destination_team_name": "2018 Champion"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "1": {
+                    "player": [
+                      [
+                        {
+                          "player_key": "380.p.31090"
+                        },
+                        {
+                          "player_id": "31090"
+                        },
+                        {
+                          "name": {
+                            "full": "Will Dissly",
+                            "first": "Will",
+                            "last": "Dissly",
+                            "ascii_first": "Will",
+                            "ascii_last": "Dissly"
+                          }
+                        },
+                        {
+                          "editorial_team_abbr": "Sea"
+                        },
+                        {
+                          "display_position": "TE"
+                        },
+                        {
+                          "position_type": "O"
+                        }
+                      ],
+                      {
+                        "transaction_data": {
+                          "type": "drop",
+                          "source_type": "team",
+                          "source_team_key": "380.l.241704.t.11",
+                          "source_team_name": "2018 Champion",
+                          "destination_type": "waivers"
+                        }
+                      }
+                    ]
+                  },
+                  "count": 2
                 }
-              ]
-            }
+              }
+            ]
           }
         }
-      ]
-    }
+      }
+    ]
   }
 }

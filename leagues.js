@@ -1,12 +1,12 @@
-const axios = require('axios');
+const got = require('got');
 
-async function updateForUser(user, httpLib = axios) {
-  const usersRes = await httpLib.get(
+async function updateForUser(user, httpLib = got) {
+  const users = await httpLib(
     'https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_codes=nfl;is_available=1/leagues?format=json',
     { headers: { Authorization: `Bearer ${user.accessToken}` } },
-  );
+  ).json();
 
-  const { games } = usersRes.data.fantasy_content.users[0].user[1];
+  const { games } = users.fantasy_content.users[0].user[1];
   if (!Object.keys(games).length) {
     return;
   }

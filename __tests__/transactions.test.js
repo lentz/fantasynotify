@@ -9,9 +9,9 @@ describe('transactions', () => {
 
   describe('#getAll', () => {
     test('tranforms yahoo response into usable transactions', async () => {
-      const mockHttpLib = {
-        get: () => Promise.resolve(JSON.parse(mockYahooTransactions)),
-      };
+      const mockHttpLib = () => ({
+        json: () => Promise.resolve(JSON.parse(mockYahooTransactions)),
+      });
 
       const transactions = await getAll(mockLeague, {}, mockHttpLib);
 

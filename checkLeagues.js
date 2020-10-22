@@ -33,18 +33,17 @@ const User = require('./User');
       await user.save();
       await new Promise((resolve) => setTimeout(resolve, 2000));
     } catch (err) {
-      if (err.response) {
+      if (err.body && err.body.error === 'INVALID_REFRESH_TOKEN') {
+        console.log(`Deleting user '${user.email}' with revoked refresh token`);
+        await user.remove();
+      } else if (err.code) {
         console.error(
-          `HTTP ${err.response.status}: ${JSON.stringify(
-            err.response.data,
+          `HTTP ${err.code}: ${JSON.stringify(
+            err.body,
             null,
             2,
           )}`,
         );
-      }
-      if (err.body && err.body.error === 'INVALID_REFRESH_TOKEN') {
-        console.log(`Deleting user '${user.email}' with revoked refresh token`);
-        await user.remove();
       } else {
         console.error(err.stack);
       }
