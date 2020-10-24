@@ -1,3 +1,5 @@
+const mongoose = require('mongoose');
+
 const leagues = require('./leagues');
 const User = require('./User');
 const yahooAuth = require('./yahooAuth');
@@ -54,6 +56,10 @@ async function authCallback(req, res) {
 }
 
 async function unsubscribe(req, res) {
+  if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
+    return res.render('index', { errorMessage: 'Invalid user ID' });
+  }
+
   const user = await User.findByIdAndDelete(req.params.id);
   const context = {};
   if (!user) {
@@ -61,7 +67,7 @@ async function unsubscribe(req, res) {
   } else {
     context.successMessage = `${user.email} has been unsubscribed`;
   }
-  res.render('index', context);
+  return res.render('index', context);
 }
 
 function handleError(err, req, res, _next) {

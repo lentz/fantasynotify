@@ -106,10 +106,21 @@ describe('controller', () => {
   });
 
   describe('#unsubscribe', () => {
+    test('renders an error if and invalid ID is provided', async () => {
+      await controller.unsubscribe({ params: { id: '123' } }, mockRes);
+
+      expect(mockRes.render).toHaveBeenCalledWith('index', {
+        errorMessage: 'Invalid user ID',
+      });
+    });
+
     test('renders an error if ID does not match an account', async () => {
       jest.spyOn(User, 'findByIdAndDelete').mockResolvedValue(null);
 
-      await controller.unsubscribe({ params: { id: '123' } }, mockRes);
+      await controller.unsubscribe(
+        { params: { id: '5f93a6a9dcb7a060bd1f1f2d' } },
+        mockRes,
+      );
 
       expect(mockRes.render).toHaveBeenCalledWith('index', {
         errorMessage: 'No email found matching this account',
@@ -121,7 +132,10 @@ describe('controller', () => {
         .spyOn(User, 'findByIdAndDelete')
         .mockResolvedValue({ email: 'foo@bar.com' });
 
-      await controller.unsubscribe({ params: { id: '123' } }, mockRes);
+      await controller.unsubscribe(
+        { params: { id: '5f93a6a9dcb7a060bd1f1f2d' } },
+        mockRes,
+      );
 
       expect(mockRes.render).toHaveBeenCalledWith('index', {
         successMessage: 'foo@bar.com has been unsubscribed',
