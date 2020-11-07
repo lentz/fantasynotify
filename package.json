@@ -32,7 +32,7 @@
     "express-handlebars": "^5.2.0",
     "got": "^11.8.0",
     "handlebars": "^4.7.6",
-    "helmet": "^4.1.1",
+    "helmet": "^4.2.0",
     "mongoose": "^5.10.11",
     "mongoose-encryption": "^2.0.2",
     "morgan": "^1.10.0"
