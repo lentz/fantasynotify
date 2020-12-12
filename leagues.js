@@ -23,9 +23,9 @@ async function updateForUser(user, httpLib = got) {
     }
   });
 
-  user.leagues = (user.leagues || []).filter((existingLeague) => {
-    return leagues.some((league) => league.key === existingLeague.key);
-  });
+  user.leagues = (user.leagues || []).filter((existingLeague) =>
+    leagues.some((league) => league.key === existingLeague.key),
+  );
 }
 
 module.exports = { updateForUser };
