@@ -37,13 +37,7 @@ const User = require('./User');
         console.log(`Deleting user '${user.email}' with revoked refresh token`);
         await user.remove();
       } else if (err.code) {
-        console.error(
-          `HTTP ${err.code}: ${JSON.stringify(
-            err.body,
-            null,
-            2,
-          )}`,
-        );
+        console.error(`HTTP ${err.code}: ${JSON.stringify(err.body, null, 2)}`);
       } else {
         console.error(err.stack);
       }
