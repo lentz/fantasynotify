@@ -91,7 +91,7 @@ describe('Notification', () => {
 
     const mailerArg = mockMailer.send.mock.calls[0][0];
     expect(mailerArg.from).toEqual(
-      'Fantasy Notify <notifications@fantasynotify.herokuapp.com>',
+      'Fantasy Notify <fantasynotify@mailinator.com>',
     );
     expect(mailerArg.to).toEqual('test@test.com');
     expect(mailerArg.subject).toEqual('New transactions in Test League');
