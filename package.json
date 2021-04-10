@@ -34,7 +34,7 @@
     "handlebars": "^4.7.7",
     "helmet": "^4.4.1",
     "mongoose": "^5.12.3",
-    "mongoose-encryption": "^2.0.3",
+    "mongoose-encryption": "^2.1.0",
     "morgan": "^1.10.0"
   },
   "devDependencies": {
