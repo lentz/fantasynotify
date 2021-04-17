@@ -20,7 +20,7 @@
     "start": "node app.js"
   },
   "engines": {
-    "node": "^10.0.0"
+    "node": "^14.0.0"
   },
   "dependencies": {
     "@sendgrid/mail": "^7.4.2",
