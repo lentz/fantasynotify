@@ -51,7 +51,7 @@ module.exports = class Notification {
     console.log(`Sending notification to ${this.user.email}`);
     const message = {
       to: this.user.email,
-      from: 'Fantasy Notify <fantasynotify@mailinator.com>',
+      from: 'Fantasy Notify <fantasynotify@buddyduel.net>',
       subject: `New transactions in ${Object.keys(this.leagueTransactions).join(
         ', ',
       )}`,
