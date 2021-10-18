@@ -90,11 +90,11 @@ describe('Notification', () => {
     notification.send();
 
     const mailerArg = mockMailer.send.mock.calls[0][0];
-    expect(mailerArg.from).toEqual(
+    expect(mailerArg.from).toBe(
       'Fantasy Notify <fantasynotify@buddyduel.net>',
     );
-    expect(mailerArg.to).toEqual('test@test.com');
-    expect(mailerArg.subject).toEqual('New transactions in Test League');
+    expect(mailerArg.to).toBe('test@test.com');
+    expect(mailerArg.subject).toBe('New transactions in Test League');
     expect(mailerArg.html).toMatchSnapshot();
   });
 
@@ -140,7 +140,7 @@ describe('Notification', () => {
     notification.send();
 
     const mailerArg = mockMailer.send.mock.calls[0][0];
-    expect(mailerArg.subject).toEqual(
+    expect(mailerArg.subject).toBe(
       'New transactions in Test League, League 2',
     );
     expect(mailerArg.html).toMatchSnapshot();
