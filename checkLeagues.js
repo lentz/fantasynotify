@@ -31,7 +31,9 @@ const User = require('./User');
       await notification.send();
       user.markModified('leagues');
       await user.save();
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      await new Promise((resolve) => {
+        setTimeout(resolve, 2000);
+      });
     } catch (err) {
       if (err.body && err.body.error === 'INVALID_REFRESH_TOKEN') {
         console.log(`Deleting user '${user.email}' with revoked refresh token`);
