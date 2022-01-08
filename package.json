@@ -34,7 +34,7 @@
     "got": "^11.8.3",
     "handlebars": "^4.7.7",
     "helmet": "^4.6.0",
-    "mongoose": "^6.1.4",
+    "mongoose": "^6.1.5",
     "mongoose-encryption": "^2.1.2",
     "morgan": "^1.10.0"
   },
