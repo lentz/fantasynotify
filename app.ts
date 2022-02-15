@@ -1,15 +1,16 @@
-const fs = require('fs');
-const https = require('https');
+import * as fs from 'fs';
+import * as https from 'https';
 
-require('dotenv').config();
-const bodyParser = require('body-parser');
-const express = require('express');
-require('express-async-errors');
-const helmet = require('helmet');
-const morgan = require('morgan');
-const handlebarsExpress = require('express-handlebars');
-require('./db');
-const controller = require('./controller');
+import dotenv from 'dotenv';
+dotenv.config();
+import * as bodyParser from 'body-parser';
+import express from 'express';
+import 'express-async-errors';
+import helmet from 'helmet';
+import morgan from 'morgan';
+import * as handlebarsExpress from 'express-handlebars';
+import './db';
+import * as controller from './controller';
 
 const app = express();
 
@@ -22,7 +23,7 @@ app.use(
 app.use(morgan('combined'));
 app.use(bodyParser.urlencoded({ extended: false }));
 const handlebars = handlebarsExpress.create({
-  defaultLayout: false,
+  defaultLayout: undefined,
   extname: '.hbs',
 });
 app.engine('.hbs', handlebars.engine);
@@ -35,7 +36,7 @@ app.get('/unsubscribe/:id', controller.unsubscribe);
 app.use(controller.handleError);
 
 let server;
-if (/localhost/.test(process.env.MONGODB_URI)) {
+if (/localhost/.test(process.env.MONGODB_URI as string)) {
   /* Dev HTTPS */
   server = https.createServer(
     {
@@ -53,4 +54,4 @@ server
   .on('listening', () => console.log(`Listening on port ${process.env.PORT}`))
   .on('error', console.error);
 
-module.exports = app;
+export default app;

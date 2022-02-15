@@ -1,11 +1,10 @@
 #!/usr/bin/env node
 
-require('dotenv').config();
-const db = require('./db');
-const Notification = require('./Notification');
-const leagues = require('./leagues');
-const transactions = require('./transactions');
-const User = require('./User');
+import db from './db';
+import Notification from './Notification';
+import * as leagues from './leagues';
+import * as transactions from './transactions';
+import User from './User';
 
 /* eslint-disable no-await-in-loop */
 (async function run() {
@@ -16,7 +15,7 @@ const User = require('./User');
       console.log(`Checking leagues for ${user.email}`);
       const notification = new Notification(user);
       await user.renewToken();
-      await leagues.updateForUser(user);
+      await leagues.update(user);
       // eslint-disable-next-line no-restricted-syntax
       for (const league of user.leagues) {
         const allTransactions = await transactions.getAll(league, user);
@@ -34,14 +33,14 @@ const User = require('./User');
       await new Promise((resolve) => {
         setTimeout(resolve, 2000);
       });
-    } catch (err) {
-      if (err.body && err.body.error === 'INVALID_REFRESH_TOKEN') {
+    } catch (err: any) {
+      if (err.body?.error === 'INVALID_REFRESH_TOKEN') {
         console.log(`Deleting user '${user.email}' with revoked refresh token`);
         await user.remove();
       } else if (err.code) {
         console.error(`HTTP ${err.code}: ${JSON.stringify(err.body, null, 2)}`);
       } else {
-        console.error(err.stack);
+        console.error((err as Error).stack);
       }
     }
   }

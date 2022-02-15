@@ -1,6 +1,6 @@
-const got = require('got');
+import got from 'got';
 
-function mapPlayers(players) {
+function mapPlayers(players: any[]) {
   return Object.entries(players)
     .map((entry) => entry[1].player)
     .filter((entry) => entry)
@@ -16,12 +16,13 @@ function mapPlayers(players) {
     });
 }
 
-async function getAll(league, user, httpLib = got) {
-  const transactions = await httpLib(
+export async function getAll(league: any, user: any, httpLib = got) {
+  const transactions: any = await httpLib(
     `https://fantasysports.yahooapis.com/fantasy/v2/league/${league.key}/transactions;types=add,drop?format=json`,
     { headers: { Authorization: `Bearer ${user.accessToken}` } },
   ).json();
-  const yahooTransactions = transactions.fantasy_content.league[1].transactions;
+  const yahooTransactions: any[] =
+    transactions.fantasy_content.league[1].transactions;
 
   return Object.entries(yahooTransactions)
     .map((entry) => entry[1].transaction)
@@ -34,7 +35,7 @@ async function getAll(league, user, httpLib = got) {
     }));
 }
 
-function filterNew(league, transactions = []) {
+export function filterNew(league: any, transactions: any[] = []) {
   if (!league.lastNotifiedTransaction) {
     return transactions;
   }
@@ -44,5 +45,3 @@ function filterNew(league, transactions = []) {
 
   return transactions.slice(0, lastNotifiedTransactionIndex);
 }
-
-module.exports = { filterNew, getAll };

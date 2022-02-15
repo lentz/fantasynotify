@@ -1,8 +1,8 @@
-const { readFileSync } = require('fs');
-const handlebars = require('handlebars');
-const sgMail = require('@sendgrid/mail');
+import { readFileSync } from 'fs';
+import * as handlebars from 'handlebars';
+import sgMail from '@sendgrid/mail';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
 const emailTemplate = handlebars.compile(
   readFileSync('./views/emailLayout.hbs').toString(),
@@ -30,14 +30,20 @@ handlebars.registerHelper('playerTransaction', (player, bid) => {
   return `${team} ${action} <span style="font-weight: bold">${player.name}</span> ${source}`;
 });
 
-module.exports = class Notification {
-  constructor(user, mailer = sgMail) {
+export default class Notification {
+  leagueTransactions: any;
+
+  mailer: any;
+
+  user: any;
+
+  constructor(user: any, mailer = sgMail) {
     this.leagueTransactions = {};
     this.mailer = mailer;
     this.user = user;
   }
 
-  addTransactions(league, transactions) {
+  addTransactions(league: any, transactions: any) {
     if (!transactions || !transactions.length) {
       return;
     }
@@ -64,4 +70,4 @@ module.exports = class Notification {
     };
     return this.mailer.send(message);
   }
-};
+}

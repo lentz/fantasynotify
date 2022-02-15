@@ -1,7 +1,7 @@
-const controller = require('../controller');
-const User = require('../User');
-const leagues = require('../leagues');
-const yahooAuth = require('../yahooAuth');
+import * as controller from '../controller';
+import User from '../User';
+import * as leagues from '../leagues';
+import yahooAuth from '../yahooAuth';
 
 jest.mock('../yahooAuth');
 
@@ -59,7 +59,7 @@ describe('controller', () => {
       ).rejects.toEqual(new Error('auth failed')));
 
     test('calls updateLeagues and renders a success message', async () => {
-      jest.spyOn(leagues, 'updateForUser').mockImplementation((user) => {
+      jest.spyOn(leagues, 'update').mockImplementation((user) => {
         /* eslint-disable-next-line no-param-reassign */
         user.leagues = [{ name: 'league 1' }, { name: 'league 2' }];
       });
@@ -83,7 +83,7 @@ describe('controller', () => {
     });
 
     test('renders a warning if no leagues were found', async () => {
-      jest.spyOn(leagues, 'updateForUser').mockImplementation((user) => {
+      jest.spyOn(leagues, 'update').mockImplementation((user) => {
         /* eslint-disable-next-line no-param-reassign */
         user.leagues = [];
       });

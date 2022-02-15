@@ -1,7 +1,18 @@
-require('dotenv').config();
-const mongoose = require('mongoose');
-const mongooseEncryption = require('mongoose-encryption');
-const yahooAuth = require('./yahooAuth');
+import * as mongoose from 'mongoose';
+import mongooseEncryption from 'mongoose-encryption';
+import yahooAuth from './yahooAuth';
+
+export interface IUser {
+  email: string;
+  accessToken: string;
+  refreshToken: string;
+  expires: Date;
+  leagues?: {
+    key: string;
+    name: string;
+    lastNotifiedTransaction?: string;
+  }[];
+}
 
 const userSchema = new mongoose.Schema(
   {
@@ -35,10 +46,12 @@ userSchema.methods.renewToken = async function renewToken() {
     this.accessToken,
     this.refreshToken,
     'bearer',
+    {},
   );
   const newToken = await token.refresh();
   this.accessToken = newToken.accessToken;
-  this.expires = newToken.expires;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  this.expires = (newToken as any).expires;
 };
 
-module.exports = mongoose.model('User', userSchema);
+export default mongoose.model('User', userSchema);

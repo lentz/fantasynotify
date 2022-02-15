@@ -1,14 +1,15 @@
-const mongoose = require('mongoose');
+import { NextFunction, Request, Response } from 'express';
+import mongoose from 'mongoose';
 
-const leagues = require('./leagues');
-const User = require('./User');
-const yahooAuth = require('./yahooAuth');
+import User from './User';
+import * as leagues from './leagues';
+import yahooAuth from './yahooAuth';
 
-async function index(req, res) {
+export async function index(_req: Request, res: Response) {
   res.render('index');
 }
 
-async function signup(req, res) {
+export async function signup(req: Request, res: Response) {
   const email = req.body.email && req.body.email.trim();
   if (!email || !email.length) {
     return res.render('index', { errorMessage: 'Email is required!' });
@@ -22,9 +23,9 @@ async function signup(req, res) {
   return res.redirect(yahooAuth.code.getUri({ state: email }));
 }
 
-async function authCallback(req, res) {
+export async function authCallback(req: Request, res: Response) {
   if (req.query.error) {
-    throw new Error(req.query.error);
+    throw new Error(req.query.error as string);
   }
   if (!Object.keys(req.query).length) {
     return res.render('index', {
@@ -35,14 +36,14 @@ async function authCallback(req, res) {
   const user = new User({
     email: req.query.state,
     accessToken: authUser.accessToken,
-    expires: authUser.expires,
+    expires: (authUser as any).expires,
     refreshToken: authUser.refreshToken,
   });
-  await leagues.updateForUser(user);
-  let context = {
+  await leagues.update(user);
+  let context: any = {
     successMessage: `All done! You'll start receiving transaction
       notifications for ${user.leagues
-        .map((league) => league.name)
+        .map((league: any) => league.name)
         .join(', ')}.`,
   };
   if (!user.leagues.length) {
@@ -55,13 +56,13 @@ async function authCallback(req, res) {
   return res.render('index', context);
 }
 
-async function unsubscribe(req, res) {
+export async function unsubscribe(req: Request, res: Response) {
   if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
     return res.render('index', { errorMessage: 'Invalid user ID' });
   }
 
   const user = await User.findByIdAndDelete(req.params.id);
-  const context = {};
+  const context: any = {};
   if (!user) {
     context.errorMessage = 'No email found matching this account';
   } else {
@@ -70,7 +71,12 @@ async function unsubscribe(req, res) {
   return res.render('index', context);
 }
 
-function handleError(err, req, res, _next) {
+export function handleError(
+  err: Error,
+  _req: Request,
+  res: Response,
+  _next: NextFunction,
+) {
   const context = { errorMessage: err.message };
   if (err.message === 'access_denied') {
     context.errorMessage = `You must click "Allow" to authorize Fantasy Notify
@@ -80,11 +86,3 @@ function handleError(err, req, res, _next) {
   }
   res.render('index', context);
 }
-
-module.exports = {
-  authCallback,
-  handleError,
-  index,
-  signup,
-  unsubscribe,
-};

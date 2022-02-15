@@ -1,17 +1,17 @@
-const { readFileSync } = require('fs');
-const { updateForUser } = require('../leagues');
+import { readFileSync } from 'fs';
+import * as leagues from '../leagues';
 
 describe('leagues', () => {
   const mockYahooUser = readFileSync('./__tests__/mockYahooUser.json');
 
-  describe('#updateForUser', () => {
+  describe('#update', () => {
     test('adds new leagues to the user', async () => {
       const mockHttpLib = () => ({
         json: () => Promise.resolve(JSON.parse(mockYahooUser)),
       });
       const mockUser = { leagues: [] };
 
-      await updateForUser(mockUser, mockHttpLib);
+      await leagues.update(mockUser, mockHttpLib);
 
       expect(mockUser.leagues).toEqual([
         {
@@ -38,7 +38,7 @@ describe('leagues', () => {
         ],
       };
 
-      await updateForUser(mockUser, mockHttpLib);
+      await leagues.update(mockUser, mockHttpLib);
 
       expect(mockUser.leagues).toEqual([
         {
@@ -69,7 +69,7 @@ describe('leagues', () => {
         ],
       };
 
-      await updateForUser(mockUser, mockHttpLib);
+      await leagues.update(mockUser, mockHttpLib);
 
       expect(mockUser.leagues).toEqual([
         {
@@ -104,7 +104,7 @@ describe('leagues', () => {
         ],
       };
 
-      await updateForUser(mockUser, mockHttpLib);
+      await leagues.update(mockUser, mockHttpLib);
 
       expect(mockUser.leagues).toEqual([
         {

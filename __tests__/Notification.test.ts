@@ -1,8 +1,6 @@
-process.env.SENDGRID_API_KEY = 'SG.TEST_KEY';
-const Notification = require('../Notification');
+import Notification from '../Notification';
 
 describe('Notification', () => {
-  process.env.DOMAIN = 'http://test.com';
   const mockUser = { id: '123', email: 'test@test.com' };
   const mockLeague = { name: 'Test League' };
   const mockMailer = { send: jest.fn() };
@@ -27,6 +25,7 @@ describe('Notification', () => {
 
   test('renders the transactions when calling send', () => {
     const notification = new Notification(mockUser, mockMailer);
+    jest.spyOn(console, 'log').mockReturnValue();
     const mockTransactions = [
       {
         players: [
@@ -90,9 +89,7 @@ describe('Notification', () => {
     notification.send();
 
     const mailerArg = mockMailer.send.mock.calls[0][0];
-    expect(mailerArg.from).toBe(
-      'Fantasy Notify <fantasynotify@buddyduel.net>',
-    );
+    expect(mailerArg.from).toBe('Fantasy Notify <fantasynotify@buddyduel.net>');
     expect(mailerArg.to).toBe('test@test.com');
     expect(mailerArg.subject).toBe('New transactions in Test League');
     expect(mailerArg.html).toMatchSnapshot();
@@ -100,6 +97,7 @@ describe('Notification', () => {
 
   test('creates message with transactions from multiple leagues', () => {
     const notification = new Notification(mockUser, mockMailer);
+    jest.spyOn(console, 'log').mockReturnValue();
     const mockLeague1Transactions = [
       {
         players: [
@@ -140,9 +138,7 @@ describe('Notification', () => {
     notification.send();
 
     const mailerArg = mockMailer.send.mock.calls[0][0];
-    expect(mailerArg.subject).toBe(
-      'New transactions in Test League, League 2',
-    );
+    expect(mailerArg.subject).toBe('New transactions in Test League, League 2');
     expect(mailerArg.html).toMatchSnapshot();
   });
 });
