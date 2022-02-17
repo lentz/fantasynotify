@@ -15,21 +15,8 @@ const app = express();
 
 app.use(
   helmet({
-    contentSecurityPolicy: {
-      directives: {
-        defaultSrc: ["'self'"],
-        baseUri: ["'self'"],
-        blockAllMixedContent: [],
-        fontSrc: ["'self'", 'https:', 'data:'],
-        frameAncestors: ["'self'"],
-        imgSrc: ["'self'", 'data:', 'www.paypalobjects.com'],
-        objectSrc: ["'none'"],
-        scriptSrc: ["'self'"],
-        scriptSrcAttr: ["'none'"],
-        styleSrc: ["'self'", 'https:', "'unsafe-inline'"],
-        upgradeInsecureRequests: [],
-      },
-    },
+    crossOriginEmbedderPolicy: false,
+    contentSecurityPolicy: false,
   }),
 );
 app.use(morgan('combined'));
