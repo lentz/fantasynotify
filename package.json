@@ -16,7 +16,6 @@
     "build": "tsc",
     "build-watch": "tsc --watch",
     "check-leagues": "node ./dist/checkLeagues.js",
-    "heroku-postbuild": "npm run build",
     "lint": "eslint '**/*.ts'",
     "prebuild": "rm -rf ./dist",
     "start": "node ./dist/app.js",
