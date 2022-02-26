@@ -9,8 +9,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      SENDGRID_API_KEY: SG.TEST_KEY
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -29,5 +27,7 @@ jobs:
         run: npm ci
       - name: Lint
         run: npm run lint
+      - name: Build
+        run: npm run build
       - name: Test
         run: npm test

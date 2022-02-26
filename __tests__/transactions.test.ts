@@ -1,5 +1,5 @@
-const { readFileSync } = require('fs');
-const { filterNew, getAll } = require('../transactions');
+import { readFileSync } from 'fs';
+import { filterNew, getAll } from '../transactions';
 
 describe('transactions', () => {
   const mockLeague = { name: 'league', lastNotifiedTransaction: '2' };

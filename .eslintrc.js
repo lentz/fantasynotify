@@ -1,20 +1,24 @@
 module.exports = {
+  parser: '@typescript-eslint/parser',
   extends: [
-    'airbnb-base',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:import/typescript',
+    'plugin:import/recommended',
     'plugin:jest/recommended',
     'plugin:jest/style',
     'prettier',
   ],
-  plugins: ['jest'],
+  plugins: ['@typescript-eslint', 'jest'],
   rules: {
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      {
+        argsIgnorePattern: '^_',
+      },
+    ],
     'jest/expect-expect': 'error',
     'no-console': 'off',
     'no-param-reassign': 'off',
-    'no-unused-vars': [
-      'error',
-      {
-        argsIgnorePattern: '^_*',
-      },
-    ],
   },
 };
