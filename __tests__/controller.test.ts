@@ -75,11 +75,12 @@ describe('controller', () => {
         mockRes,
       );
 
-      expect(mockRes.render).toHaveBeenCalledWith('index', {
-        successMessage:
-          "All done! You'll start receiving transaction\n" +
-          '      notifications for league 1, league 2.',
-      });
+      expect(mockRes.render.mock.calls[0][1]).toMatchInlineSnapshot(`
+        Object {
+          "successMessage": "All done! You'll start receiving transaction
+                  notifications for league 1, league 2.",
+        }
+      `);
     });
 
     test('renders a warning if no leagues were found', async () => {

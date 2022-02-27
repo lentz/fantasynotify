@@ -17,7 +17,7 @@ import User from './User';
       await user.renewToken();
       await leagues.update(user);
       // eslint-disable-next-line no-restricted-syntax
-      for (const league of user.leagues) {
+      for (const league of user.leagues ?? []) {
         const allTransactions = await transactions.getAll(league, user);
         notification.addTransactions(
           league,
@@ -33,6 +33,7 @@ import User from './User';
       await new Promise((resolve) => {
         setTimeout(resolve, 2000);
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       if (err.body?.error === 'INVALID_REFRESH_TOKEN') {
         console.log(`Deleting user '${user.email}' with revoked refresh token`);

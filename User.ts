@@ -2,16 +2,20 @@ import * as mongoose from 'mongoose';
 import mongooseEncryption from 'mongoose-encryption';
 import yahooAuth from './yahooAuth';
 
+export interface ILeague {
+  key: string;
+  lastNotifiedTransaction?: string;
+  name: string;
+}
+
 export interface IUser {
-  email: string;
   accessToken: string;
-  refreshToken: string;
+  email: string;
   expires: Date;
-  leagues?: {
-    key: string;
-    name: string;
-    lastNotifiedTransaction?: string;
-  }[];
+  id: string;
+  leagues: ILeague[];
+  refreshToken: string;
+  renewToken: () => Promise<void>;
 }
 
 const userSchema = new mongoose.Schema(
@@ -54,4 +58,4 @@ userSchema.methods.renewToken = async function renewToken() {
   this.expires = (newToken as any).expires;
 };
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model<IUser>('User', userSchema);

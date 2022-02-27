@@ -23,34 +23,42 @@ export async function signup(req: Request, res: Response) {
   return res.redirect(yahooAuth.code.getUri({ state: email }));
 }
 
+interface IIndexContext {
+  errorMessage?: string;
+  successMessage?: string;
+}
+
 export async function authCallback(req: Request, res: Response) {
+  let context: IIndexContext = {};
   if (req.query.error) {
     throw new Error(req.query.error as string);
   }
   if (!Object.keys(req.query).length) {
-    return res.render('index', {
+    context = {
       errorMessage: 'Invalid callback, please try again.',
-    });
+    };
+    return res.render('index', context);
   }
   const authUser = await yahooAuth.code.getToken(req.originalUrl);
   const user = new User({
     email: req.query.state,
     accessToken: authUser.accessToken,
-    expires: (authUser as any).expires,
+    expires: (authUser as any).expires, // eslint-disable-line @typescript-eslint/no-explicit-any
     refreshToken: authUser.refreshToken,
   });
   await leagues.update(user);
-  let context: any = {
-    successMessage: `All done! You'll start receiving transaction
-      notifications for ${user.leagues
-        .map((league: any) => league.name)
-        .join(', ')}.`,
-  };
-  if (!user.leagues.length) {
+  if (!user.leagues?.length) {
     context = {
       errorMessage: 'No fantasy football leagues found for your account!',
     };
   } else {
+    context = {
+      successMessage: `All done! You'll start receiving transaction
+          notifications for ${user.leagues
+            .map((league) => league.name)
+            .join(', ')}.`,
+    };
+
     await user.save();
   }
   return res.render('index', context);
@@ -62,7 +70,7 @@ export async function unsubscribe(req: Request, res: Response) {
   }
 
   const user = await User.findByIdAndDelete(req.params.id);
-  const context: any = {};
+  const context: IIndexContext = {};
   if (!user) {
     context.errorMessage = 'No email found matching this account';
   } else {
@@ -77,7 +85,7 @@ export function handleError(
   res: Response,
   _next: NextFunction,
 ) {
-  const context = { errorMessage: err.message };
+  const context: IIndexContext = { errorMessage: err.message };
   if (err.message === 'access_denied') {
     context.errorMessage = `You must click "Allow" to authorize Fantasy Notify
       to monitor your league's transactions.`;

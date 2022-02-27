@@ -1,6 +1,8 @@
 import { readFileSync } from 'fs';
 import * as handlebars from 'handlebars';
-import sgMail from '@sendgrid/mail';
+import sgMail, { MailService } from '@sendgrid/mail';
+import { ILeague, IUser } from './User';
+import { IPlayer, ITransaction } from './transactions';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 
@@ -8,43 +10,46 @@ const emailTemplate = handlebars.compile(
   readFileSync('./views/emailLayout.hbs').toString(),
 );
 
-handlebars.registerHelper('playerTransaction', (player, bid) => {
-  let source = '';
-  let action;
-  let team;
-  if (player.type === 'add') {
-    action = '<span style="color: #1e824c">added</span>';
-    team = player.destination_team_name;
-    if (player.source_type === 'waivers') {
-      source = 'from waivers';
-      if (bid) {
-        source += ` for $${bid}`;
+handlebars.registerHelper(
+  'playerTransaction',
+  (player: IPlayer, bid: number) => {
+    let source = '';
+    let action;
+    let team;
+    if (player.type === 'add') {
+      action = '<span style="color: #1e824c">added</span>';
+      team = player.destination_team_name;
+      if (player.source_type === 'waivers') {
+        source = 'from waivers';
+        if (bid) {
+          source += ` for $${bid}`;
+        }
+      } else if (player.source_type === 'freeagents') {
+        source = 'from free agents';
       }
-    } else if (player.source_type === 'freeagents') {
-      source = 'from free agents';
+    } else {
+      action = '<span style="color: #aa0000">dropped</span>';
+      team = player.source_team_name;
     }
-  } else {
-    action = '<span style="color: #aa0000">dropped</span>';
-    team = player.source_team_name;
-  }
-  return `${team} ${action} <span style="font-weight: bold">${player.name}</span> ${source}`;
-});
+    return `${team} ${action} <span style="font-weight: bold">${player.name}</span> ${source}`;
+  },
+);
 
 export default class Notification {
-  leagueTransactions: any;
+  leagueTransactions: { [leagueName: string]: ITransaction[] };
 
-  mailer: any;
+  mailer: MailService;
 
-  user: any;
+  user: IUser;
 
-  constructor(user: any, mailer = sgMail) {
+  constructor(user: IUser, mailer = sgMail) {
     this.leagueTransactions = {};
     this.mailer = mailer;
     this.user = user;
   }
 
-  addTransactions(league: any, transactions: any) {
-    if (!transactions || !transactions.length) {
+  addTransactions(league: ILeague, transactions: ITransaction[]) {
+    if (!transactions?.length) {
       return;
     }
     this.leagueTransactions[league.name] = transactions;
