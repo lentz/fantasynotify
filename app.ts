@@ -36,7 +36,9 @@ app.get('/unsubscribe/:id', controller.unsubscribe);
 app.use(controller.handleError);
 
 let server;
-if (/localhost/.test(process.env.MONGODB_URI as string)) {
+try {
+  fs.accessSync('../key.pem');
+
   /* Dev HTTPS */
   server = https.createServer(
     {
@@ -45,7 +47,7 @@ if (/localhost/.test(process.env.MONGODB_URI as string)) {
     },
     app,
   );
-} else {
+} catch (err) {
   server = app;
 }
 
