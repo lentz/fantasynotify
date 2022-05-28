@@ -19,7 +19,7 @@
     "lint": "eslint '**/*.ts'",
     "prebuild": "rm -rf ./dist",
     "start": "node ./dist/app.js",
-    "serve": "ts-node-dev --inspect -- app.ts",
+    "serve": "tsnd --rs --inspect -- app.ts",
     "test": "jest",
     "test-watch": "jest --watch"
   },
@@ -69,10 +69,6 @@
       "./jestSetup.ts"
     ],
     "testEnvironment": "node"
-  },
-  "nodemonConfig": {
-    "watch": "dist",
-    "nodeArgs": "--inspect"
   },
   "pre-commit": [
     "lint",
