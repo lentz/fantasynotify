@@ -76,7 +76,7 @@ describe('controller', () => {
       );
 
       expect(mockRes.render.mock.calls[0][1]).toMatchInlineSnapshot(`
-        Object {
+        {
           "successMessage": "All done! You'll start receiving transaction
                   notifications for league 1, league 2.",
         }
