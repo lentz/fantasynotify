@@ -59,7 +59,7 @@
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.3",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^4.8.4"
+    "typescript": "^4.9.5"
   },
   "jest": {
     "clearMocks": true,
