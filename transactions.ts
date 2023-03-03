@@ -1,5 +1,5 @@
 import got from 'got';
-import { ILeague, IUser } from './User';
+import { ILeague, IUser } from './User.js';
 
 function mapPlayers(players: IYahooPlayers): IPlayer[] {
   return Object.entries(players)

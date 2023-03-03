@@ -1,9 +1,12 @@
-import Notification from '../Notification';
+import { describe, expect, test, vi } from 'vitest';
+
+process.env.SENDGRID_API_KEY = 'SG.TESTKEY';
+import Notification from '../Notification.js';
 
 describe('Notification', () => {
   const mockUser = { id: '123', email: 'test@test.com' };
   const mockLeague = { name: 'Test League' };
-  const mockMailer = { send: jest.fn() };
+  const mockMailer = { send: vi.fn() };
 
   test('does not send a notification if addTransaction is not called', () => {
     const notification = new Notification(mockUser, mockMailer);
@@ -25,7 +28,7 @@ describe('Notification', () => {
 
   test('renders the transactions when calling send', () => {
     const notification = new Notification(mockUser, mockMailer);
-    jest.spyOn(console, 'log').mockReturnValue();
+    vi.spyOn(console, 'log').mockReturnValue();
     const mockTransactions = [
       {
         players: [
@@ -97,7 +100,7 @@ describe('Notification', () => {
 
   test('creates message with transactions from multiple leagues', () => {
     const notification = new Notification(mockUser, mockMailer);
-    jest.spyOn(console, 'log').mockReturnValue();
+    vi.spyOn(console, 'log').mockReturnValue();
     const mockLeague1Transactions = [
       {
         players: [

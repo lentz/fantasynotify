@@ -1,9 +1,9 @@
 import { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
 
-import User from './User';
-import * as leagues from './leagues';
-import yahooAuth from './yahooAuth';
+import User from './User.js';
+import * as leagues from './leagues.js';
+import yahooAuth from './yahooAuth.js';
 
 export async function index(_req: Request, res: Response) {
   res.render('index');

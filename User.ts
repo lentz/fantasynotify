@@ -1,6 +1,6 @@
 import * as mongoose from 'mongoose';
 import mongooseEncryption from 'mongoose-encryption';
-import yahooAuth from './yahooAuth';
+import yahooAuth from './yahooAuth.js';
 
 export interface ILeague {
   key: string;

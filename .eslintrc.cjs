@@ -5,11 +5,10 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:import/typescript',
     'plugin:import/recommended',
-    'plugin:jest/recommended',
-    'plugin:jest/style',
+    'plugin:vitest/recommended',
     'prettier',
   ],
-  plugins: ['@typescript-eslint', 'jest'],
+  plugins: ['@typescript-eslint', 'vitest'],
   rules: {
     '@typescript-eslint/no-unused-vars': [
       'error',
@@ -17,7 +16,7 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-    'jest/expect-expect': 'error',
+    'import/no-unresolved': 'off',
     'no-console': 'off',
     'no-param-reassign': 'off',
   },

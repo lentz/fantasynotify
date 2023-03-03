@@ -1,5 +1,5 @@
 import got from 'got';
-import { IUser } from './User';
+import { IUser } from './User.js';
 
 interface IYahooLeague {
   league: [

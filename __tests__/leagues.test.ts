@@ -1,5 +1,8 @@
 import { readFileSync } from 'fs';
-import * as leagues from '../leagues';
+
+import { describe, expect, test } from 'vitest';
+
+import * as leagues from '../leagues.js';
 
 describe('leagues', () => {
   const mockYahooUser = readFileSync('./__tests__/mockYahooUser.json');

@@ -1,5 +1,8 @@
 import { readFileSync } from 'fs';
-import { filterNew, getAll } from '../transactions';
+
+import { describe, expect, test } from 'vitest';
+
+import { filterNew, getAll } from '../transactions.js';
 
 describe('transactions', () => {
   const mockLeague = { name: 'league', lastNotifiedTransaction: '2' };

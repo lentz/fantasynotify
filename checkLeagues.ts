@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import db from './db';
-import Notification from './Notification';
-import * as leagues from './leagues';
-import * as transactions from './transactions';
-import User from './User';
+import db from './db.js';
+import Notification from './Notification.js';
+import * as leagues from './leagues.js';
+import * as transactions from './transactions.js';
+import User from './User.js';
 
 /* eslint-disable no-await-in-loop */
 (async function run() {

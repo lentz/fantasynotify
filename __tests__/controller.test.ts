@@ -1,13 +1,15 @@
-import * as controller from '../controller';
-import User from '../User';
-import * as leagues from '../leagues';
-import yahooAuth from '../yahooAuth';
+import { describe, expect, test, vi } from 'vitest';
 
-jest.mock('../yahooAuth');
+import * as controller from '../controller.js';
+import User from '../User.js';
+import * as leagues from '../leagues.js';
+import yahooAuth from '../yahooAuth.js';
+
+vi.mock('../yahooAuth.js');
 
 const mockRes = {
-  render: jest.fn(),
-  redirect: jest.fn(),
+  render: vi.fn(),
+  redirect: vi.fn(),
 };
 
 describe('controller', () => {
@@ -29,7 +31,7 @@ describe('controller', () => {
     });
 
     test('shows a warning if the user has already signed up', async () => {
-      jest.spyOn(User, 'findOne').mockReturnValue({
+      vi.spyOn(User, 'findOne').mockReturnValue({
         exec: () => Promise.resolve({ email: 'foo@bar.com' }),
       });
 
@@ -42,7 +44,7 @@ describe('controller', () => {
     });
 
     test('redirects to the yahoo auth page', async () => {
-      jest.spyOn(User, 'findOne').mockReturnValue({
+      vi.spyOn(User, 'findOne').mockReturnValue({
         exec: () => Promise.resolve(null),
       });
 
@@ -59,11 +61,11 @@ describe('controller', () => {
       ).rejects.toEqual(new Error('auth failed')));
 
     test('calls updateLeagues and renders a success message', async () => {
-      jest.spyOn(leagues, 'update').mockImplementation((user) => {
+      vi.spyOn(leagues, 'update').mockImplementation((user) => {
         /* eslint-disable-next-line no-param-reassign */
         user.leagues = [{ name: 'league 1' }, { name: 'league 2' }];
       });
-      jest.spyOn(User.prototype, 'save').mockResolvedValue();
+      vi.spyOn(User.prototype, 'save').mockResolvedValue();
       yahooAuth.code.getToken.mockResolvedValue({
         accessToken: 'access',
         expires: new Date(),
@@ -84,11 +86,11 @@ describe('controller', () => {
     });
 
     test('renders a warning if no leagues were found', async () => {
-      jest.spyOn(leagues, 'update').mockImplementation((user) => {
+      vi.spyOn(leagues, 'update').mockImplementation((user) => {
         /* eslint-disable-next-line no-param-reassign */
         user.leagues = [];
       });
-      jest.spyOn(User.prototype, 'save').mockResolvedValue();
+      vi.spyOn(User.prototype, 'save').mockResolvedValue();
       yahooAuth.code.getToken.mockResolvedValue({
         accessToken: 'access',
         expires: new Date(),
@@ -116,7 +118,7 @@ describe('controller', () => {
     });
 
     test('renders an error if ID does not match an account', async () => {
-      jest.spyOn(User, 'findByIdAndDelete').mockResolvedValue(null);
+      vi.spyOn(User, 'findByIdAndDelete').mockResolvedValue(null);
 
       await controller.unsubscribe(
         { params: { id: '5f93a6a9dcb7a060bd1f1f2d' } },
@@ -129,9 +131,9 @@ describe('controller', () => {
     });
 
     test('calls the function to delete the user if the ID matches', async () => {
-      jest
-        .spyOn(User, 'findByIdAndDelete')
-        .mockResolvedValue({ email: 'foo@bar.com' });
+      vi.spyOn(User, 'findByIdAndDelete').mockResolvedValue({
+        email: 'foo@bar.com',
+      });
 
       await controller.unsubscribe(
         { params: { id: '5f93a6a9dcb7a060bd1f1f2d' } },
@@ -156,7 +158,7 @@ describe('controller', () => {
     });
 
     test('prints other errors to the console and sets errorMessage', () => {
-      const consoleSpy = jest.spyOn(console, 'error').mockReturnValue();
+      const consoleSpy = vi.spyOn(console, 'error').mockReturnValue();
 
       controller.handleError(new Error('Other error'), {}, mockRes);
 

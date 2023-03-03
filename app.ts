@@ -3,14 +3,14 @@ import * as https from 'https';
 
 import dotenv from 'dotenv';
 dotenv.config();
-import * as bodyParser from 'body-parser';
+import bodyParser from 'body-parser';
 import express from 'express';
 import 'express-async-errors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import * as handlebarsExpress from 'express-handlebars';
-import './db';
-import * as controller from './controller';
+import './db.js';
+import * as controller from './controller.js';
 
 const app = express();
 

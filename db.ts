@@ -3,6 +3,7 @@ import mongoose from 'mongoose';
 
 dotenv.config();
 
+mongoose.set('strictQuery', true);
 mongoose.connect(process.env.MONGODB_URI as string);
 mongoose.connection.on('error', (err) => {
   console.error('Unable to connect to Mongo:', err);

@@ -1,8 +1,8 @@
 import { readFileSync } from 'fs';
-import * as handlebars from 'handlebars';
+import handlebars from 'handlebars';
 import sgMail, { MailService } from '@sendgrid/mail';
-import { ILeague, IUser } from './User';
-import { IPlayer, ITransaction } from './transactions';
+import { ILeague, IUser } from './User.js';
+import { IPlayer, ITransaction } from './transactions.js';
 
 sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
 

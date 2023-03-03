@@ -1,6 +1,8 @@
+import { vi } from 'vitest';
+
 export default {
   code: {
-    getToken: jest.fn(),
-    getUri: jest.fn(),
+    getToken: vi.fn(),
+    getUri: vi.fn(),
   },
 };
