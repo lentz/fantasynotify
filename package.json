@@ -50,7 +50,7 @@
     "eslint": "^8.37.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-vitest": "^0.0.53",
+    "eslint-plugin-vitest": "^0.0.57",
     "pre-commit": "^1.2.2",
     "prettier": "^2.8.7",
     "tsx": "^3.12.3",
