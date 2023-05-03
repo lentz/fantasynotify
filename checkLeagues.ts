@@ -37,7 +37,7 @@ import User from './User.js';
     } catch (err: any) {
       if (err.body?.error === 'INVALID_REFRESH_TOKEN') {
         console.log(`Deleting user '${user.email}' with revoked refresh token`);
-        await user.remove();
+        await user.deleteOne();
       } else if (err.code) {
         console.error(`HTTP ${err.code}: ${JSON.stringify(err.body, null, 2)}`);
       } else {
