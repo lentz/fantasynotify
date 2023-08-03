@@ -1,64 +1,111 @@
-<!DOCTYPE HTML>
 <html>
   <head>
     <title>Fantasy Transaction Notifier</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="Get free add/drop notifications for Yahoo! Fantasy Football leagues to stay ahead of your competition" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/solid.css" integrity="sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css" integrity="sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7" crossorigin="anonymous">
+    <meta
+      name='viewport'
+      content='width=device-width, initial-scale=1, shrink-to-fit=no'
+    />
+    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <meta
+      name='description'
+      content='Get free add/drop notifications for Yahoo! Fantasy Football leagues to stay ahead of your competition'
+    />
+    <link
+      rel='stylesheet'
+      href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css'
+      integrity='sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb'
+      crossorigin='anonymous'
+    />
+    <link
+      rel='stylesheet'
+      href='https://use.fontawesome.com/releases/v5.3.1/css/solid.css'
+      integrity='sha384-VGP9aw4WtGH/uPAOseYxZ+Vz/vaTb1ehm1bwx92Fm8dTrE+3boLfF1SpAtB1z7HW'
+      crossorigin='anonymous'
+    />
+    <link
+      rel='stylesheet'
+      href='https://use.fontawesome.com/releases/v5.3.1/css/fontawesome.css'
+      integrity='sha384-1rquJLNOM3ijoueaaeS5m+McXPJCGdr5HcA03/VHXxcp2kX2sUrQDmFc3jR5i/C7'
+      crossorigin='anonymous'
+    />
     <style>
-      .container { margin-top: 10px; }
-      #emailInput { width: 250px; }
-      .donate { margin-top: 40px; }
+      .container { margin-top: 10px; } #emailInput { width: 250px; } .donate {
+      margin-top: 40px; }
     </style>
   </head>
   <body>
-    <div class="container">
-      <div class="jumbotron">
-        <h1 class="display-4 text-primary">
-          <span class="fas fa-envelope-open"></span>
+    <div class='container'>
+      <div class='jumbotron'>
+        <h1 class='display-4 text-primary'>
+          <span class='fas fa-envelope-open'></span>
           Fantasy Transaction Notifier
         </h1>
-        <p class="lead">
-          Enter your email and authenticate with your Yahoo! account
-          to receive add/drop transaction notifications for all of your Yahoo!
-          Fantasy Football leagues.
+        <p class='lead'>
+          Enter your email and authenticate with your Yahoo! account to receive
+          add/drop transaction notifications for all of your Yahoo! Fantasy
+          Football leagues.
         </p>
-        <hr class="my-4">
+        <hr class='my-4' />
         {{#if successMessage}}
-        <div class="alert alert-success" role="alert">
-          {{successMessage}}
-        </div>
+          <div class='alert alert-success' role='alert'>
+            {{successMessage}}
+          </div>
         {{/if}}
         {{#if errorMessage}}
-        <div class="alert alert-warning" role="alert">
-          {{errorMessage}}
-        </div>
-        {{/if}}
-        <form method="post" action="/signup">
-          <div class="form-group">
-            <label for="emailInput">Email Address:</label>
-            <input type="email" id="emailInput" name="email" placeholder="Email" required />
+          <div class='alert alert-warning' role='alert'>
+            {{errorMessage}}
           </div>
-          <button type="submit" class="btn btn-lg btn-success">Get Notified!</button>
+        {{/if}}
+        <form method='post' action='/signup'>
+          <div class='form-group'>
+            <label for='emailInput'>Email Address:</label>
+            <input
+              type='email'
+              id='emailInput'
+              name='email'
+              placeholder='Email'
+              required
+            />
+          </div>
+          <button type='submit' class='btn btn-lg btn-success'>Get Notified!</button>
         </form>
-        <div class="donate text-center">
+        <div class='donate text-center'>
           <h6>Support Fantasy Notify</h6>
-          <form action="https://www.paypal.com/donate" method="post" target="_top">
-            <input type="hidden" name="hosted_button_id" value="24AYH6739J46A" />
-            <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif" border="0"
-              name="submit" title="Donate to Fantasy Notifier" alt="Donate with PayPal button" />
-            <img alt="" border="0" src="https://www.paypal.com/en_US/i/scr/pixel.gif" width="1" height="1" />
+          <form
+            action='https://www.paypal.com/donate'
+            method='post'
+            target='_top'
+          >
+            <input
+              type='hidden'
+              name='hosted_button_id'
+              value='24AYH6739J46A'
+            />
+            <input
+              type='image'
+              src='https://www.paypalobjects.com/en_US/i/btn/btn_donate_LG.gif'
+              border='0'
+              name='submit'
+              title='Donate to Fantasy Notifier'
+              alt='Donate with PayPal button'
+            />
+            <img
+              alt=''
+              border='0'
+              src='https://www.paypal.com/en_US/i/scr/pixel.gif'
+              width='1'
+              height='1'
+            />
           </form>
         </div>
       </div>
-      <p class="text-center text-secondary">
-      <small>
-        Your email isn't shared with <strong>anyone</strong> and is only
-        used to deliver your notifications. Unsubscribe at any time.
-      </small>
+      <p class='text-center text-secondary'>
+        <small>
+          Your email isn't shared with
+          <strong>anyone</strong>
+          and is only used to deliver your notifications. Unsubscribe at any
+          time.
+        </small>
       </p>
     </div>
   </body>
