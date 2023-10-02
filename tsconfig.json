@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2021",
-    "module": "es2022",
+    "module": "nodenext",
     "moduleResolution": "nodenext",
     "outDir": "./dist",
     "incremental": true,
