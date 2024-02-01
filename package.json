@@ -35,7 +35,7 @@
     "express": "^4.18.2",
     "express-async-errors": "^3.1.1",
     "express-handlebars": "^7.1.2",
-    "got": "^14.0.0",
+    "got": "^14.1.0",
     "handlebars": "^4.7.7",
     "helmet": "^7.1.0",
     "mongoose": "^8.0.0",
