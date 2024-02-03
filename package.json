@@ -55,7 +55,7 @@
     "prettier": "^3.2.4",
     "tsx": "^4.7.0",
     "typescript": "^5.3.3",
-    "vitest": "^0.34.6"
+    "vitest": "^1.2.2"
   },
   "pre-commit": [
     "lint",

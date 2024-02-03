@@ -4,31 +4,31 @@ exports[`Notification > creates message with transactions from multiple leagues 
 "<!DOCTYPE HTML>
 <html>
   <head>
-    <meta name=\\"viewport\\" content=\\"width=device-width\\">
-    <meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=UTF-8\\">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
       <h3>Test League</h3>
       <hr />
         <div>
           <p>
-            Test Team 1 <span style=\\"color: #1e824c\\">added</span> <span style=\\"font-weight: bold\\">Carson Wentz</span> from waivers<br />
-            Test Team 1 <span style=\\"color: #aa0000\\">dropped</span> <span style=\\"font-weight: bold\\">Alex Smith</span> <br />
+            Test Team 1 <span style="color: #1e824c">added</span> <span style="font-weight: bold">Carson Wentz</span> from waivers<br />
+            Test Team 1 <span style="color: #aa0000">dropped</span> <span style="font-weight: bold">Alex Smith</span> <br />
           </p>
         </div>
       <h3>League 2</h3>
       <hr />
         <div>
           <p>
-            Test Team 2 <span style=\\"color: #1e824c\\">added</span> <span style=\\"font-weight: bold\\">Zach Ertz</span> from waivers<br />
-            Test Team 2 <span style=\\"color: #aa0000\\">dropped</span> <span style=\\"font-weight: bold\\">Jordan Reed</span> <br />
+            Test Team 2 <span style="color: #1e824c">added</span> <span style="font-weight: bold">Zach Ertz</span> from waivers<br />
+            Test Team 2 <span style="color: #aa0000">dropped</span> <span style="font-weight: bold">Jordan Reed</span> <br />
           </p>
         </div>
-    <div style=\\"text-align: center;\\">
-      <span style=\\"font-size: .75em; color: #666666; margin-top: 40px;\\">
-        This email was sent by <a href=\\"\\">Fantasy Transaction Notifier</a>
+    <div style="text-align: center;">
+      <span style="font-size: .75em; color: #666666; margin-top: 40px;">
+        This email was sent by <a href="">Fantasy Transaction Notifier</a>
         to test@test.com.
-        <a href=\\"/unsubscribe/123\\">Unsubscribe</a>
+        <a href="/unsubscribe/123">Unsubscribe</a>
       </span>
     </div>
   </body>
@@ -40,40 +40,40 @@ exports[`Notification > renders the transactions when calling send 1`] = `
 "<!DOCTYPE HTML>
 <html>
   <head>
-    <meta name=\\"viewport\\" content=\\"width=device-width\\">
-    <meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=UTF-8\\">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   </head>
   <body>
       <h3>Test League</h3>
       <hr />
         <div>
           <p>
-            Test Team 1 <span style=\\"color: #1e824c\\">added</span> <span style=\\"font-weight: bold\\">Carson Wentz</span> from waivers<br />
-            Test Team 1 <span style=\\"color: #aa0000\\">dropped</span> <span style=\\"font-weight: bold\\">Alex Smith</span> <br />
+            Test Team 1 <span style="color: #1e824c">added</span> <span style="font-weight: bold">Carson Wentz</span> from waivers<br />
+            Test Team 1 <span style="color: #aa0000">dropped</span> <span style="font-weight: bold">Alex Smith</span> <br />
           </p>
         </div>
         <div>
           <p>
-            Test Team 2 <span style=\\"color: #1e824c\\">added</span> <span style=\\"font-weight: bold\\">Zach Ertz</span> from waivers for $7<br />
-            Test Team 2 <span style=\\"color: #aa0000\\">dropped</span> <span style=\\"font-weight: bold\\">Jordan Reed</span> <br />
+            Test Team 2 <span style="color: #1e824c">added</span> <span style="font-weight: bold">Zach Ertz</span> from waivers for $7<br />
+            Test Team 2 <span style="color: #aa0000">dropped</span> <span style="font-weight: bold">Jordan Reed</span> <br />
           </p>
         </div>
         <div>
           <p>
-            Test Team 3 <span style=\\"color: #1e824c\\">added</span> <span style=\\"font-weight: bold\\">Jay Ajayi</span> from free agents<br />
-            Test Team 3 <span style=\\"color: #aa0000\\">dropped</span> <span style=\\"font-weight: bold\\">James Connor</span> <br />
+            Test Team 3 <span style="color: #1e824c">added</span> <span style="font-weight: bold">Jay Ajayi</span> from free agents<br />
+            Test Team 3 <span style="color: #aa0000">dropped</span> <span style="font-weight: bold">James Connor</span> <br />
           </p>
         </div>
         <div>
           <p>
-            Test Team 4 <span style=\\"color: #aa0000\\">dropped</span> <span style=\\"font-weight: bold\\">Antonio Brown</span> <br />
+            Test Team 4 <span style="color: #aa0000">dropped</span> <span style="font-weight: bold">Antonio Brown</span> <br />
           </p>
         </div>
-    <div style=\\"text-align: center;\\">
-      <span style=\\"font-size: .75em; color: #666666; margin-top: 40px;\\">
-        This email was sent by <a href=\\"\\">Fantasy Transaction Notifier</a>
+    <div style="text-align: center;">
+      <span style="font-size: .75em; color: #666666; margin-top: 40px;">
+        This email was sent by <a href="">Fantasy Transaction Notifier</a>
         to test@test.com.
-        <a href=\\"/unsubscribe/123\\">Unsubscribe</a>
+        <a href="/unsubscribe/123">Unsubscribe</a>
       </span>
     </div>
   </body>
