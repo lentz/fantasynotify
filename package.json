@@ -32,7 +32,7 @@
     "body-parser": "^1.20.2",
     "client-oauth2": "^4.3.3",
     "dotenv": "^16.4.5",
-    "express": "^4.18.3",
+    "express": "^4.19.2",
     "express-async-errors": "^3.1.1",
     "express-handlebars": "^7.1.2",
     "got": "^14.2.0",
