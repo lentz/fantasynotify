@@ -7,3 +7,9 @@ updates:
     open-pull-requests-limit: 10
     assignees:
       - lentz
+  - package-ecosystem: github-actions
+    directory: '/'
+    schedule:
+      interval: weekly
+    assignees:
+      - lentz
