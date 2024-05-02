@@ -5,7 +5,7 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:import/typescript',
     'plugin:import/recommended',
-    'plugin:vitest/recommended',
+    'plugin:vitest/legacy-recommended',
     'prettier',
   ],
   plugins: ['@typescript-eslint', 'vitest'],
