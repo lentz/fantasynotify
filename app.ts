@@ -1,8 +1,6 @@
 import * as fs from 'fs';
 import * as https from 'https';
 
-import dotenv from 'dotenv';
-dotenv.config();
 import bodyParser from 'body-parser';
 import express from 'express';
 import 'express-async-errors';
