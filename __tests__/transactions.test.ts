@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import { filterNew, getAll } from '../transactions.js';
 
@@ -11,7 +11,7 @@ describe('transactions', () => {
   );
 
   describe('#getAll', () => {
-    test('tranforms yahoo response into usable transactions', async () => {
+    it('tranforms yahoo response into usable transactions', async () => {
       const mockHttpLib = () => ({
         json: () => Promise.resolve(JSON.parse(mockYahooTransactions)),
       });
@@ -112,7 +112,7 @@ describe('transactions', () => {
   });
 
   describe('#filterNew', () => {
-    test('returns only new transactions', () => {
+    it('returns only new transactions', () => {
       const transactions = [{ key: '3' }, { key: '2' }, { key: '1' }];
 
       const newTransactions = filterNew(mockLeague, transactions);
@@ -120,7 +120,7 @@ describe('transactions', () => {
       expect(newTransactions).toEqual([{ key: '3' }]);
     });
 
-    test('returns empty array if none are new', () => {
+    it('returns empty array if none are new', () => {
       const transactions = [{ key: '2' }, { key: '1' }];
 
       const newTransactions = filterNew(mockLeague, transactions);
@@ -128,11 +128,11 @@ describe('transactions', () => {
       expect(newTransactions).toEqual([]);
     });
 
-    test('returns empty array if transactions is not provided', () => {
+    it('returns empty array if transactions is not provided', () => {
       expect(filterNew({ name: 'new' })).toEqual([]);
     });
 
-    test('returns all transactions if the league does not have a last modified transaction', () => {
+    it('returns all transactions if the league does not have a last modified transaction', () => {
       expect(filterNew({ name: 'new' }, [{ key: '1' }])).toEqual([
         { key: '1' },
       ]);

@@ -1,6 +1,6 @@
 // Vitest Snapshot v1, https://vitest.dev/guide/snapshot.html
 
-exports[`Notification > creates message with transactions from multiple leagues 1`] = `
+exports[`notification > creates message with transactions from multiple leagues 1`] = `
 "<!DOCTYPE HTML>
 <html>
   <head>
@@ -36,7 +36,7 @@ exports[`Notification > creates message with transactions from multiple leagues 
 "
 `;
 
-exports[`Notification > renders the transactions when calling send 1`] = `
+exports[`notification > renders the transactions when calling send 1`] = `
 "<!DOCTYPE HTML>
 <html>
   <head>

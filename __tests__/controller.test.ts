@@ -1,4 +1,4 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import * as controller from '../controller.js';
 import User from '../User.js';
@@ -14,7 +14,7 @@ const mockRes = {
 
 describe('controller', () => {
   describe('#index', () => {
-    test('renders the home page', () => {
+    it('renders the home page', () => {
       controller.index({}, mockRes);
 
       expect(mockRes.render).toHaveBeenCalledWith('index');
@@ -22,7 +22,7 @@ describe('controller', () => {
   });
 
   describe('#signup', () => {
-    test('renders an error is email is not provided', async () => {
+    it('renders an error is email is not provided', async () => {
       await controller.signup({ body: {} }, mockRes);
 
       expect(mockRes.render).toHaveBeenCalledWith('index', {
@@ -30,7 +30,7 @@ describe('controller', () => {
       });
     });
 
-    test('shows a warning if the user has already signed up', async () => {
+    it('shows a warning if the user has already signed up', async () => {
       vi.spyOn(User, 'findOne').mockReturnValue({
         exec: () => Promise.resolve({ email: 'foo@bar.com' }),
       });
@@ -43,7 +43,7 @@ describe('controller', () => {
       });
     });
 
-    test('redirects to the yahoo auth page', async () => {
+    it('redirects to the yahoo auth page', async () => {
       vi.spyOn(User, 'findOne').mockReturnValue({
         exec: () => Promise.resolve(null),
       });
@@ -55,12 +55,12 @@ describe('controller', () => {
   });
 
   describe('#authCallback', () => {
-    test('throws an error if set in the request', () =>
+    it('throws an error if set in the request', () =>
       expect(
         controller.authCallback({ query: { error: 'auth failed' } }, mockRes),
       ).rejects.toEqual(new Error('auth failed')));
 
-    test('calls updateLeagues and renders a success message', async () => {
+    it('calls updateLeagues and renders a success message', async () => {
       vi.spyOn(leagues, 'update').mockImplementation((user) => {
         /* eslint-disable-next-line no-param-reassign */
         user.leagues = [{ name: 'league 1' }, { name: 'league 2' }];
@@ -85,7 +85,7 @@ describe('controller', () => {
       `);
     });
 
-    test('renders a warning if no leagues were found', async () => {
+    it('renders a warning if no leagues were found', async () => {
       vi.spyOn(leagues, 'update').mockImplementation((user) => {
         /* eslint-disable-next-line no-param-reassign */
         user.leagues = [];
@@ -109,7 +109,7 @@ describe('controller', () => {
   });
 
   describe('#unsubscribe', () => {
-    test('renders an error if and invalid ID is provided', async () => {
+    it('renders an error if and invalid ID is provided', async () => {
       await controller.unsubscribe({ params: { id: '123' } }, mockRes);
 
       expect(mockRes.render).toHaveBeenCalledWith('index', {
@@ -117,7 +117,7 @@ describe('controller', () => {
       });
     });
 
-    test('renders an error if ID does not match an account', async () => {
+    it('renders an error if ID does not match an account', async () => {
       vi.spyOn(User, 'findByIdAndDelete').mockResolvedValue(null);
 
       await controller.unsubscribe(
@@ -130,7 +130,7 @@ describe('controller', () => {
       });
     });
 
-    test('calls the function to delete the user if the ID matches', async () => {
+    it('calls the function to delete the user if the ID matches', async () => {
       vi.spyOn(User, 'findByIdAndDelete').mockResolvedValue({
         email: 'foo@bar.com',
       });
@@ -147,7 +147,7 @@ describe('controller', () => {
   });
 
   describe('#handleError', () => {
-    test('instructs user to allow on Yahoo if access denied', () => {
+    it('instructs user to allow on Yahoo if access denied', () => {
       controller.handleError(new Error('access_denied'), {}, mockRes);
 
       expect(mockRes.render).toHaveBeenCalledWith('index', {
@@ -157,7 +157,7 @@ describe('controller', () => {
       });
     });
 
-    test('prints other errors to the console and sets errorMessage', () => {
+    it('prints other errors to the console and sets errorMessage', () => {
       const consoleSpy = vi.spyOn(console, 'error').mockReturnValue();
 
       controller.handleError(new Error('Other error'), {}, mockRes);

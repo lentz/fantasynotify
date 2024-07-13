@@ -1,14 +1,14 @@
-import { describe, expect, test, vi } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 process.env.SENDGRID_API_KEY = 'SG.TESTKEY';
 import Notification from '../Notification.js';
 
-describe('Notification', () => {
+describe('notification', () => {
   const mockUser = { id: '123', email: 'test@test.com' };
   const mockLeague = { name: 'Test League' };
   const mockMailer = { send: vi.fn() };
 
-  test('does not send a notification if addTransaction is not called', () => {
+  it('does not send a notification if addTransaction is not called', () => {
     const notification = new Notification(mockUser, mockMailer);
 
     notification.send();
@@ -16,7 +16,7 @@ describe('Notification', () => {
     expect(mockMailer.send).not.toHaveBeenCalled();
   });
 
-  test('does not send a notification if empty transactions are provided', () => {
+  it('does not send a notification if empty transactions are provided', () => {
     const notification = new Notification(mockUser, mockMailer);
     notification.addTransactions(mockLeague, []);
     notification.addTransactions(mockLeague);
@@ -26,7 +26,7 @@ describe('Notification', () => {
     expect(mockMailer.send).not.toHaveBeenCalled();
   });
 
-  test('renders the transactions when calling send', () => {
+  it('renders the transactions when calling send', () => {
     const notification = new Notification(mockUser, mockMailer);
     vi.spyOn(console, 'log').mockReturnValue();
     const mockTransactions = [
@@ -98,7 +98,7 @@ describe('Notification', () => {
     expect(mailerArg.html).toMatchSnapshot();
   });
 
-  test('creates message with transactions from multiple leagues', () => {
+  it('creates message with transactions from multiple leagues', () => {
     const notification = new Notification(mockUser, mockMailer);
     vi.spyOn(console, 'log').mockReturnValue();
     const mockLeague1Transactions = [

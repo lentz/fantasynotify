@@ -1,6 +1,6 @@
 import { readFileSync } from 'fs';
 
-import { describe, expect, test } from 'vitest';
+import { describe, expect, it } from 'vitest';
 
 import * as leagues from '../leagues.js';
 
@@ -8,7 +8,7 @@ describe('leagues', () => {
   const mockYahooUser = readFileSync('./__tests__/mockYahooUser.json');
 
   describe('#update', () => {
-    test('adds new leagues to the user', async () => {
+    it('adds new leagues to the user', async () => {
       const mockHttpLib = () => ({
         json: () => Promise.resolve(JSON.parse(mockYahooUser)),
       });
@@ -28,7 +28,7 @@ describe('leagues', () => {
       ]);
     });
 
-    test('only adds leagues that are not already present', async () => {
+    it('only adds leagues that are not already present', async () => {
       const mockHttpLib = () => ({
         json: () => Promise.resolve(JSON.parse(mockYahooUser)),
       });
@@ -55,7 +55,7 @@ describe('leagues', () => {
       ]);
     });
 
-    test('does not modify leagues if they all already exist', async () => {
+    it('does not modify leagues if they all already exist', async () => {
       const mockHttpLib = () => ({
         json: () => Promise.resolve(JSON.parse(mockYahooUser)),
       });
@@ -86,7 +86,7 @@ describe('leagues', () => {
       ]);
     });
 
-    test('removes old leagues that are no longer returned from Yahoo', async () => {
+    it('removes old leagues that are no longer returned from Yahoo', async () => {
       const mockHttpLib = () => ({
         json: () => Promise.resolve(JSON.parse(mockYahooUser)),
       });
