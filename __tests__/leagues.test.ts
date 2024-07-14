@@ -5,13 +5,15 @@ import { describe, expect, it } from 'vitest';
 import * as leagues from '../leagues.js';
 
 describe('leagues', () => {
-  const mockYahooUser = readFileSync('./__tests__/mockYahooUser.json');
+  const mockYahooUser = readFileSync('./__tests__/mockYahooUser.json', 'utf8');
 
   describe('#update', () => {
     it('adds new leagues to the user', async () => {
-      const mockHttpLib = () => ({
-        json: () => Promise.resolve(JSON.parse(mockYahooUser)),
-      });
+      const mockHttpLib = () =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(JSON.parse(mockYahooUser)),
+        });
       const mockUser = { leagues: [] };
 
       await leagues.update(mockUser, mockHttpLib);
@@ -29,9 +31,11 @@ describe('leagues', () => {
     });
 
     it('only adds leagues that are not already present', async () => {
-      const mockHttpLib = () => ({
-        json: () => Promise.resolve(JSON.parse(mockYahooUser)),
-      });
+      const mockHttpLib = () =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(JSON.parse(mockYahooUser)),
+        });
       const mockUser = {
         leagues: [
           {
@@ -56,9 +60,11 @@ describe('leagues', () => {
     });
 
     it('does not modify leagues if they all already exist', async () => {
-      const mockHttpLib = () => ({
-        json: () => Promise.resolve(JSON.parse(mockYahooUser)),
-      });
+      const mockHttpLib = () =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(JSON.parse(mockYahooUser)),
+        });
       const mockUser = {
         leagues: [
           {
@@ -87,9 +93,11 @@ describe('leagues', () => {
     });
 
     it('removes old leagues that are no longer returned from Yahoo', async () => {
-      const mockHttpLib = () => ({
-        json: () => Promise.resolve(JSON.parse(mockYahooUser)),
-      });
+      const mockHttpLib = () =>
+        Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve(JSON.parse(mockYahooUser)),
+        });
       const mockUser = {
         leagues: [
           {

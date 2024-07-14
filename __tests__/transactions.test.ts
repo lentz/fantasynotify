@@ -8,13 +8,16 @@ describe('transactions', () => {
   const mockLeague = { name: 'league', lastNotifiedTransaction: '2' };
   const mockYahooTransactions = readFileSync(
     './__tests__/mockYahooTransactions.json',
+    'utf8',
   );
 
   describe('#getAll', () => {
     it('tranforms yahoo response into usable transactions', async () => {
-      const mockHttpLib = () => ({
-        json: () => Promise.resolve(JSON.parse(mockYahooTransactions)),
-      });
+      const mockHttpLib = () =>
+        Promise.resolve({
+          json: () => Promise.resolve(JSON.parse(mockYahooTransactions)),
+          ok: true,
+        });
 
       const transactions = await getAll(mockLeague, {}, mockHttpLib);
 

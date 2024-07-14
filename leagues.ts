@@ -1,4 +1,3 @@
-import got from 'got';
 import { IUser } from './User.js';
 
 interface IYahooLeague {
@@ -42,11 +41,19 @@ interface IYahooResponse {
   };
 }
 
-export async function update(user: IUser, httpLib = got) {
-  const users: IYahooResponse = await httpLib(
+export async function update(user: IUser, httpLib: typeof fetch = fetch) {
+  const response = await httpLib(
     'https://fantasysports.yahooapis.com/fantasy/v2/users;use_login=1/games;game_codes=nfl;is_available=1/leagues?format=json',
     { headers: { Authorization: `Bearer ${user.accessToken}` } },
-  ).json();
+  );
+
+  if (!response.ok) {
+    throw new Error(
+      `Users request failed with HTTP ${response.status}: ${await response.text()}`,
+    );
+  }
+
+  const users: IYahooResponse = await response.json();
 
   const { games } = users.fantasy_content.users[0].user[1];
   if (!Object.keys(games).length) {

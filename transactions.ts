@@ -1,4 +1,3 @@
-import got from 'got';
 import { ILeague, IUser } from './User.js';
 
 function mapPlayers(players: IYahooPlayers): IPlayer[] {
@@ -76,14 +75,22 @@ export interface ITransaction {
 export async function getAll(
   league: ILeague,
   user: IUser,
-  httpLib = got,
+  httpLib: typeof fetch = fetch,
 ): Promise<ITransaction[]> {
-  const response: IYahooResponse = await httpLib(
+  const response = await httpLib(
     `https://fantasysports.yahooapis.com/fantasy/v2/league/${league.key}/transactions;types=add,drop?format=json`,
     { headers: { Authorization: `Bearer ${user.accessToken}` } },
-  ).json();
+  );
 
-  return Object.entries(response.fantasy_content.league[1].transactions)
+  if (!response.ok) {
+    throw new Error(
+      `Transactions request failed with HTTP ${response.status}: ${await response.text()}`,
+    );
+  }
+
+  const responseBody: IYahooResponse = await response.json();
+
+  return Object.entries(responseBody.fantasy_content.league[1].transactions)
     .map((entry) => entry[1].transaction)
     .filter((transaction) => transaction)
     .filter((transaction) => transaction[0].status === 'successful')
