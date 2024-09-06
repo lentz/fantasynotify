@@ -48,9 +48,17 @@ export async function update(user: IUser, httpLib: typeof fetch = fetch) {
   );
 
   if (!response.ok) {
-    throw new Error(
-      `Users request failed with HTTP ${response.status}: ${await response.text()}`,
-    );
+    if ([401, 403].includes(response.status)) {
+      console.warn(
+        `Users auth failure with HTTP ${response.status}: ${await response.text()}`,
+      );
+
+      return;
+    } else {
+      throw new Error(
+        `Users request failed with HTTP ${response.status}: ${await response.text()}`,
+      );
+    }
   }
 
   const users: IYahooResponse = await response.json();

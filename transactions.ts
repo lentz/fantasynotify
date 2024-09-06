@@ -83,9 +83,17 @@ export async function getAll(
   );
 
   if (!response.ok) {
-    throw new Error(
-      `Transactions request failed with HTTP ${response.status}: ${await response.text()}`,
-    );
+    if ([401, 403].includes(response.status)) {
+      console.warn(
+        `Transactions auth failure with HTTP ${response.status}: ${await response.text()}`,
+      );
+
+      return [];
+    } else {
+      throw new Error(
+        `Transactions request failed with HTTP ${response.status}: ${await response.text()}`,
+      );
+    }
   }
 
   const responseBody: IYahooResponse = await response.json();
