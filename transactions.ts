@@ -84,8 +84,9 @@ export async function getAll(
 
   if (!response.ok) {
     if ([401, 403].includes(response.status)) {
+      const body = await response.json();
       console.warn(
-        `Transactions auth failure with HTTP ${response.status}: ${await response.text()}`,
+        `Transactions auth failure with HTTP ${response.status}: ${JSON.stringify(body.error, null, 2)}`,
       );
 
       return [];

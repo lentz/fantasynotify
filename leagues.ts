@@ -49,8 +49,9 @@ export async function update(user: IUser, httpLib: typeof fetch = fetch) {
 
   if (!response.ok) {
     if ([401, 403].includes(response.status)) {
+      const body = await response.json();
       console.warn(
-        `Users auth failure with HTTP ${response.status}: ${await response.text()}`,
+        `Users auth failure with HTTP ${response.status}: ${JSON.stringify(body.error, null, 2)}`,
       );
 
       return;
