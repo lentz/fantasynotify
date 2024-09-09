@@ -1,10 +1,12 @@
 import { readFileSync } from 'fs';
 import handlebars from 'handlebars';
 import sgMail, { MailService } from '@sendgrid/mail';
+
 import { ILeague, IUser } from './User.js';
+import config from './config.js';
 import { IPlayer, ITransaction } from './transactions.js';
 
-sgMail.setApiKey(process.env.SENDGRID_API_KEY as string);
+sgMail.setApiKey(config.SENDGRID_API_KEY);
 
 const emailTemplate = handlebars.compile(
   readFileSync('./views/emailLayout.hbs').toString(),
@@ -68,7 +70,7 @@ export default class Notification {
       )}`,
       html: emailTemplate({
         leagueTransactions: this.leagueTransactions,
-        domain: process.env.DOMAIN,
+        domain: config.DOMAIN,
         userEmail: this.user.email,
         userId: this.user.id,
       }),

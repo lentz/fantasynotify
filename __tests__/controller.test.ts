@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 
+vi.mock('../config.js', () => ({
+  default: {},
+}));
+
 import * as controller from '../controller.js';
 import User from '../User.js';
 import * as leagues from '../leagues.js';

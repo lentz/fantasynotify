@@ -7,7 +7,9 @@ import 'express-async-errors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import * as handlebarsExpress from 'express-handlebars';
+
 import './db.js';
+import config from './config.js';
 import * as controller from './controller.js';
 
 const app = express();
@@ -50,8 +52,8 @@ try {
 }
 
 server
-  .listen(process.env.PORT)
-  .on('listening', () => console.log(`Listening on port ${process.env.PORT}`))
+  .listen(config.PORT)
+  .on('listening', () => console.log(`Listening on port ${config.PORT}`))
   .on('error', console.error);
 
 export default app;

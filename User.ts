@@ -1,5 +1,7 @@
 import * as mongoose from 'mongoose';
 import mongooseEncryption from 'mongoose-encryption';
+
+import config from './config.js';
 import yahooAuth from './yahooAuth.js';
 
 export interface ILeague {
@@ -36,10 +38,10 @@ const userSchema = new mongoose.Schema(
   { timestamps: true },
 );
 
-if (process.env.MONGO_ENCRYPTION_KEY) {
+if (config.MONGO_ENCRYPTION_KEY) {
   userSchema.plugin(mongooseEncryption, {
-    encryptionKey: process.env.MONGO_ENCRYPTION_KEY,
-    signingKey: process.env.MONGO_SIGNING_KEY,
+    encryptionKey: config.MONGO_ENCRYPTION_KEY,
+    signingKey: config.MONGO_SIGNING_KEY,
     encryptedFields: ['accessToken', 'refreshToken'],
     additionalAuthenticatedFields: ['email'],
   });

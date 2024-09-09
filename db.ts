@@ -1,7 +1,9 @@
 import mongoose from 'mongoose';
 
+import config from './config.js';
+
 mongoose.set('strictQuery', true);
-mongoose.connect(process.env.MONGODB_URI as string);
+mongoose.connect(config.MONGODB_URI);
 mongoose.connection.on('error', (err) => {
   console.error('Unable to connect to Mongo:', err);
   process.exit(1);

@@ -1,6 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 
-process.env.SENDGRID_API_KEY = 'SG.TESTKEY';
+vi.mock('../config.js', () => ({
+  default: { SENDGRID_API_KEY: 'SG.TESTKEY' },
+}));
+
 import Notification from '../Notification.js';
 
 describe('notification', () => {
