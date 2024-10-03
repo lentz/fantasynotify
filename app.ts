@@ -47,7 +47,7 @@ try {
     },
     app,
   );
-} catch (err) {
+} catch (_err) {
   server = app;
 }
 

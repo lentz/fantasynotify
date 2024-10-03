@@ -66,7 +66,6 @@ describe('controller', () => {
 
     it('calls updateLeagues and renders a success message', async () => {
       vi.spyOn(leagues, 'update').mockImplementation((user) => {
-        /* eslint-disable-next-line no-param-reassign */
         user.leagues = [{ name: 'league 1' }, { name: 'league 2' }];
       });
       vi.spyOn(User.prototype, 'save').mockResolvedValue();
@@ -91,7 +90,6 @@ describe('controller', () => {
 
     it('renders a warning if no leagues were found', async () => {
       vi.spyOn(leagues, 'update').mockImplementation((user) => {
-        /* eslint-disable-next-line no-param-reassign */
         user.leagues = [];
       });
       vi.spyOn(User.prototype, 'save').mockResolvedValue();
