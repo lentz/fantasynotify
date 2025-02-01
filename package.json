@@ -36,7 +36,7 @@
     "express-handlebars": "^8.0.1",
     "handlebars": "^4.7.7",
     "helmet": "^8.0.0",
-    "mongoose": "^8.9.5",
+    "mongoose": "^8.9.6",
     "mongoose-encryption": "^2.1.2",
     "morgan": "^1.10.0",
     "zod": "^3.24.1"
