@@ -8,9 +8,9 @@ import helmet from 'helmet';
 import morgan from 'morgan';
 import * as handlebarsExpress from 'express-handlebars';
 
-import './db.js';
-import config from './config.js';
-import * as controller from './controller.js';
+import './db.ts';
+import config from './config.ts';
+import * as controller from './controller.ts';
 
 const app = express();
 

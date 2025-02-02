@@ -1,6 +1,6 @@
 import mongoose from 'mongoose';
 
-import config from './config.js';
+import config from './config.ts';
 
 mongoose.set('strictQuery', true);
 mongoose.connect(config.MONGODB_URI);

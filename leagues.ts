@@ -1,4 +1,4 @@
-import { IUser } from './User.js';
+import type { IUser } from './User.ts';
 
 interface IYahooLeague {
   league: [

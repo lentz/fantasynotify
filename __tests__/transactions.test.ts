@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 
 import { describe, expect, it } from 'vitest';
 
-import { filterNew, getAll } from '../transactions.js';
+import { filterNew, getAll } from '../transactions.ts';
 
 describe('transactions', () => {
   const mockLeague = { name: 'league', lastNotifiedTransaction: '2' };

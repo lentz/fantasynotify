@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 
-import db from './db.js';
-import Notification from './Notification.js';
-import * as leagues from './leagues.js';
-import * as transactions from './transactions.js';
-import User from './User.js';
+import db from './db.ts';
+import Notification from './Notification.ts';
+import * as leagues from './leagues.ts';
+import * as transactions from './transactions.ts';
+import User from './User.ts';
 
 const users = await User.find().sort({ updatedAt: 1 }).exec();
 

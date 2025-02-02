@@ -1,4 +1,4 @@
-import { ILeague, IUser } from './User.js';
+import type { ILeague, IUser } from './User.ts';
 
 function mapPlayers(players: IYahooPlayers): IPlayer[] {
   return Object.entries(players)

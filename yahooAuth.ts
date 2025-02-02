@@ -1,6 +1,6 @@
 import ClientOAuth2 from 'client-oauth2';
 
-import config from './config.js';
+import config from './config.ts';
 
 export default new ClientOAuth2({
   clientId: config.YAHOO_CLIENT_ID,

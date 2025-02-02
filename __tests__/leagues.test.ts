@@ -2,7 +2,7 @@ import { readFileSync } from 'fs';
 
 import { describe, expect, it } from 'vitest';
 
-import * as leagues from '../leagues.js';
+import * as leagues from '../leagues.ts';
 
 describe('leagues', () => {
   const mockYahooUser = readFileSync('./__tests__/mockYahooUser.json', 'utf8');

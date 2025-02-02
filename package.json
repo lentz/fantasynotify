@@ -20,7 +20,7 @@
     "lint": "eslint .",
     "prebuild": "rm -rf ./dist",
     "start": "node ./dist/app.js",
-    "serve": "tsx watch --env-file .env app.ts",
+    "serve": "node --watch --experimental-strip-types --inspect=:9229 --env-file .env app.ts",
     "test": "vitest run",
     "test-watch": "vitest"
   },
@@ -50,7 +50,6 @@
     "eslint": "^9.19.0",
     "pre-commit": "^1.2.2",
     "prettier": "^3.4.2",
-    "tsx": "^4.19.2",
     "typescript": "^5.7.3",
     "typescript-eslint": "^8.22.0",
     "vitest": "^3.0.4"

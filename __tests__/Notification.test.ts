@@ -1,10 +1,10 @@
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('../config.js', () => ({
+vi.mock('../config.ts', () => ({
   default: { SENDGRID_API_KEY: 'SG.TESTKEY' },
 }));
 
-import Notification from '../Notification.js';
+import Notification from '../Notification.ts';
 
 describe('notification', () => {
   const mockUser = { id: '123', email: 'test@test.com' };

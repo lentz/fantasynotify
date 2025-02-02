@@ -1,15 +1,15 @@
 import { describe, expect, it, vi } from 'vitest';
 
-vi.mock('../config.js', () => ({
+vi.mock('../config.ts', () => ({
   default: {},
 }));
 
-import * as controller from '../controller.js';
-import User from '../User.js';
-import * as leagues from '../leagues.js';
-import yahooAuth from '../yahooAuth.js';
+import * as controller from '../controller.ts';
+import User from '../User.ts';
+import * as leagues from '../leagues.ts';
+import yahooAuth from '../yahooAuth.ts';
 
-vi.mock('../yahooAuth.js');
+vi.mock('../yahooAuth.ts');
 
 const mockRes = {
   render: vi.fn(),
