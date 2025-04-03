@@ -3,7 +3,6 @@ import * as https from 'https';
 
 import bodyParser from 'body-parser';
 import express from 'express';
-import 'express-async-errors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import * as handlebarsExpress from 'express-handlebars';
