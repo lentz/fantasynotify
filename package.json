@@ -28,7 +28,7 @@
     "node": "^22.0.0"
   },
   "dependencies": {
-    "@sendgrid/mail": "^8.1.4",
+    "@sendgrid/mail": "^8.1.5",
     "body-parser": "^2.2.0",
     "client-oauth2": "^4.3.3",
     "express": "^5.1.0",
