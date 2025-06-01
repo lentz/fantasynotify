@@ -41,7 +41,7 @@
     "zod": "^3.24.3"
   },
   "devDependencies": {
-    "@eslint/js": "^9.23.0",
+    "@eslint/js": "^9.28.0",
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.1",
     "@types/morgan": "^1.9.9",
