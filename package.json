@@ -45,7 +45,7 @@
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.1",
     "@types/morgan": "^1.9.9",
-    "@vitest/eslint-plugin": "^1.1.44",
+    "@vitest/eslint-plugin": "^1.2.1",
     "eslint": "^9.25.1",
     "pre-commit": "^1.2.2",
     "prettier": "^3.5.3",
