@@ -1,7 +1,6 @@
 // @ts-check
 
 import eslint from '@eslint/js';
-import vitest from '@vitest/eslint-plugin';
 import tseslint from 'typescript-eslint';
 
 export default tseslint.config(
@@ -23,10 +22,5 @@ export default tseslint.config(
         },
       ],
     },
-  },
-  {
-    files: ['__tests__/**'],
-    plugins: { vitest },
-    rules: { ...vitest.configs.recommended.rules },
   },
 );

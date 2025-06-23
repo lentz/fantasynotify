@@ -1,11 +1,11 @@
-import { readFileSync } from 'fs';
+import { deepEqual } from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { describe, it } from 'node:test';
 
-import { describe, expect, it } from 'vitest';
-
-import * as leagues from '../leagues.ts';
+import * as leagues from './leagues.ts';
 
 describe('leagues', () => {
-  const mockYahooUser = readFileSync('./__tests__/mockYahooUser.json', 'utf8');
+  const mockYahooUser = readFileSync('./test-data/mockYahooUser.json', 'utf8');
 
   describe('#update', () => {
     it('adds new leagues to the user', async () => {
@@ -16,9 +16,9 @@ describe('leagues', () => {
         });
       const mockUser = { leagues: [] };
 
-      await leagues.update(mockUser, mockHttpLib);
+      await leagues.update(mockUser as any, mockHttpLib as any);
 
-      expect(mockUser.leagues).toEqual([
+      deepEqual(mockUser.leagues, [
         {
           key: '380.l.942166',
           name: 'Keeper League',
@@ -45,9 +45,9 @@ describe('leagues', () => {
         ],
       };
 
-      await leagues.update(mockUser, mockHttpLib);
+      await leagues.update(mockUser as any, mockHttpLib as any);
 
-      expect(mockUser.leagues).toEqual([
+      deepEqual(mockUser.leagues, [
         {
           key: '380.l.942166',
           name: 'Keeper League',
@@ -78,9 +78,9 @@ describe('leagues', () => {
         ],
       };
 
-      await leagues.update(mockUser, mockHttpLib);
+      await leagues.update(mockUser as any, mockHttpLib as any);
 
-      expect(mockUser.leagues).toEqual([
+      deepEqual(mockUser.leagues, [
         {
           key: '380.l.942166',
           name: 'Keeper League',
@@ -115,9 +115,9 @@ describe('leagues', () => {
         ],
       };
 
-      await leagues.update(mockUser, mockHttpLib);
+      await leagues.update(mockUser as any, mockHttpLib as any);
 
-      expect(mockUser.leagues).toEqual([
+      deepEqual(mockUser.leagues, [
         {
           key: '380.l.942166',
           name: 'Keeper League',

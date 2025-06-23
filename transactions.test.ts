@@ -1,13 +1,18 @@
-import { readFileSync } from 'fs';
+import { deepEqual } from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+import { describe, it } from 'node:test';
 
-import { describe, expect, it } from 'vitest';
-
-import { filterNew, getAll } from '../transactions.ts';
+import { filterNew, getAll, type ITransaction } from './transactions.ts';
+import type { ILeague, IUser } from './User.ts';
 
 describe('transactions', () => {
-  const mockLeague = { name: 'league', lastNotifiedTransaction: '2' };
+  const mockLeague = {
+    key: 'fake-key',
+    name: 'league',
+    lastNotifiedTransaction: '2',
+  };
   const mockYahooTransactions = readFileSync(
-    './__tests__/mockYahooTransactions.json',
+    './test-data/mockYahooTransactions.json',
     'utf8',
   );
 
@@ -19,9 +24,13 @@ describe('transactions', () => {
           ok: true,
         });
 
-      const transactions = await getAll(mockLeague, {}, mockHttpLib);
+      const transactions = await getAll(
+        mockLeague,
+        {} as IUser,
+        mockHttpLib as any,
+      );
 
-      expect(transactions).toEqual([
+      deepEqual(transactions, [
         {
           bid: 7,
           key: '380.l.241704.tr.146',
@@ -116,29 +125,36 @@ describe('transactions', () => {
 
   describe('#filterNew', () => {
     it('returns only new transactions', () => {
-      const transactions = [{ key: '3' }, { key: '2' }, { key: '1' }];
+      const transactions = [
+        { key: '3' },
+        { key: '2' },
+        { key: '1' },
+      ] as ITransaction[];
 
       const newTransactions = filterNew(mockLeague, transactions);
 
-      expect(newTransactions).toEqual([{ key: '3' }]);
+      deepEqual(newTransactions, [{ key: '3' }]);
     });
 
     it('returns empty array if none are new', () => {
-      const transactions = [{ key: '2' }, { key: '1' }];
+      const transactions = [{ key: '2' }, { key: '1' }] as ITransaction[];
 
       const newTransactions = filterNew(mockLeague, transactions);
 
-      expect(newTransactions).toEqual([]);
+      deepEqual(newTransactions, []);
     });
 
     it('returns empty array if transactions is not provided', () => {
-      expect(filterNew({ name: 'new' })).toEqual([]);
+      deepEqual(filterNew({ name: 'new' } as ILeague), []);
     });
 
     it('returns all transactions if the league does not have a last modified transaction', () => {
-      expect(filterNew({ name: 'new' }, [{ key: '1' }])).toEqual([
-        { key: '1' },
-      ]);
+      deepEqual(
+        filterNew({ key: 'fake-key', name: 'new' }, [
+          { key: '1' },
+        ] as ITransaction[]),
+        [{ key: '1' }],
+      );
     });
   });
 });

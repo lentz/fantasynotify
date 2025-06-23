@@ -21,8 +21,8 @@
     "prebuild": "rm -rf ./dist",
     "start": "node ./dist/app.js",
     "serve": "node --watch --inspect=:9229 --env-file .env app.ts",
-    "test": "vitest run",
-    "test-watch": "vitest"
+    "test": "node --experimental-test-module-mocks --test",
+    "test:watch": "npm run test -- --watch"
   },
   "engines": {
     "node": "^24.0.0"
@@ -45,13 +45,11 @@
     "@types/eslint__js": "^8.42.3",
     "@types/express": "^5.0.2",
     "@types/morgan": "^1.9.9",
-    "@vitest/eslint-plugin": "^1.2.1",
     "eslint": "^9.28.0",
     "pre-commit": "^1.2.2",
     "prettier": "^3.5.3",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.33.0",
-    "vitest": "^3.1.4"
+    "typescript-eslint": "^8.33.0"
   },
   "pre-commit": [
     "lint",
