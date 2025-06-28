@@ -20,12 +20,12 @@
     "lint": "eslint .",
     "prebuild": "rm -rf ./dist",
     "start": "node ./dist/app.js",
-    "serve": "node --watch --experimental-strip-types --inspect=:9229 --env-file .env app.ts",
+    "serve": "node --watch --inspect=:9229 --env-file .env app.ts",
     "test": "vitest run",
     "test-watch": "vitest"
   },
   "engines": {
-    "node": "^22.0.0"
+    "node": "^24.0.0"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.5",
