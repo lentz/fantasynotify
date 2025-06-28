@@ -17,7 +17,7 @@
     "build": "tsc",
     "typecheck": "tsc --noEmit --watch",
     "check-leagues": "node ./dist/checkLeagues.js",
-    "lint": "eslint .",
+    "lint": "biome check --error-on-warnings",
     "prebuild": "rm -rf ./dist",
     "start": "node ./dist/app.js",
     "serve": "node --watch --inspect=:9229 --env-file .env app.ts",
@@ -41,16 +41,11 @@
     "zod": "^3.25.46"
   },
   "devDependencies": {
-    "@eslint/js": "^9.28.0",
-    "@types/eslint__js": "^8.42.3",
+    "@biomejs/biome": "^2.0.6",
     "@types/express": "^5.0.2",
     "@types/morgan": "^1.9.9",
-    "@vitest/eslint-plugin": "^1.2.1",
-    "eslint": "^9.28.0",
     "pre-commit": "^1.2.2",
-    "prettier": "^3.5.3",
     "typescript": "^5.8.3",
-    "typescript-eslint": "^8.33.0",
     "vitest": "^3.1.4"
   },
   "pre-commit": [

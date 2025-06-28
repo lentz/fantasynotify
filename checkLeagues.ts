@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import db from './db.ts';
-import Notification from './Notification.ts';
 import * as leagues from './leagues.ts';
+import Notification from './Notification.ts';
 import * as transactions from './transactions.ts';
 import User from './User.ts';
 
@@ -20,7 +20,7 @@ for (const user of users) {
         league,
         transactions.filterNew(league, allTransactions),
       );
-      if (allTransactions && allTransactions.length) {
+      if (allTransactions?.length) {
         league.lastNotifiedTransaction = allTransactions[0].key;
       }
     }
@@ -30,7 +30,7 @@ for (const user of users) {
     await new Promise((resolve) => {
       setTimeout(resolve, 2000);
     });
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: Always an Error
   } catch (err: any) {
     if (err.body?.error === 'INVALID_REFRESH_TOKEN') {
       console.log(`Deleting user '${user.email}' with revoked refresh token`);

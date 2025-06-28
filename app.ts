@@ -1,11 +1,10 @@
-import * as fs from 'fs';
-import * as https from 'https';
-
+import * as fs from 'node:fs';
+import * as https from 'node:https';
 import bodyParser from 'body-parser';
 import express from 'express';
+import * as handlebarsExpress from 'express-handlebars';
 import helmet from 'helmet';
 import morgan from 'morgan';
-import * as handlebarsExpress from 'express-handlebars';
 
 import './db.ts';
 import config from './config.ts';
@@ -34,7 +33,7 @@ app.get('/auth/callback', controller.authCallback);
 app.get('/unsubscribe/:id', controller.unsubscribe);
 app.use(controller.handleError);
 
-let server;
+let server: https.Server | express.Express;
 try {
   fs.accessSync('../key.pem');
 

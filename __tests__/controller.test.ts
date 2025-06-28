@@ -5,8 +5,8 @@ vi.mock('../config.ts', () => ({
 }));
 
 import * as controller from '../controller.ts';
-import User from '../User.ts';
 import * as leagues from '../leagues.ts';
+import User from '../User.ts';
 import yahooAuth from '../yahooAuth.ts';
 
 vi.mock('../yahooAuth.ts');

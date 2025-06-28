@@ -56,7 +56,7 @@ userSchema.methods.renewToken = async function renewToken() {
   );
   const newToken = await token.refresh();
   this.accessToken = newToken.accessToken;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // biome-ignore lint/suspicious/noExplicitAny: incorrect type
   this.expires = (newToken as any).expires;
 };
 

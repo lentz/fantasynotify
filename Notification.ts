@@ -1,10 +1,9 @@
-import { readFileSync } from 'fs';
+import { readFileSync } from 'node:fs';
+import sgMail, { type MailService } from '@sendgrid/mail';
 import handlebars from 'handlebars';
-import sgMail, { MailService } from '@sendgrid/mail';
-
-import type { ILeague, IUser } from './User.ts';
 import config from './config.ts';
 import type { IPlayer, ITransaction } from './transactions.ts';
+import type { ILeague, IUser } from './User.ts';
 
 sgMail.setApiKey(config.SENDGRID_API_KEY);
 
@@ -16,8 +15,8 @@ handlebars.registerHelper(
   'playerTransaction',
   (player: IPlayer, bid: number) => {
     let source = '';
-    let action;
-    let team;
+    let action: string;
+    let team: string;
     if (player.type === 'add') {
       action = '<span style="color: #1e824c">added</span>';
       team = player.destination_team_name;

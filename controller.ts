@@ -1,8 +1,7 @@
 import type { NextFunction, Request, Response } from 'express';
 import mongoose from 'mongoose';
-
-import User from './User.ts';
 import * as leagues from './leagues.ts';
+import User from './User.ts';
 import yahooAuth from './yahooAuth.ts';
 
 export async function index(_req: Request, res: Response) {
@@ -10,7 +9,7 @@ export async function index(_req: Request, res: Response) {
 }
 
 export async function signup(req: Request, res: Response) {
-  const email = req.body.email && req.body.email.trim();
+  const email = req.body.email?.trim();
   if (!email || !email.length) {
     return res.render('index', { errorMessage: 'Email is required!' });
   }
@@ -43,7 +42,8 @@ export async function authCallback(req: Request, res: Response) {
   const user = new User({
     email: req.query.state,
     accessToken: authUser.accessToken,
-    expires: (authUser as any).expires, // eslint-disable-line @typescript-eslint/no-explicit-any
+    // biome-ignore lint/suspicious/noExplicitAny: incorrect type
+    expires: (authUser as any).expires,
     refreshToken: authUser.refreshToken,
   });
   await leagues.update(user);
