@@ -1,6 +1,5 @@
 import * as fs from 'node:fs';
 import * as https from 'node:https';
-import bodyParser from 'body-parser';
 import express from 'express';
 import * as handlebarsExpress from 'express-handlebars';
 import helmet from 'helmet';
@@ -19,7 +18,7 @@ app.use(
   }),
 );
 app.use(morgan('combined'));
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: false }));
 const handlebars = handlebarsExpress.create({
   defaultLayout: undefined,
   extname: '.hbs',
