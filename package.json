@@ -19,13 +19,11 @@
     "check-leagues": "node ./dist/checkLeagues.js",
     "lint": "biome check --error-on-warnings",
     "prebuild": "rm -rf ./dist",
+    "prepare": "husky",
     "start": "node ./dist/app.js",
     "serve": "node --watch --inspect=:9229 --env-file .env app.ts",
     "test": "vitest run",
     "test-watch": "vitest"
-  },
-  "engines": {
-    "node": "^24.0.0"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.5",
@@ -44,12 +42,8 @@
     "@biomejs/biome": "^2.0.6",
     "@types/express": "^5.0.2",
     "@types/morgan": "^1.9.9",
-    "pre-commit": "^1.2.2",
+    "husky": "^9.1.7",
     "typescript": "^5.8.3",
     "vitest": "^3.1.4"
-  },
-  "pre-commit": [
-    "lint",
-    "test"
-  ]
+  }
 }
