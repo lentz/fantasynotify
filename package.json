@@ -29,7 +29,7 @@
     "@sendgrid/mail": "^8.1.6",
     "client-oauth2": "^4.3.3",
     "express": "^5.1.0",
-    "express-handlebars": "^8.0.3",
+    "express-handlebars": "^8.0.4",
     "handlebars": "^4.7.7",
     "helmet": "^8.1.0",
     "mongoose": "^8.19.3",
