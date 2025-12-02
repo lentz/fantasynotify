@@ -28,7 +28,7 @@
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",
     "client-oauth2": "^4.3.3",
-    "express": "^5.1.0",
+    "express": "^5.2.1",
     "express-handlebars": "^8.0.4",
     "handlebars": "^4.7.7",
     "helmet": "^8.1.0",
@@ -39,7 +39,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.4",
-    "@types/express": "^5.0.5",
+    "@types/express": "^5.0.6",
     "@types/morgan": "^1.9.10",
     "husky": "^9.1.7",
     "typescript": "^5.9.3",
