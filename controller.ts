@@ -10,7 +10,7 @@ export async function index(_req: Request, res: Response) {
 
 export async function signup(req: Request, res: Response) {
   const email = req.body.email?.trim();
-  if (!email || !email.length) {
+  if (!email?.length) {
     return res.render('index', { errorMessage: 'Email is required!' });
   }
   const user = await User.findOne({ email }).exec();
