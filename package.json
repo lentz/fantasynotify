@@ -32,7 +32,7 @@
     "express-handlebars": "^9.0.1",
     "handlebars": "^4.7.9",
     "helmet": "^8.1.0",
-    "mongoose": "^9.5.0",
+    "mongoose": "^9.6.2",
     "morgan": "^1.10.1",
     "zod": "^4.4.3"
   },
