@@ -13,5 +13,5 @@
     "verbatimModuleSyntax": true,
     "erasableSyntaxOnly": true
   },
-  "exclude": ["__mocks__", "__tests__"]
+  "exclude": ["test"]
 }

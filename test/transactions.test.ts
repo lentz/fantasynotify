@@ -1,13 +1,13 @@
+import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-
-import { describe, expect, it } from 'vitest';
+import { describe, it } from 'node:test';
 
 import { filterNew, getAll } from '../transactions.ts';
 
 describe('transactions', () => {
   const mockLeague = { name: 'league', lastNotifiedTransaction: '2' };
   const mockYahooTransactions = readFileSync(
-    './__tests__/mockYahooTransactions.json',
+    new URL('./mockYahooTransactions.json', import.meta.url),
     'utf8',
   );
 
@@ -21,7 +21,7 @@ describe('transactions', () => {
 
       const transactions = await getAll(mockLeague, {}, mockHttpLib);
 
-      expect(transactions).toEqual([
+      assert.deepStrictEqual(transactions, [
         {
           bid: 7,
           key: '380.l.241704.tr.146',
@@ -120,7 +120,7 @@ describe('transactions', () => {
 
       const newTransactions = filterNew(mockLeague, transactions);
 
-      expect(newTransactions).toEqual([{ key: '3' }]);
+      assert.deepStrictEqual(newTransactions, [{ key: '3' }]);
     });
 
     it('returns empty array if none are new', () => {
@@ -128,15 +128,15 @@ describe('transactions', () => {
 
       const newTransactions = filterNew(mockLeague, transactions);
 
-      expect(newTransactions).toEqual([]);
+      assert.deepStrictEqual(newTransactions, []);
     });
 
     it('returns empty array if transactions is not provided', () => {
-      expect(filterNew({ name: 'new' })).toEqual([]);
+      assert.deepStrictEqual(filterNew({ name: 'new' }), []);
     });
 
     it('returns all transactions if the league does not have a last modified transaction', () => {
-      expect(filterNew({ name: 'new' }, [{ key: '1' }])).toEqual([
+      assert.deepStrictEqual(filterNew({ name: 'new' }, [{ key: '1' }]), [
         { key: '1' },
       ]);
     });

@@ -1,37 +1,35 @@
-import { describe, expect, it, vi } from 'vitest';
-
-vi.mock('../config.ts', () => ({
-  default: { SENDGRID_API_KEY: 'SG.TESTKEY' },
-}));
+import assert from 'node:assert/strict';
+import { describe, it, mock } from 'node:test';
 
 import Notification from '../Notification.ts';
 
 describe('notification', () => {
   const mockUser = { id: '123', email: 'test@test.com' };
   const mockLeague = { name: 'Test League' };
-  const mockMailer = { send: vi.fn() };
-
   it('does not send a notification if addTransaction is not called', () => {
+    const mockMailer = { send: mock.fn() };
     const notification = new Notification(mockUser, mockMailer);
 
     notification.send();
 
-    expect(mockMailer.send).not.toHaveBeenCalled();
+    assert.equal(mockMailer.send.mock.callCount(), 0);
   });
 
   it('does not send a notification if empty transactions are provided', () => {
+    const mockMailer = { send: mock.fn() };
     const notification = new Notification(mockUser, mockMailer);
     notification.addTransactions(mockLeague, []);
     notification.addTransactions(mockLeague);
 
     notification.send();
 
-    expect(mockMailer.send).not.toHaveBeenCalled();
+    assert.equal(mockMailer.send.mock.callCount(), 0);
   });
 
-  it('renders the transactions when calling send', () => {
+  it('renders the transactions when calling send', (t) => {
+    const mockMailer = { send: mock.fn() };
     const notification = new Notification(mockUser, mockMailer);
-    vi.spyOn(console, 'log').mockReturnValue();
+    mock.method(console, 'log', () => {});
     const mockTransactions = [
       {
         players: [
@@ -94,16 +92,20 @@ describe('notification', () => {
 
     notification.send();
 
-    const mailerArg = mockMailer.send.mock.calls[0][0];
-    expect(mailerArg.from).toBe('Fantasy Notify <fantasynotify@buddyduel.net>');
-    expect(mailerArg.to).toBe('test@test.com');
-    expect(mailerArg.subject).toBe('New transactions in Test League');
-    expect(mailerArg.html).toMatchSnapshot();
+    const mailerArg = mockMailer.send.mock.calls[0].arguments[0];
+    assert.equal(
+      mailerArg.from,
+      'Fantasy Notify <fantasynotify@buddyduel.net>',
+    );
+    assert.equal(mailerArg.to, 'test@test.com');
+    assert.equal(mailerArg.subject, 'New transactions in Test League');
+    t.assert.snapshot(mailerArg.html.split('\n'));
   });
 
-  it('creates message with transactions from multiple leagues', () => {
+  it('creates message with transactions from multiple leagues', (t) => {
+    const mockMailer = { send: mock.fn() };
     const notification = new Notification(mockUser, mockMailer);
-    vi.spyOn(console, 'log').mockReturnValue();
+    mock.method(console, 'log', () => {});
     const mockLeague1Transactions = [
       {
         players: [
@@ -143,8 +145,11 @@ describe('notification', () => {
 
     notification.send();
 
-    const mailerArg = mockMailer.send.mock.calls[0][0];
-    expect(mailerArg.subject).toBe('New transactions in Test League, League 2');
-    expect(mailerArg.html).toMatchSnapshot();
+    const mailerArg = mockMailer.send.mock.calls[0].arguments[0];
+    assert.equal(
+      mailerArg.subject,
+      'New transactions in Test League, League 2',
+    );
+    t.assert.snapshot(mailerArg.html.split('\n'));
   });
 });
