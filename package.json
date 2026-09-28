@@ -23,7 +23,7 @@
     "start": "node ./dist/app.js",
     "serve": "node --watch --inspect=:9229 --env-file .env app.ts",
     "test": "node --experimental-test-module-mocks --import ./test/setup.ts --test test/*.test.ts",
-    "test-watch": "node --experimental-test-module-mocks --import ./test/setup.ts --test --watch test/*.test.ts"
+    "test:watch": "node --experimental-test-module-mocks --import ./test/setup.ts --test --watch test/*.test.ts"
   },
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",
