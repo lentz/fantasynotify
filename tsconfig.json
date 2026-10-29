@@ -7,6 +7,7 @@
     "incremental": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "strict": true,
     "allowImportingTsExtensions": true,
     "rewriteRelativeImportExtensions": true,

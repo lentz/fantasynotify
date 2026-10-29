@@ -1,5 +1,5 @@
 import { readFileSync } from 'node:fs';
-import sgMail, { type MailService } from '@sendgrid/mail';
+import sgMail from '@sendgrid/mail';
 import handlebars from 'handlebars';
 import config from './config.ts';
 import type { IPlayer, ITransaction } from './transactions.ts';
@@ -39,7 +39,7 @@ handlebars.registerHelper(
 export default class Notification {
   leagueTransactions: { [leagueName: string]: ITransaction[] };
 
-  mailer: MailService;
+  mailer: typeof sgMail;
 
   user: IUser;
 
