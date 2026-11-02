@@ -28,7 +28,7 @@
   "dependencies": {
     "@sendgrid/mail": "^8.1.6",
     "client-oauth2": "^4.3.3",
-    "express": "^5.2.1",
+    "express": "^5.3.0",
     "express-handlebars": "^9.0.1",
     "handlebars": "^4.7.10",
     "helmet": "^8.3.0",
