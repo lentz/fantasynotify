@@ -20,7 +20,7 @@ for (const user of users) {
         league,
         transactions.filterNew(league, allTransactions),
       );
-      if (allTransactions?.length) {
+      if (allTransactions[0]) {
         league.lastNotifiedTransaction = allTransactions[0].key;
       }
     }

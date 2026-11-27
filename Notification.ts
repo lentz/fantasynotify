@@ -1,11 +1,9 @@
 import { readFileSync } from 'node:fs';
-import sgMail from '@sendgrid/mail';
 import handlebars from 'handlebars';
+import { Resend } from 'resend';
 import config from './config.ts';
 import type { IPlayer, ITransaction } from './transactions.ts';
 import type { ILeague, IUser } from './User.ts';
-
-sgMail.setApiKey(config.SENDGRID_API_KEY);
 
 const emailTemplate = handlebars.compile(
   readFileSync('./views/emailLayout.hbs').toString(),
@@ -39,13 +37,13 @@ handlebars.registerHelper(
 export default class Notification {
   leagueTransactions: { [leagueName: string]: ITransaction[] };
 
-  mailer: typeof sgMail;
+  mailer: Resend;
 
   user: IUser;
 
-  constructor(user: IUser, mailer = sgMail) {
+  constructor(user: IUser, mailer?: Resend) {
     this.leagueTransactions = {};
-    this.mailer = mailer;
+    this.mailer = mailer ?? new Resend(config.RESEND_API_KEY);
     this.user = user;
   }
 
@@ -56,14 +54,14 @@ export default class Notification {
     this.leagueTransactions[league.name] = transactions;
   }
 
-  send() {
+  async send() {
     if (!Object.entries(this.leagueTransactions).length) {
-      return null;
+      return;
     }
     console.log(`Sending notification to ${this.user.email}`);
     const message = {
       to: this.user.email,
-      from: 'Fantasy Notify <fantasynotify@buddyduel.net>',
+      from: 'Fantasy Notify <onboarding@resend.dev>',
       subject: `New transactions in ${Object.keys(this.leagueTransactions).join(
         ', ',
       )}`,
@@ -74,6 +72,11 @@ export default class Notification {
         userId: this.user.id,
       }),
     };
-    return this.mailer.send(message);
+
+    const result = await this.mailer.emails.send(message);
+
+    if (result.error) {
+      throw new Error(result.error.message);
+    }
   }
 }

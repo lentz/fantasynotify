@@ -6,6 +6,7 @@ import Notification from '../Notification.ts';
 describe('notification', () => {
   const mockUser = { id: '123', email: 'test@test.com' };
   const mockLeague = { name: 'Test League' };
+
   it('does not send a notification if addTransaction is not called', () => {
     const mockMailer = { send: mock.fn() };
     const notification = new Notification(mockUser, mockMailer);
@@ -16,18 +17,18 @@ describe('notification', () => {
   });
 
   it('does not send a notification if empty transactions are provided', () => {
-    const mockMailer = { send: mock.fn() };
+    const mockMailer = { emails: { send: mock.fn() } };
     const notification = new Notification(mockUser, mockMailer);
     notification.addTransactions(mockLeague, []);
     notification.addTransactions(mockLeague);
 
     notification.send();
 
-    assert.equal(mockMailer.send.mock.callCount(), 0);
+    assert.equal(mockMailer.emails.send.mock.callCount(), 0);
   });
 
   it('renders the transactions when calling send', (t) => {
-    const mockMailer = { send: mock.fn() };
+    const mockMailer = { emails: { send: mock.fn() } };
     const notification = new Notification(mockUser, mockMailer);
     mock.method(console, 'log', () => {});
     const mockTransactions = [
@@ -92,18 +93,15 @@ describe('notification', () => {
 
     notification.send();
 
-    const mailerArg = mockMailer.send.mock.calls[0].arguments[0];
-    assert.equal(
-      mailerArg.from,
-      'Fantasy Notify <fantasynotify@buddyduel.net>',
-    );
+    const mailerArg = mockMailer.emails.send.mock.calls[0].arguments[0];
+    assert.equal(mailerArg.from, 'Fantasy Notify <onboarding@resend.dev>');
     assert.equal(mailerArg.to, 'test@test.com');
     assert.equal(mailerArg.subject, 'New transactions in Test League');
     t.assert.snapshot(mailerArg.html.split('\n'));
   });
 
   it('creates message with transactions from multiple leagues', (t) => {
-    const mockMailer = { send: mock.fn() };
+    const mockMailer = { emails: { send: mock.fn() } };
     const notification = new Notification(mockUser, mockMailer);
     mock.method(console, 'log', () => {});
     const mockLeague1Transactions = [
@@ -145,7 +143,7 @@ describe('notification', () => {
 
     notification.send();
 
-    const mailerArg = mockMailer.send.mock.calls[0].arguments[0];
+    const mailerArg = mockMailer.emails.send.mock.calls[0].arguments[0];
     assert.equal(
       mailerArg.subject,
       'New transactions in Test League, League 2',
