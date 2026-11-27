@@ -8,6 +8,8 @@ import User from './User.ts';
 
 const users = await User.find().sort({ updatedAt: 1 }).exec();
 
+let hadErrors = false;
+
 for (const user of users) {
   try {
     console.log(`Checking leagues for ${user.email}`);
@@ -20,7 +22,7 @@ for (const user of users) {
         league,
         transactions.filterNew(league, allTransactions),
       );
-      if (allTransactions?.length) {
+      if (allTransactions[0]) {
         league.lastNotifiedTransaction = allTransactions[0].key;
       }
     }
@@ -32,6 +34,7 @@ for (const user of users) {
     });
     // biome-ignore lint/suspicious/noExplicitAny: Always an Error
   } catch (err: any) {
+    hadErrors = true;
     if (err.body?.error === 'INVALID_REFRESH_TOKEN') {
       console.log(`Deleting user '${user.email}' with revoked refresh token`);
       await user.deleteOne();
@@ -42,4 +45,9 @@ for (const user of users) {
     }
   }
 }
+
 db.close();
+
+if (hadErrors) {
+  process.exit(1);
+}

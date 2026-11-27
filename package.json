@@ -14,19 +14,15 @@
   "homepage": "https://github.com/lentz/fantasynotify#readme",
   "type": "module",
   "scripts": {
-    "build": "tsc",
-    "typecheck": "tsc --noEmit --watch",
-    "check-leagues": "node ./dist/checkLeagues.js",
+    "typecheck": "tsc --noEmit",
+    "check-leagues": "node ./checkLeagues.ts",
     "lint": "biome check --error-on-warnings",
-    "prebuild": "rm -rf ./dist",
     "prepare": "husky",
-    "start": "node ./dist/app.js",
-    "serve": "node --watch --inspect=:9229 --env-file .env app.ts",
+    "start": "node --watch --inspect=:9229 app.ts",
     "test": "node --experimental-test-module-mocks --import ./test/setup.ts --test test/*.test.ts",
     "test:watch": "node --experimental-test-module-mocks --import ./test/setup.ts --test --watch test/*.test.ts"
   },
   "dependencies": {
-    "@sendgrid/mail": "^8.1.6",
     "client-oauth2": "^4.3.3",
     "express": "^5.3.0",
     "express-handlebars": "^9.0.4",
@@ -34,6 +30,7 @@
     "helmet": "^8.3.0",
     "mongoose": "^9.10.1",
     "morgan": "^1.12.1",
+    "resend": "^6.41.0",
     "zod": "^4.6.6"
   },
   "devDependencies": {
