@@ -25,7 +25,7 @@
   "dependencies": {
     "client-oauth2": "^4.3.3",
     "express": "^5.3.0",
-    "express-handlebars": "^9.0.4",
+    "express-handlebars": "^9.0.6",
     "handlebars": "^4.7.10",
     "helmet": "^8.3.0",
     "mongoose": "^9.10.1",
